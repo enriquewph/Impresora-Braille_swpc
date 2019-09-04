@@ -91,6 +91,10 @@
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-
+        Dim Traductor As New TraductorBraille
+        RichTextBox2.Clear()
+        Dim TextoATraducir As String = RichTextBox1.Text
+        Dim TextoTraducido As String = Traductor.TraducirTexto(TextoATraducir)
+        RichTextBox2.Text = TextoTraducido
     End Sub
 End Class
