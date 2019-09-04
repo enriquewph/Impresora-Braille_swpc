@@ -74,12 +74,23 @@
             End If
         Next
     End Sub
+
     Sub SendArrayHoja()
-        For i_ejeY As Integer = arrayHoja.GetLowerBound(1) To arrayHoja.GetUpperBound(1)
-            For i_ejeX As Integer = arrayHoja.GetLowerBound(0) To arrayHoja.GetUpperBound(0)
-
+        If SerialPort1.IsOpen Then
+            For i_ejeY As Integer = arrayHoja.GetLowerBound(1) To arrayHoja.GetUpperBound(1)
+                For i_ejeX As Integer = arrayHoja.GetLowerBound(0) To arrayHoja.GetUpperBound(0)
+                    SerialPort1.Write(arrayHoja(i_ejeX, i_ejeY))
+                Next
+                SerialPort1.Write(Environment.NewLine)
             Next
+        End If
+    End Sub
 
-        Next
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        SendArrayHoja()
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
     End Sub
 End Class
