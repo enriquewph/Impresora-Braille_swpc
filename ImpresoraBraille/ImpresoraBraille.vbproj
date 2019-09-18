@@ -72,6 +72,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrailleComLib.vb" />
     <Compile Include="Impresora Braille.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +122,75 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="iconfinder_sync_126579.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\01\16\41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\01\16\45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\01\16\46.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\01\16\49.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\01\16\50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\02\16\11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\02\16\12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\02\16\35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\02\16\36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\02\16\41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\03\16\01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\03\16\02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\03\16\03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\03\16\04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\03\16\25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\03\16\31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\03\16\46.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\03\16\49.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\03\16\50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\04\16\01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\04\16\02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\04\16\04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\pi_diagona_icons_pack_10_icons_pack_120546\04\16\43.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

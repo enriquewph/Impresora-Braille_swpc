@@ -1,12 +1,20 @@
 ﻿Public Class TraductorBraille
-
-
     Public Function TraducirTexto(InputString As String) As String
+        Dim ModoNumeros As Boolean = False
         Dim OutputString As String = ""
 
         For Each letra As Char In InputString
             If Char.IsUpper(letra) Then
                 OutputString += "⠨"
+            End If
+            If Char.IsNumber(letra) Then
+                If ModoNumeros = False Then
+                    ModoNumeros = True
+                    'Se detecto el comienzo de un numero nuevo, incluir indicador numerico
+
+                End If
+            Else
+                ModoNumeros = False
             End If
             OutputString += LetraABraille(letra)
         Next

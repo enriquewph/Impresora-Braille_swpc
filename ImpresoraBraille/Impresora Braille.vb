@@ -1,47 +1,40 @@
 ﻿Public Class Form1
-#Region "variables"
+    Dim BCL As New BrailleComLib
     Dim arrayHoja(6, 71) As Byte
-#End Region
+    Dim Puerto_Impresora As String
 
-    Sub GetSerialPortNames()
+
+    Sub SetSerialPortNames()
         ' Show all available COM ports.
-        ComboBox1.Items.Clear()
 
-        For Each sp As String In My.Computer.Ports.SerialPortNames
-            ComboBox1.Items.Add(sp)
+        Dim ComboBox As ToolStripComboBox = ToolStripComboBoxPuertos
+
+        Dim ElegidoPrevio As String = ""
+
+        If Not ComboBox.Text = "" Then
+            ElegidoPrevio = ComboBox.SelectedItem
+        End If
+
+        ComboBox.Items.Clear()
+
+        For Each sp As String In BCL.GetSerialComList()
+            ComboBox.Items.Add(sp)
         Next
 
-        ComboBox1.SelectedIndex = 0
+        If Not ElegidoPrevio = "" Then
+            If ComboBox.Items.Contains(ElegidoPrevio) Then
+                ComboBox.SelectedIndex = ComboBox.Items.IndexOf(ElegidoPrevio)
+            Else
+                ComboBox.SelectedIndex = 0
+            End If
+        Else
+            ComboBox.SelectedIndex = 0
+        End If
+
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        GetSerialPortNames()
-    End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub ButtonReloadCom_Click(sender As Object, e As EventArgs) Handles ButtonReloadCom.Click
-        GetSerialPortNames()
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Try
-            If Not SerialPort1.IsOpen Then
-                SerialPort1.BaudRate = 115200
-                SerialPort1.PortName = ComboBox1.SelectedItem.ToString()
-                SerialPort1.Open()
-                LabelEstado.Text = "CONECTADO"
-                Button1.Text = "DESCONECTAR"
-            Else
-                SerialPort1.Close()
-                LabelEstado.Text = "DESCONECTADO"
-                Button1.Text = "CONECTAR"
-            End If
-        Catch ex As Exception
-            MsgBox(ex)
-        End Try
+        SetSerialPortNames()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -96,5 +89,43 @@
         Dim TextoATraducir As String = RichTextBox1.Text
         Dim TextoTraducido As String = Traductor.TraducirTexto(TextoATraducir)
         RichTextBox2.Text = TextoTraducido
+    End Sub
+
+    Private Sub ToolStripButtonConectar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonConectar.Click
+        Puerto_Impresora = ToolStripComboBoxPuertos.SelectedItem
+
+        If Not BCL.Impresora_Conectada() Then
+            If Not BCL.Conectar_Impresora(Puerto_Impresora) Then
+                'Si hubo un error al conectar hacer lo siguiente:
+                MsgBox("No se pudo conectar a la impresora.", MsgBoxStyle.Exclamation, "Error de conexion:")
+            End If
+        Else
+            BCL.Desconectar_Impresora()
+        End If
+
+        ActualizarLabelsConectar()
+    End Sub
+
+    Private Sub ToolStripButtonRecargarPuertos_Click(sender As Object, e As EventArgs) Handles ToolStripButtonRecargarPuertos.Click
+        SetSerialPortNames()
+    End Sub
+
+    Private Sub ActualizarLabelsConectar()
+        If (BCL.Impresora_Conectada()) Then
+            ToolStripButtonConectar.Text = "Desconectar"
+            ToolStripButtonConectar.Image = ImpresoraBraille.My.Resources.Resources._01
+
+            ToolStripLabelEstado.Text = "Conectado"
+            ToolStripLabelEstado.Image = ImpresoraBraille.My.Resources.Resources._021
+        Else
+            ToolStripButtonConectar.Text = "Conectar"
+            ToolStripButtonConectar.Image = ImpresoraBraille.My.Resources.Resources._02
+            ToolStripLabelEstado.Text = "Desconectado"
+            ToolStripLabelEstado.Image = ImpresoraBraille.My.Resources.Resources._011
+        End If
+    End Sub
+
+    Private Sub ToolStripComboBoxPuertos_NoBlue(sender As Object, e As EventArgs) Handles ToolStripComboBoxPuertos.DropDownClosed
+        ToolStripComboBoxPuertos.SelectionLength = 0
     End Sub
 End Class
