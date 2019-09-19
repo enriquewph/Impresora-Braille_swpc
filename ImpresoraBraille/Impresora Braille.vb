@@ -1,6 +1,5 @@
 ﻿Public Class Form1
     Dim BCL As New BrailleComLib
-    Dim arrayHoja(6, 71) As Byte
     Dim Puerto_Impresora As String
 
 
@@ -39,21 +38,21 @@
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-        For i_ejeY As Integer = arrayHoja.GetLowerBound(1) To arrayHoja.GetUpperBound(1)
-            For i_ejeX As Integer = arrayHoja.GetLowerBound(0) To arrayHoja.GetUpperBound(0)
-                arrayHoja(i_ejeX, i_ejeY) = 0
+        For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
+            For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
+                BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY) = 0
             Next
-            arrayHoja(0, i_ejeY) = 128
+            BCL.arrayHoja_a_enviar(0, i_ejeY) = 128
         Next
 
         RichTextBox1.Clear()
 
         Dim contador_renglones As Integer = 0
-        For i_ejeY As Integer = arrayHoja.GetLowerBound(1) To arrayHoja.GetUpperBound(1)
-            For i_ejeX As Integer = arrayHoja.GetLowerBound(0) To arrayHoja.GetUpperBound(0)
+        For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
+            For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
 
-                RichTextBox1.Text += Convert.ToString(arrayHoja(i_ejeX, i_ejeY), 2).PadLeft(8, "0")
-                If i_ejeX < arrayHoja.GetUpperBound(0) Then
+                RichTextBox1.Text += Convert.ToString(BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY), 2).PadLeft(8, "0")
+                If i_ejeX < BCL.arrayHoja_a_enviar.GetUpperBound(0) Then
                     RichTextBox1.Text += "-"
                 End If
             Next
@@ -68,19 +67,18 @@
         Next
     End Sub
 
-    Sub SendArrayHoja()
-        If SerialPort1.IsOpen Then
-            For i_ejeY As Integer = arrayHoja.GetLowerBound(1) To arrayHoja.GetUpperBound(1)
-                For i_ejeX As Integer = arrayHoja.GetLowerBound(0) To arrayHoja.GetUpperBound(0)
-                    SerialPort1.Write(arrayHoja(i_ejeX, i_ejeY))
-                Next
-                SerialPort1.Write(Environment.NewLine)
-            Next
-        End If
-    End Sub
+
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        SendArrayHoja()
+        For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
+            For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
+                BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY) = 0
+            Next
+            BCL.arrayHoja_a_enviar(0, i_ejeY) = 128
+        Next
+
+        BCL.SendHojasTotales(1)
+        BCL.SendHoja(1)
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
