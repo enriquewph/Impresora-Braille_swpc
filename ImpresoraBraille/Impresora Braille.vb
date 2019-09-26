@@ -1,4 +1,4 @@
-﻿Public Class Form1
+﻿Public Class ImpresoraBraille
     Dim BCL As New BrailleComLib
     Dim Puerto_Impresora As String
 
@@ -8,7 +8,7 @@
 
         Dim ComboBox As ToolStripComboBox = ToolStripComboBoxPuertos
 
-        Dim ElegidoPrevio As String = ""
+        Dim ElegidoPrevio As String = My.Settings.COM
 
         If Not ComboBox.Text = "" Then
             ElegidoPrevio = ComboBox.SelectedItem
@@ -29,6 +29,8 @@
         Else
             ComboBox.SelectedIndex = 0
         End If
+
+        My.Settings.COM = ComboBox.SelectedItem
 
     End Sub
 
@@ -70,12 +72,15 @@
 
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
         For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
             For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
                 BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY) = 0
             Next
             BCL.arrayHoja_a_enviar(0, i_ejeY) = 128
         Next
+
+        BCL.arrayHoja_a_enviar(2, 5) = 32
 
         BCL.SendHojasTotales(1)
         BCL.SendHoja(1)
@@ -102,6 +107,7 @@
         End If
 
         ActualizarLabelsConectar()
+        My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
     End Sub
 
     Private Sub ToolStripButtonRecargarPuertos_Click(sender As Object, e As EventArgs) Handles ToolStripButtonRecargarPuertos.Click
@@ -111,19 +117,23 @@
     Private Sub ActualizarLabelsConectar()
         If (BCL.Impresora_Conectada()) Then
             ToolStripButtonConectar.Text = "Desconectar"
-            ToolStripButtonConectar.Image = ImpresoraBraille.My.Resources.Resources._01
+            ToolStripButtonConectar.Image = My.Resources.Resources._01
 
             ToolStripLabelEstado.Text = "Conectado"
-            ToolStripLabelEstado.Image = ImpresoraBraille.My.Resources.Resources._021
+            ToolStripLabelEstado.Image = My.Resources.Resources._021
         Else
             ToolStripButtonConectar.Text = "Conectar"
-            ToolStripButtonConectar.Image = ImpresoraBraille.My.Resources.Resources._02
+            ToolStripButtonConectar.Image = My.Resources.Resources._02
             ToolStripLabelEstado.Text = "Desconectado"
-            ToolStripLabelEstado.Image = ImpresoraBraille.My.Resources.Resources._011
+            ToolStripLabelEstado.Image = My.Resources.Resources._011
         End If
     End Sub
 
     Private Sub ToolStripComboBoxPuertos_NoBlue(sender As Object, e As EventArgs) Handles ToolStripComboBoxPuertos.DropDownClosed
         ToolStripComboBoxPuertos.SelectionLength = 0
+    End Sub
+
+    Private Sub ToolStripComboBoxPuertos_Click(sender As Object, e As EventArgs) Handles ToolStripComboBoxPuertos.Click
+        My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
     End Sub
 End Class

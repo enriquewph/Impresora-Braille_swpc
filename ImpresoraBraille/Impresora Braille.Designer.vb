@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form1
+Partial Class ImpresoraBraille
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -31,18 +31,18 @@ Partial Class Form1
         Me.ToolStripButtonConectar = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabelEstado = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButtonRecargarPuertos = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripComboBoxPuertos = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripLabelPuerto = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.SuspendLayout()
@@ -121,6 +121,23 @@ Partial Class Form1
         Me.ToolStrip2.TabIndex = 14
         Me.ToolStrip2.Text = "Estado"
         '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.ToolStripLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripLabel1.Image = Global.ImpresoraBraille.My.Resources.Resources._011
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(44, 22)
+        Me.ToolStripLabel1.Text = "Rev 1.0"
+        Me.ToolStripLabel1.ToolTipText = "Revision 1.0 2019"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
         'ToolStripLabelEstado
         '
         Me.ToolStripLabelEstado.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
@@ -132,6 +149,12 @@ Partial Class Form1
         Me.ToolStripLabelEstado.Text = "Desconectado"
         Me.ToolStripLabelEstado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ToolStripLabelEstado.ToolTipText = "Estado de la impresora"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
         '
         'ToolStripButtonRecargarPuertos
         '
@@ -163,6 +186,16 @@ Partial Class Form1
         Me.ToolStripLabelPuerto.Text = "Puerto:"
         Me.ToolStripLabelPuerto.ToolTipText = "Puerto de la impresora"
         '
+        'ToolStripLabel2
+        '
+        Me.ToolStripLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.ToolStripLabel2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripLabel2.Image = Global.ImpresoraBraille.My.Resources.Resources._011
+        Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        Me.ToolStripLabel2.Size = New System.Drawing.Size(57, 22)
+        Me.ToolStripLabel2.Text = "Progreso:"
+        Me.ToolStripLabel2.ToolTipText = "Progreso"
+        '
         'ToolStripProgressBar1
         '
         Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
@@ -187,40 +220,7 @@ Partial Class Form1
         Me.Button3.Text = "Enviar"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.ToolStripLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripLabel1.Image = Global.ImpresoraBraille.My.Resources.Resources._011
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(44, 22)
-        Me.ToolStripLabel1.Text = "Rev 1.0"
-        Me.ToolStripLabel1.ToolTipText = "Revision 1.0 2019"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripLabel2
-        '
-        Me.ToolStripLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.ToolStripLabel2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripLabel2.Image = Global.ImpresoraBraille.My.Resources.Resources._011
-        Me.ToolStripLabel2.Name = "ToolStripLabel2"
-        Me.ToolStripLabel2.Size = New System.Drawing.Size(57, 22)
-        Me.ToolStripLabel2.Text = "Progreso:"
-        Me.ToolStripLabel2.ToolTipText = "Progreso"
-        '
-        'Form1
+        'ImpresoraBraille
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -238,7 +238,7 @@ Partial Class Form1
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(800, 500)
         Me.MinimumSize = New System.Drawing.Size(800, 500)
-        Me.Name = "Form1"
+        Me.Name = "ImpresoraBraille"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Impresora Braille"
         Me.ToolStrip1.ResumeLayout(False)

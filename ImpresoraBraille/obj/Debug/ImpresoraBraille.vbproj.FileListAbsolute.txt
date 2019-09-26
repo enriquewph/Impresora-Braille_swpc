@@ -11,15 +11,15 @@ D:\Dropbox\DOCUMENTOS\ONIET 2017\Software\ImpresoraBraille\ImpresoraBraille\obj\
 D:\Dropbox\DOCUMENTOS\ONIET 2017\Software\ImpresoraBraille\ImpresoraBraille\obj\Debug\ImpresoraBraille.exe
 D:\Dropbox\DOCUMENTOS\ONIET 2017\Software\ImpresoraBraille\ImpresoraBraille\obj\Debug\ImpresoraBraille.xml
 D:\Dropbox\DOCUMENTOS\ONIET 2017\Software\ImpresoraBraille\ImpresoraBraille\obj\Debug\ImpresoraBraille.pdb
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\ImpresoraBraille.exe.config
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\ImpresoraBraille.exe
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\ImpresoraBraille.pdb
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\ImpresoraBraille.xml
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.vbprojAssemblyReference.cache
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.Form1.resources
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.Resources.resources
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.vbproj.GenerateResource.cache
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.vbproj.CoreCompileInputs.cache
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.exe
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.xml
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.pdb
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.ImpresoraBraille.resources
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.exe.config
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.exe
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.pdb
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.exe
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.pdb

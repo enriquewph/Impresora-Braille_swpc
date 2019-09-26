@@ -156,51 +156,48 @@
 
     Public Sub SendHoja(HojaActual As Byte) ' prepara la impresora para recibir el array, manda la hoja y espera el OK.
         SendHojaActual(HojaActual)
+
         If (PrepararImpresion()) Then
-            MsgBox(SendArray().ToString)
+            SendArray()
         End If
+
     End Sub
 
     Public Function SendArray() ' Retorna 1 si fue exitoso 0 si hubo algun error
         If SerialPort1.IsOpen Then
-            Dim SerialSendBuffer(504) As Byte
+
+            Dim SerialSendBuffer(505) As Byte
             Dim Index As Integer = 0
+            Dim csum_long As Long = 0
+            Dim checksum_byte As Byte = 0
 
             For i_ejeY As Integer = arrayHoja_a_enviar.GetLowerBound(1) To arrayHoja_a_enviar.GetUpperBound(1)
                 For i_ejeX As Integer = arrayHoja_a_enviar.GetLowerBound(0) To arrayHoja_a_enviar.GetUpperBound(0)
                     SerialSendBuffer(Index) = arrayHoja_a_enviar(i_ejeX, i_ejeY)
+                    csum_long += SerialSendBuffer(Index)
                     Index = Index + 1
                 Next
             Next
 
-            SerialPort1.Write(SerialSendBuffer, 0, 504)
+            'calculo del checksum
+            checksum_byte = csum_long Mod 256
+            SerialSendBuffer(505) = checksum_byte
 
-            Dim recepcion_OK As Boolean = GetResponse().Equals(BCLE_RECEPCION_OK)
+            'envio de la hoja
+            SerialPort1.Write(SerialSendBuffer, 0, 505)
 
-            If recepcion_OK Then
-                'CALCULAR CRC8
-                Dim checksum As Byte = Serial_GetByte()
-                MsgBox("Checksum PC: " + Crc8(SerialSendBuffer, 504).ToString() + " - Checksum ARD: " + checksum.ToString())
+
+            Dim respuesta As Byte = GetResponse()
+            If respuesta = BCLE_RECEPCION_OK Then
+                MsgBox("OK")
+                Return True
+            ElseIf respuesta = BCLE_RECEPCION_ERROR Then
+                MsgBox("ERROR")
+                Return False
             End If
-
         End If
-
         Return False
     End Function
-
-    Public Shared Function Crc8(ByVal data As Byte(), ByVal size As Integer) As Byte
-        Dim checksum As Byte = 0
-        For i As Integer = 0 To size - 1
-            checksum = (CInt(checksum) + data(i)) Mod 256
-        Next
-        If checksum = 0 Then
-            Return 0
-        Else
-            Return CByte(256 - checksum)
-        End If
-    End Function
-
-
 #Region "Rutinas de invalidaciones"
     Protected Overrides Sub Finalize()
         MyBase.Finalize()

@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Revisar los valores de los atributos del ensamblado
 
-<Assembly: AssemblyTitle("ImpresoraBraille")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("ImpresoraBraille")>
-<Assembly: AssemblyCopyright("Copyright ©  2017")>
+<Assembly: AssemblyTitle("Impresora Braille ITSV")>
+<Assembly: AssemblyDescription("Software para Impresora Braille ITSV")>
+<Assembly: AssemblyCompany("Enrique Walter Philippeaux - ITS Villada")>
+<Assembly: AssemblyProduct("Impresora Braille")>
+<Assembly: AssemblyCopyright("MIT 2019")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
