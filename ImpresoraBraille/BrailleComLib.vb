@@ -158,7 +158,9 @@
         SendHojaActual(HojaActual)
 
         If (PrepararImpresion()) Then
-            SendArray()
+            If Not SendArray() Then
+                MsgBox("Hubo un error al comunicarse con la impresora")
+            End If
         End If
 
     End Sub
@@ -167,9 +169,13 @@
         If SerialPort1.IsOpen Then
 
             Dim SerialSendBuffer(505) As Byte
+
+            For Each dato In SerialSendBuffer
+                dato = 0
+            Next
+
             Dim Index As Integer = 0
             Dim csum_long As Long = 0
-            Dim checksum_byte As Byte = 0
 
             For i_ejeY As Integer = arrayHoja_a_enviar.GetLowerBound(1) To arrayHoja_a_enviar.GetUpperBound(1)
                 For i_ejeX As Integer = arrayHoja_a_enviar.GetLowerBound(0) To arrayHoja_a_enviar.GetUpperBound(0)
@@ -180,8 +186,7 @@
             Next
 
             'calculo del checksum
-            checksum_byte = csum_long Mod 256
-            SerialSendBuffer(505) = checksum_byte
+            SerialSendBuffer(504) = csum_long Mod 256
 
             'envio de la hoja
             SerialPort1.Write(SerialSendBuffer, 0, 505)
@@ -189,10 +194,8 @@
 
             Dim respuesta As Byte = GetResponse()
             If respuesta = BCLE_RECEPCION_OK Then
-                MsgBox("OK")
                 Return True
             ElseIf respuesta = BCLE_RECEPCION_ERROR Then
-                MsgBox("ERROR")
                 Return False
             End If
         End If

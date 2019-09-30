@@ -7,23 +7,54 @@
             If Char.IsUpper(letra) Then
                 OutputString += "⠨"
             End If
+
             If Char.IsNumber(letra) Then
                 If ModoNumeros = False Then
                     ModoNumeros = True
                     'Se detecto el comienzo de un numero nuevo, incluir indicador numerico
-
+                    OutputString += "⠼"
                 End If
             Else
                 ModoNumeros = False
             End If
+
             OutputString += LetraABraille(letra)
         Next
 
         Return OutputString
     End Function
 
+
     Public Function LetraABraille(InputChar As Char) As Char
         Dim OutputChar As Char = ""
+
+        If Char.IsNumber(InputChar) Then
+            Select Case InputChar
+                Case "0"
+                    OutputChar = "⠚"
+                Case "1"
+                    OutputChar = "⠁"
+                Case "2"
+                    OutputChar = "⠃"
+                Case "3"
+                    OutputChar = "⠉"
+                Case "4"
+                    OutputChar = "⠙"
+                Case "5"
+                    OutputChar = "⠑"
+                Case "6"
+                    OutputChar = "⠋"
+                Case "7"
+                    OutputChar = "⠛"
+                Case "8"
+                    OutputChar = "⠓"
+                Case "9"
+                    OutputChar = "⠊"
+            End Select
+
+            Return OutputChar
+        End If
+
         Select Case InputChar.ToString.ToLower
             Case "a"
                 OutputChar = "⠁"

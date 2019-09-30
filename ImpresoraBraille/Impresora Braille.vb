@@ -1,5 +1,6 @@
 ﻿Public Class ImpresoraBraille
     Dim BCL As New BrailleComLib
+    Dim Traductor As New TraductorBraille
     Dim Puerto_Impresora As String
 
 
@@ -77,17 +78,15 @@
             For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
                 BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY) = 0
             Next
-            BCL.arrayHoja_a_enviar(0, i_ejeY) = 128
+            BCL.arrayHoja_a_enviar(0, i_ejeY) = i_ejeY * 2
         Next
-
-        BCL.arrayHoja_a_enviar(2, 5) = 32
 
         BCL.SendHojasTotales(1)
         BCL.SendHoja(1)
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim Traductor As New TraductorBraille
+
         RichTextBox2.Clear()
         Dim TextoATraducir As String = RichTextBox1.Text
         Dim TextoTraducido As String = Traductor.TraducirTexto(TextoATraducir)

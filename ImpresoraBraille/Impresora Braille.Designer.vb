@@ -38,7 +38,6 @@ Partial Class ImpresoraBraille
         Me.ToolStripButtonRecargarPuertos = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripComboBoxPuertos = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripLabelPuerto = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -112,7 +111,7 @@ Partial Class ImpresoraBraille
         '
         Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripSeparator2, Me.ToolStripLabelEstado, Me.ToolStripSeparator4, Me.ToolStripButtonRecargarPuertos, Me.ToolStripComboBoxPuertos, Me.ToolStripLabelPuerto, Me.ToolStripLabel2, Me.ToolStripProgressBar1})
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripSeparator2, Me.ToolStripLabelEstado, Me.ToolStripSeparator4, Me.ToolStripButtonRecargarPuertos, Me.ToolStripComboBoxPuertos, Me.ToolStripLabelPuerto, Me.ToolStripProgressBar1})
         Me.ToolStrip2.Location = New System.Drawing.Point(0, 436)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -172,7 +171,7 @@ Partial Class ImpresoraBraille
         Me.ToolStripComboBoxPuertos.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripComboBoxPuertos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ToolStripComboBoxPuertos.Name = "ToolStripComboBoxPuertos"
-        Me.ToolStripComboBoxPuertos.Size = New System.Drawing.Size(75, 25)
+        Me.ToolStripComboBoxPuertos.Size = New System.Drawing.Size(85, 25)
         Me.ToolStripComboBoxPuertos.ToolTipText = "Puerto de la impresora"
         '
         'ToolStripLabelPuerto
@@ -186,20 +185,10 @@ Partial Class ImpresoraBraille
         Me.ToolStripLabelPuerto.Text = "Puerto:"
         Me.ToolStripLabelPuerto.ToolTipText = "Puerto de la impresora"
         '
-        'ToolStripLabel2
-        '
-        Me.ToolStripLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.ToolStripLabel2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripLabel2.Image = Global.ImpresoraBraille.My.Resources.Resources._011
-        Me.ToolStripLabel2.Name = "ToolStripLabel2"
-        Me.ToolStripLabel2.Size = New System.Drawing.Size(57, 22)
-        Me.ToolStripLabel2.Text = "Progreso:"
-        Me.ToolStripLabel2.ToolTipText = "Progreso"
-        '
         'ToolStripProgressBar1
         '
         Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
-        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(300, 22)
+        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(450, 22)
         Me.ToolStripProgressBar1.ToolTipText = "Progreso"
         '
         'Button2
@@ -268,5 +257,4 @@ Partial Class ImpresoraBraille
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
-    Friend WithEvents ToolStripLabel2 As ToolStripLabel
 End Class
