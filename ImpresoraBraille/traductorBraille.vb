@@ -3,7 +3,26 @@
         Dim ModoNumeros As Boolean = False
         Dim OutputString As String = ""
 
-        For Each letra As Char In InputString
+        Dim inputArray As Char() = InputString.ToCharArray
+
+        For i As Integer = 0 To inputArray.GetUpperBound(0)
+            Dim letra As Char = inputArray(i)
+            Dim letra_ant As Char
+            Dim letra_sig As Char
+
+            If (i > 0) Then
+                letra_ant = inputArray(i - 1)
+            Else
+                letra_ant = vbNewLine
+            End If
+
+            If (i < inputArray.GetUpperBound(0)) Then
+                letra_sig = inputArray(i + 1)
+            Else
+                letra_sig = vbNewLine
+            End If
+
+
             If Char.IsUpper(letra) Then
                 OutputString += "⠨"
             End If
@@ -18,7 +37,7 @@
                 ModoNumeros = False
             End If
 
-            OutputString += CharToBraille(letra)
+            OutputString += CharToBraille(letra, letra_ant, letra_sig)
         Next
 
         Return OutputString
@@ -191,9 +210,47 @@
                 OutputChar = "⠤⠤"
             Case "*"
                 OutputChar = "⠔"
+            Case "'"
+                If (Char.IsLetter(charAnterior) And Char.IsLetter(charSiguiente)) Then
+                    OutputChar = "⠄"
+                Else
+                    OutputChar = "⠦"
+                End If
+            Case "/"
+                If (charAnterior <> "/") Then
+                    If charSiguiente <> "/" Then
+                        OutputChar = "⠠⠂"
+                    Else
+                        OutputChar = "⠠⠢⠂"
+                    End If
+                Else
+                    OutputChar = ""
+                End If
+            Case "\"
+                If (charAnterior <> "\") Then
+                    If charSiguiente <> "\" Then
+                        OutputChar = "⠐⠄"
+                    Else
+                        OutputChar = "⠐⠔⠄"
+                    End If
+                Else
+                    OutputChar = ""
+                End If
+            Case "|"
+                If (charAnterior <> "|") Then
+                    If charSiguiente <> "|" Then
+                        OutputChar = "⠸ "
+                    Else
+                        OutputChar = "⠸⠇"
+                    End If
+                Else
+                    OutputChar = ""
+                End If
+
             Case ""
                 OutputChar = ""
         End Select
+
 
         '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
         '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
