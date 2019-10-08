@@ -18,15 +18,32 @@
                 ModoNumeros = False
             End If
 
-            OutputString += LetraABraille(letra)
+            OutputString += CharToBraille(letra)
         Next
 
         Return OutputString
     End Function
 
+    '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
+    '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
+    '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
+    '⠠	⠡	⠣	⠩	⠹	⠱	⠫	⠻	⠳	⠪	⠺	⠨	⠸
+    '⠀	⠂	⠆	⠒	⠲	⠢	⠖	⠶	⠦	⠔	⠴	⠐	⠰
 
-    Public Function LetraABraille(InputChar As Char) As Char
-        Dim OutputChar As Char = ""
+
+
+    Public Function CharToBraille(ch As Char, charAnterior As Char, charSiguiente As Char) As String
+        Dim OutputChar As String = ch
+        Dim InputChar As String = ch.ToString.ToLower
+
+
+        '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
+        '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
+        '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
+        '⠠	⠡	⠣	⠩	⠹	⠱	⠫	⠻	⠳	⠪	⠺	⠨	⠸
+        '⠀	⠂	⠆	⠒	⠲	⠢	⠖	⠶	⠦	⠔	⠴	⠐	⠰
+
+
 
         If Char.IsNumber(InputChar) Then
             Select Case InputChar
@@ -55,7 +72,9 @@
             Return OutputChar
         End If
 
-        Select Case InputChar.ToString.ToLower
+        Select Case InputChar
+            Case " "
+                OutputChar = " "
             Case "a"
                 OutputChar = "⠁"
             Case "b"
@@ -108,10 +127,80 @@
                 OutputChar = "⠽"
             Case "z"
                 OutputChar = "⠵"
-
-            Case " "
-                OutputChar = " "
+            Case "á"
+                OutputChar = "⠷"
+            Case "é"
+                OutputChar = "⠮"
+            Case "í"
+                OutputChar = "⠌"
+            Case "ó"
+                OutputChar = "⠬"
+            Case "ú"
+                OutputChar = "⠾"
+            Case "ü"
+                OutputChar = "⠳"
+            Case "."
+                OutputChar = "⠄"
+            Case ","
+                OutputChar = "⠂"
+            Case ";"
+                OutputChar = "⠆"
+            Case ":"
+                OutputChar = "⠒"
+            Case "?"
+                OutputChar = "⠢"
+            Case "¿"
+                OutputChar = "⠢"
+            Case "!"
+                OutputChar = "⠖"
+            Case "¡"
+                OutputChar = "⠖"
+            Case """"
+                OutputChar = "⠦"
+            Case "““"
+                OutputChar = "⠦"
+            Case "””"
+                OutputChar = "⠦"
+            Case "«"
+                OutputChar = "⠦"
+            Case "»"
+                OutputChar = "⠦"
+            Case "‘"
+                OutputChar = "⠠⠦"
+            Case "’"
+                OutputChar = "⠠⠦"
+            Case "<"
+                OutputChar = "⠠⠦"
+            Case ">"
+                OutputChar = "⠠⠦"
+            Case "("
+                OutputChar = "⠣"
+            Case ")"
+                OutputChar = "⠜"
+            Case "["
+                OutputChar = "⠷"
+            Case "]"
+                OutputChar = "⠾"
+            Case "{"
+                OutputChar = "⠐⠇"
+            Case "}"
+                OutputChar = "⠸⠂"
+            Case "-"
+                OutputChar = "⠤"
+            Case "_"
+                OutputChar = "⠤⠤"
+            Case "*"
+                OutputChar = "⠔"
+            Case ""
+                OutputChar = ""
         End Select
+
+        '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
+        '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
+        '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
+        '⠠	⠡	⠣	⠩	⠹	⠱	⠫	⠻	⠳	⠪	⠺	⠨	⠸
+        '⠀	⠂	⠆	⠒	⠲	⠢	⠖	⠶	⠦	⠔	⠴	⠐	⠰
+
         Return OutputChar
     End Function
 
