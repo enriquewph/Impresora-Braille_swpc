@@ -2,6 +2,7 @@
     Dim BCL As New BrailleComLib
     Dim Traductor As New TraductorBraille
     Dim Puerto_Impresora As String
+    Dim BitmapHoja As Bitmap
 
 
     Sub SetSerialPortNames()
@@ -48,26 +49,8 @@
             BCL.arrayHoja_a_enviar(0, i_ejeY) = 128
         Next
 
-        RichTextBox1.Clear()
+        DibujarBitmap()
 
-        Dim contador_renglones As Integer = 0
-        For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
-            For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
-
-                RichTextBox1.Text += Convert.ToString(BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY), 2).PadLeft(8, "0")
-                If i_ejeX < BCL.arrayHoja_a_enviar.GetUpperBound(0) Then
-                    RichTextBox1.Text += "-"
-                End If
-            Next
-            RichTextBox1.Text += Environment.NewLine
-
-            contador_renglones += 1
-
-            If contador_renglones = 3 Then
-                RichTextBox1.Text += Environment.NewLine
-                contador_renglones = 0
-            End If
-        Next
     End Sub
 
 
@@ -135,4 +118,58 @@
     Private Sub ToolStripComboBoxPuertos_Click(sender As Object, e As EventArgs) Handles ToolStripComboBoxPuertos.Click
         My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
     End Sub
+
+
+    Private Sub DibujarBitmap()
+        BitmapHoja = New Bitmap(56, 72)
+
+        Dim myByteArray(504) As Byte
+        Dim myByteArray_Index As UInteger
+
+
+        For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
+            For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
+                myByteArray(myByteArray_Index) = BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY)
+                myByteArray_Index = myByteArray_Index + 1
+            Next
+        Next
+
+        Dim Str As String = ""
+        Dim newLineCounter As Integer = 0
+
+        Dim indx As UInt16 = 0
+
+        For indx = 0 To 4032
+
+            Dim bit As Boolean = 0
+
+            If bit Then
+                Str += "·"
+            Else
+                Str += " "
+            End If
+
+            newLineCounter = newLineCounter + 1
+
+            If newLineCounter = 56 Then
+                Str += vbNewLine
+                newLineCounter = 0
+            End If
+        Next
+
+        MsgBox(Str)
+
+        PictureBox1.Image = BitmapHoja
+    End Sub
+
+    Private Sub DibujarPunto(x As Integer, y As Integer, valor As Boolean)
+        Dim myColor As Color
+        If valor Then
+            myColor = Color.Black
+        Else
+            myColor = Color.White
+        End If
+        BitmapHoja.SetPixel(x, y, myColor)
+    End Sub
 End Class
+

@@ -42,21 +42,23 @@ Partial Class ImpresoraBraille
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ToolStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RichTextBox1
         '
         Me.RichTextBox1.Location = New System.Drawing.Point(12, 31)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(581, 209)
+        Me.RichTextBox1.Size = New System.Drawing.Size(304, 209)
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(599, 89)
+        Me.Button4.Location = New System.Drawing.Point(687, 89)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(85, 23)
         Me.Button4.TabIndex = 10
@@ -68,7 +70,7 @@ Partial Class ImpresoraBraille
         Me.RichTextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RichTextBox2.Location = New System.Drawing.Point(12, 246)
         Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.Size = New System.Drawing.Size(581, 187)
+        Me.RichTextBox2.Size = New System.Drawing.Size(304, 187)
         Me.RichTextBox2.TabIndex = 11
         Me.RichTextBox2.Text = ""
         '
@@ -193,7 +195,7 @@ Partial Class ImpresoraBraille
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(599, 31)
+        Me.Button2.Location = New System.Drawing.Point(687, 31)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(85, 23)
         Me.Button2.TabIndex = 8
@@ -202,12 +204,22 @@ Partial Class ImpresoraBraille
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(599, 60)
+        Me.Button3.Location = New System.Drawing.Point(687, 60)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(85, 23)
         Me.Button3.TabIndex = 9
         Me.Button3.Text = "Enviar"
         Me.Button3.UseVisualStyleBackColor = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.Color.White
+        Me.PictureBox1.Location = New System.Drawing.Point(322, 31)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(359, 402)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 15
+        Me.PictureBox1.TabStop = False
         '
         'ImpresoraBraille
         '
@@ -215,6 +227,7 @@ Partial Class ImpresoraBraille
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDark
         Me.ClientSize = New System.Drawing.Size(784, 461)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.LabelEst)
@@ -234,6 +247,7 @@ Partial Class ImpresoraBraille
         Me.ToolStrip1.PerformLayout()
         Me.ToolStrip2.ResumeLayout(False)
         Me.ToolStrip2.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -257,4 +271,5 @@ Partial Class ImpresoraBraille
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

@@ -43,14 +43,6 @@
         Return OutputString
     End Function
 
-    '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
-    '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
-    '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
-    '⠠	⠡	⠣	⠩	⠹	⠱	⠫	⠻	⠳	⠪	⠺	⠨	⠸
-    '⠀	⠂	⠆	⠒	⠲	⠢	⠖	⠶	⠦	⠔	⠴	⠐	⠰
-
-
-
     Public Function CharToBraille(ch As Char, charAnterior As Char, charSiguiente As Char) As String
         Dim OutputChar As String = ch
         Dim InputChar As String = ch.ToString.ToLower
@@ -122,6 +114,8 @@
                 OutputChar = "⠍"
             Case "n"
                 OutputChar = "⠝"
+            Case "ñ"
+                OutputChar = "⠻"
             Case "o"
                 OutputChar = "⠕"
             Case "p"
@@ -141,7 +135,11 @@
             Case "w"
                 OutputChar = "⠺"
             Case "x"
-                OutputChar = "⠭"
+                If (Char.IsNumber(charAnterior) And Char.IsNumber(charSiguiente)) Then
+                    OutputChar = "⠦"
+                Else
+                    OutputChar = "⠭"
+                End If
             Case "y"
                 OutputChar = "⠽"
             Case "z"
@@ -159,13 +157,21 @@
             Case "ü"
                 OutputChar = "⠳"
             Case "."
-                OutputChar = "⠄"
+                If (Char.IsNumber(charAnterior) And Char.IsNumber(charSiguiente)) Then
+                    OutputChar = "⠦"
+                Else
+                    OutputChar = "⠄"
+                End If
             Case ","
                 OutputChar = "⠂"
             Case ";"
                 OutputChar = "⠆"
             Case ":"
-                OutputChar = "⠒"
+                If (Char.IsNumber(charAnterior) And Char.IsNumber(charSiguiente)) Then
+                    OutputChar = "⠲"
+                Else
+                    OutputChar = "⠒"
+                End If
             Case "?"
                 OutputChar = "⠢"
             Case "¿"
@@ -209,7 +215,11 @@
             Case "_"
                 OutputChar = "⠤⠤"
             Case "*"
-                OutputChar = "⠔"
+                If (Char.IsNumber(charAnterior) And Char.IsNumber(charSiguiente)) Then
+                    OutputChar = "⠦"
+                Else
+                    OutputChar = "⠔"
+                End If
             Case "'"
                 If (Char.IsLetter(charAnterior) And Char.IsLetter(charSiguiente)) Then
                     OutputChar = "⠄"
@@ -219,7 +229,11 @@
             Case "/"
                 If (charAnterior <> "/") Then
                     If charSiguiente <> "/" Then
-                        OutputChar = "⠠⠂"
+                        If (Char.IsNumber(charAnterior) And Char.IsNumber(charSiguiente)) Then
+                            OutputChar = "⠲"
+                        Else
+                            OutputChar = "⠠⠂"
+                        End If
                     Else
                         OutputChar = "⠠⠢⠂"
                     End If
@@ -246,8 +260,51 @@
                 Else
                     OutputChar = ""
                 End If
-
-            Case ""
+            Case "+"
+                OutputChar = "⠖"
+            Case "÷"
+                OutputChar = "⠲"
+            Case "="
+                OutputChar = "⠶"
+            Case "%"
+                OutputChar = "⠸⠴"
+            Case "‰"
+                OutputChar = "⠸⠴⠴"
+            Case "©"
+                OutputChar = "⠣⠨⠉⠜"
+            Case "℗"
+                OutputChar = "⠣⠨⠏⠜"
+            Case "®"
+                OutputChar = "⠣⠨⠗⠜"
+            Case "™"
+                OutputChar = "⠣⠨⠞⠨⠍⠜"
+            Case "℠"
+                OutputChar = "⠣⠨⠎⠨⠍⠜"
+            Case "&"
+                OutputChar = "⠠⠯"
+            Case "@"
+                OutputChar = "⠐"
+            Case "±"
+                OutputChar = "⠖⠒⠤"
+            Case "†"
+                OutputChar = "⠐⠗"
+            Case "#"
+                OutputChar = "⠼⠐"
+            Case "§"
+                OutputChar = "⠬"
+            Case "¶"
+                OutputChar = "⠩"
+            Case "€"
+                OutputChar = "⠸⠑"
+            Case "$"
+                OutputChar = "⠸⠎"
+            Case "¢"
+                OutputChar = "⠘⠉"
+            Case "£"
+                OutputChar = "⠐⠮"
+            Case "¥"
+                OutputChar = "⠸⠽"
+            Case Else
                 OutputChar = ""
         End Select
 
