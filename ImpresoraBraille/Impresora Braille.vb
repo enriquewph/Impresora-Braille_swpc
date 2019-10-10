@@ -73,7 +73,7 @@
         RichTextBox2.Clear()
         Dim TextoATraducir As String = RichTextBox1.Text
         Dim TextoTraducido As String = Traductor.TraducirTexto(TextoATraducir)
-        RichTextBox2.Text = TextoTraducido
+        RichTextBox2.Text = Traductor.AjustarRenglones(TextoTraducido, 28)
     End Sub
 
     Private Sub ToolStripButtonConectar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonConectar.Click
@@ -119,12 +119,15 @@
         My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
     End Sub
 
-
     Private Sub DibujarBitmap()
         BitmapHoja = New Bitmap(56, 72)
 
         Dim myByteArray(504) As Byte
         Dim myByteArray_Index As UInteger
+        Dim myBitArray(4032) As Boolean
+        Dim myBitArray_index As UInteger
+        Dim BitInByte_index As UInteger
+        Dim myBitMatrix(55, 71) As Boolean
 
 
         For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
@@ -134,30 +137,24 @@
             Next
         Next
 
-        Dim Str As String = ""
-        Dim newLineCounter As Integer = 0
+        myByteArray_Index = 0
 
-        Dim indx As UInt16 = 0
-
-        For indx = 0 To 4032
-
-            Dim bit As Boolean = 0
-
-            If bit Then
-                Str += "·"
-            Else
-                Str += " "
-            End If
-
-            newLineCounter = newLineCounter + 1
-
-            If newLineCounter = 56 Then
-                Str += vbNewLine
-                newLineCounter = 0
+        For myBitArray_index = 0 To 4032
+            myBitArray(myBitArray_index) = (myByteArray(myByteArray_Index) And (&H80 >> BitInByte_index))
+            BitInByte_index = BitInByte_index + 1
+            If (BitInByte_index = 8) Then
+                BitInByte_index = 0
+                myByteArray_Index = myByteArray_Index + 1
             End If
         Next
 
-        MsgBox(Str)
+        Dim cuenta As Integer = 0
+        For y As Integer = myBitMatrix.GetLowerBound(1) To myBitMatrix.GetUpperBound(1)
+            For x As Integer = myBitMatrix.GetLowerBound(0) To myBitMatrix.GetUpperBound(0)
+                DibujarPunto(x, y, myBitArray(cuenta))
+                cuenta = cuenta + 1
+            Next
+        Next
 
         PictureBox1.Image = BitmapHoja
     End Sub
@@ -169,6 +166,7 @@
         Else
             myColor = Color.White
         End If
+
         BitmapHoja.SetPixel(x, y, myColor)
     End Sub
 End Class

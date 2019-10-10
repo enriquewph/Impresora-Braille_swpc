@@ -3,21 +3,22 @@
         Dim ModoNumeros As Boolean = False
         Dim OutputString As String = ""
 
-        Dim inputArray As Char() = InputString.ToCharArray
 
-        For i As Integer = 0 To inputArray.GetUpperBound(0)
-            Dim letra As Char = inputArray(i)
+        For i As Integer = 0 To InputString.Length - 1
+            'Dim letra As Char = inputArray(i)
+
+            Dim letra As Char = InputString.Chars(i)
             Dim letra_ant As Char
             Dim letra_sig As Char
 
             If (i > 0) Then
-                letra_ant = inputArray(i - 1)
+                letra_ant = InputString.Chars(i - 1)
             Else
                 letra_ant = vbNewLine
             End If
 
-            If (i < inputArray.GetUpperBound(0)) Then
-                letra_sig = inputArray(i + 1)
+            If (i < InputString.Length - 1) Then
+                letra_sig = InputString.Chars(i + 1)
             Else
                 letra_sig = vbNewLine
             End If
@@ -36,8 +37,11 @@
             Else
                 ModoNumeros = False
             End If
-
-            OutputString += CharToBraille(letra, letra_ant, letra_sig)
+            If (letra <> vbLf) Then
+                OutputString += CharToBraille(letra, letra_ant, letra_sig)
+            Else
+                OutputString += vbNewLine
+            End If
         Next
 
         Return OutputString
@@ -316,6 +320,30 @@
         '⠀	⠂	⠆	⠒	⠲	⠢	⠖	⠶	⠦	⠔	⠴	⠐	⠰
 
         Return OutputChar
+    End Function
+
+    Public Function AjustarRenglones(InputString As String, longitud_Renglon As Integer) As String ' Toma un string a la entrada y corta los renglones antes de los 28 caracteres
+        Dim OutputString As String = ""
+
+        Dim CuentaLetras As Integer = 0
+        For Each letra As Char In InputString
+
+            If (CuentaLetras >= longitud_Renglon) Then
+                OutputString += Constants.vbNewLine
+                CuentaLetras = 0
+            End If
+
+            If letra = Constants.vbNewLine Then
+                CuentaLetras = 0
+                OutputString += vbNewLine
+            Else
+                OutputString += letra
+            End If
+
+            CuentaLetras = CuentaLetras + 1
+        Next
+
+        Return OutputString
     End Function
 
     'Invalidaciones, obviarlas.
