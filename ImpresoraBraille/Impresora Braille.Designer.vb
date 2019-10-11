@@ -53,7 +53,7 @@ Partial Class ImpresoraBraille
         Me.RichTextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RichTextBox1.Location = New System.Drawing.Point(12, 31)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(304, 209)
+        Me.RichTextBox1.Size = New System.Drawing.Size(285, 402)
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
         '
@@ -69,9 +69,9 @@ Partial Class ImpresoraBraille
         'RichTextBox2
         '
         Me.RichTextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBox2.Location = New System.Drawing.Point(12, 246)
+        Me.RichTextBox2.Location = New System.Drawing.Point(303, 31)
         Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.Size = New System.Drawing.Size(304, 187)
+        Me.RichTextBox2.Size = New System.Drawing.Size(254, 402)
         Me.RichTextBox2.TabIndex = 11
         Me.RichTextBox2.Text = ""
         '
@@ -215,9 +215,9 @@ Partial Class ImpresoraBraille
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.White
-        Me.PictureBox1.Location = New System.Drawing.Point(451, 31)
+        Me.PictureBox1.Location = New System.Drawing.Point(563, 118)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(230, 354)
+        Me.PictureBox1.Size = New System.Drawing.Size(209, 315)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 15
         Me.PictureBox1.TabStop = False
