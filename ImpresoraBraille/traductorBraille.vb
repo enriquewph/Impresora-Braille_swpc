@@ -37,10 +37,11 @@
             Else
                 ModoNumeros = False
             End If
+
             If (letra <> vbLf) Then
                 OutputString += CharToBraille(letra, letra_ant, letra_sig)
             Else
-                OutputString += vbNewLine
+                OutputString += vbLf
             End If
         Next
 
@@ -326,16 +327,17 @@
         Dim OutputString As String = ""
 
         Dim CuentaLetras As Integer = 0
+
         For Each letra As Char In InputString
 
             If (CuentaLetras >= longitud_Renglon) Then
-                OutputString += Constants.vbNewLine
+                OutputString += vbLf
                 CuentaLetras = 0
             End If
 
-            If letra = Constants.vbNewLine Then
+            If letra = vbLf Then
                 CuentaLetras = 0
-                OutputString += vbNewLine
+                OutputString += vbLf
             Else
                 OutputString += letra
             End If

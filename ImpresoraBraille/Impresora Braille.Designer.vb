@@ -215,9 +215,9 @@ Partial Class ImpresoraBraille
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.White
-        Me.PictureBox1.Location = New System.Drawing.Point(451, 31)
+        Me.PictureBox1.Location = New System.Drawing.Point(402, 31)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(230, 354)
+        Me.PictureBox1.Size = New System.Drawing.Size(279, 402)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 15
         Me.PictureBox1.TabStop = False

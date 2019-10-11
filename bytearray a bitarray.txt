@@ -1,0 +1,25 @@
+Dim myByteArray(504) As Byte
+        Dim myByteArray_Index As UInteger
+        Dim myBitArray(4032) As Boolean
+        Dim myBitArray_index As UInteger
+        Dim BitInByte_index As UInteger
+        Dim myBitMatrix(55, 71) As Boolean
+
+
+        For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
+            For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
+                myByteArray(myByteArray_Index) = BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY)
+                myByteArray_Index = myByteArray_Index + 1
+            Next
+        Next
+
+        myByteArray_Index = 0
+
+        For myBitArray_index = 0 To 4032
+            myBitArray(myBitArray_index) = (myByteArray(myByteArray_Index) And (&H80 >> BitInByte_index))
+            BitInByte_index = BitInByte_index + 1
+            If (BitInByte_index = 8) Then
+                BitInByte_index = 0
+                myByteArray_Index = myByteArray_Index + 1
+            End If
+        Next

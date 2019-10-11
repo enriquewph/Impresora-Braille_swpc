@@ -3,6 +3,7 @@
     Dim Traductor As New TraductorBraille
     Dim Puerto_Impresora As String
     Dim BitmapHoja As Bitmap
+    Dim BitMatrixHoja(55, 71) As Boolean
 
 
     Sub SetSerialPortNames()
@@ -73,7 +74,9 @@
         RichTextBox2.Clear()
         Dim TextoATraducir As String = RichTextBox1.Text
         Dim TextoTraducido As String = Traductor.TraducirTexto(TextoATraducir)
-        RichTextBox2.Text = Traductor.AjustarRenglones(TextoTraducido, 28)
+        Dim TextoAjustado As String = Traductor.AjustarRenglones(TextoTraducido, 28)
+        TransponerTextoABitArray(TextoAjustado)
+        RichTextBox2.Text = TextoAjustado
     End Sub
 
     Private Sub ToolStripButtonConectar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonConectar.Click
@@ -119,40 +122,74 @@
         My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
     End Sub
 
+    Private Sub TransponerTextoABitArray(inputString As String)
+        '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
+        '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
+        '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
+        '⠠	⠡	⠣	⠩	⠹	⠱	⠫	⠻	⠳	⠪	⠺	⠨	⠸
+        '⠀	⠂	⠆	⠒	⠲	⠢	⠖	⠶	⠦	⠔	⠴	⠐	⠰
+        Dim Cord_X As Integer = 0
+        Dim Cord_Y As Integer = 0
+
+        For char_index As Integer = 0 To inputString.Length()
+            MarcarPuntos(inputString.Chars(char_index), Cord_X, Cord_Y)
+
+            Cord_X = Cord_X + 2
+
+            If (Cord_X = 53) Then
+                Cord_X = 0
+                Cord_Y = Cord_Y + 3
+            End If
+        Next
+    End Sub
+
+    Private Sub MarcarPuntos(inputChar As Char, x As Integer, y As Integer)
+        Dim Dot_TL As Boolean = 0
+        Dim Dot_TR As Boolean = 0
+        Dim Dot_ML As Boolean = 0
+        Dim Dot_MR As Boolean = 0
+        Dim Dot_BL As Boolean = 0
+        Dim Dot_BR As Boolean = 0
+
+        '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
+        '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
+        '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
+        '⠠	⠡	⠣	⠩	⠹	⠱	⠫	⠻	⠳	⠪	⠺	⠨	⠸
+        '⠀	⠂	⠆	⠒	⠲	⠢	⠖	⠶	⠦	⠔	⠴	⠐	⠰
+
+        Select Case inputChar
+            Case " "
+
+            Case "⠁"
+                Dot_TL = 1
+            Case "⠃"
+                Dot_TL = 1
+                Dot_ML = 1
+            Case "⠉"
+                Dot_TL = 1
+                Dot_TR = 1
+            Case "⠙"
+                Dot_TL = 1
+                Dot_TR = 1
+                Dot_MR = 1
+        End Select
+
+        BitMatrixHoja(x, y) = Dot_TL
+        BitMatrixHoja(x, y + 1) = Dot_ML
+        BitMatrixHoja(x, y + 2) = Dot_BL
+
+        BitMatrixHoja(x + 1, y) = Dot_TR
+        BitMatrixHoja(x + 1, y + 1) = Dot_MR
+        BitMatrixHoja(x + 1, y + 1) = Dot_BR
+
+    End Sub
+
     Private Sub DibujarBitmap()
         BitmapHoja = New Bitmap(56, 72)
 
-        Dim myByteArray(504) As Byte
-        Dim myByteArray_Index As UInteger
-        Dim myBitArray(4032) As Boolean
-        Dim myBitArray_index As UInteger
-        Dim BitInByte_index As UInteger
-        Dim myBitMatrix(55, 71) As Boolean
-
-
-        For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
-            For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
-                myByteArray(myByteArray_Index) = BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY)
-                myByteArray_Index = myByteArray_Index + 1
-            Next
-        Next
-
-        myByteArray_Index = 0
-
-        For myBitArray_index = 0 To 4032
-            myBitArray(myBitArray_index) = (myByteArray(myByteArray_Index) And (&H80 >> BitInByte_index))
-            BitInByte_index = BitInByte_index + 1
-            If (BitInByte_index = 8) Then
-                BitInByte_index = 0
-                myByteArray_Index = myByteArray_Index + 1
-            End If
-        Next
-
-        Dim cuenta As Integer = 0
-        For y As Integer = myBitMatrix.GetLowerBound(1) To myBitMatrix.GetUpperBound(1)
-            For x As Integer = myBitMatrix.GetLowerBound(0) To myBitMatrix.GetUpperBound(0)
-                DibujarPunto(x, y, myBitArray(cuenta))
-                cuenta = cuenta + 1
+        For y As Integer = BitMatrixHoja.GetLowerBound(1) To BitMatrixHoja.GetUpperBound(1)
+            For x As Integer = BitMatrixHoja.GetLowerBound(0) To BitMatrixHoja.GetUpperBound(0)
+                DibujarPunto(x, y, BitMatrixHoja(x, y))
             Next
         Next
 
