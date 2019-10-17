@@ -1,3 +1,5 @@
 
 .vs/ImpresoraBraille/v15/Server/sqlite3/storage.ide-shm
 .vs/ImpresoraBraille/v15/Server/sqlite3/storage.ide-wal
+*.ide-wal
+*.ide-shm
