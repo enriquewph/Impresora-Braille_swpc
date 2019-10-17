@@ -142,5 +142,10 @@ Impresora Braille
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:ImpresoraBraille.My.Resources.Resources.select_all_16x16">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
 </members>
 </doc>

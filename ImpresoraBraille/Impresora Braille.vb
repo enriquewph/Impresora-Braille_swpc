@@ -1,12 +1,57 @@
-﻿Public Class ImpresoraBraille
+﻿Imports ImpresoraBraille
+
+Public Class ImpresoraBraille
     Dim BCL As New BrailleComLib
     Dim Traductor As New TraductorBraille
     Dim Puerto_Impresora As String
-    Dim BitmapHoja As New Bitmap(1204, 1702)
-    Dim BitMatrixHoja(55, 71) As Boolean
 
+    Dim ListaHojas As New List(Of Hoja_c)
 
-    Sub SetSerialPortNames()
+#Region "Conexion y puerto serie"
+    Private Sub ToolStripButtonConectar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonConectar.Click
+        Puerto_Impresora = ToolStripComboBoxPuertos.SelectedItem
+
+        If Not BCL.Impresora_Conectada() Then
+            If Not BCL.Conectar_Impresora(Puerto_Impresora) Then
+                'Si hubo un error al conectar hacer lo siguiente:
+                MsgBox("No se pudo conectar a la impresora.", MsgBoxStyle.Exclamation, "Error de conexion:")
+            End If
+        Else
+            BCL.Desconectar_Impresora()
+        End If
+
+        ActualizarLabelsConectar()
+        My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
+    End Sub
+
+    Private Sub ToolStripButtonRecargarPuertos_Click(sender As Object, e As EventArgs) Handles ToolStripButtonRecargarPuertos.Click
+        SetSerialPortNames()
+    End Sub
+
+    Private Sub ToolStripComboBoxPuertos_NoBlue(sender As Object, e As EventArgs) Handles ToolStripComboBoxPuertos.DropDownClosed
+        ToolStripComboBoxPuertos.SelectionLength = 0
+    End Sub
+
+    Private Sub ToolStripComboBoxPuertos_Click(sender As Object, e As EventArgs) Handles ToolStripComboBoxPuertos.Click
+        My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
+    End Sub
+
+    Private Sub ActualizarLabelsConectar()
+        If (BCL.Impresora_Conectada()) Then
+            ToolStripButtonConectar.Text = "Desconectar"
+            ToolStripButtonConectar.Image = My.Resources.Resources._01
+
+            ToolStripLabelEstado.Text = "Conectado"
+            ToolStripLabelEstado.Image = My.Resources.Resources._021
+        Else
+            ToolStripButtonConectar.Text = "Conectar"
+            ToolStripButtonConectar.Image = My.Resources.Resources._02
+            ToolStripLabelEstado.Text = "Desconectado"
+            ToolStripLabelEstado.Image = My.Resources.Resources._011
+        End If
+    End Sub
+
+    Private Sub SetSerialPortNames()
         ' Show all available COM ports.
 
         Dim ComboBox As ToolStripComboBox = ToolStripComboBoxPuertos
@@ -36,28 +81,13 @@
         My.Settings.COM = ComboBox.SelectedItem
 
     End Sub
+#End Region
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetSerialPortNames()
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
-        For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
-            For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
-                BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY) = 0
-            Next
-            BCL.arrayHoja_a_enviar(0, i_ejeY) = 128
-        Next
-
-        DibujarBitmap()
-
-    End Sub
-
-
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-
+    Private Sub ToolStripButtonEnviar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnviar.Click
         For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
             For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
                 BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY) = 0
@@ -65,64 +95,28 @@
             BCL.arrayHoja_a_enviar(0, i_ejeY) = i_ejeY * 2
         Next
 
+        'TransponerTextoABitArray(TextoAjustado)
+
         BCL.SendHojasTotales(1)
         BCL.SendHoja(1)
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-
+    Private Sub ToolStrip1ButtonTraducir_Click(sender As Object, e As EventArgs) Handles ToolStrip1ButtonTraducir.Click
         RichTextBox2.Clear()
         Dim TextoATraducir As String = RichTextBox1.Text
+
         Dim TextoTraducido As String = Traductor.TraducirTexto(TextoATraducir)
-        Dim TextoAjustado As String = Traductor.AjustarRenglones(TextoTraducido, 28)
-        TransponerTextoABitArray(TextoAjustado)
-        RichTextBox2.Text = TextoAjustado
+        'Dim TextoAjustado As String = Traductor.AjustarRenglones(TextoTraducido, 28)
+
+
+        RichTextBox2.Text = TextoTraducido
     End Sub
 
-    Private Sub ToolStripButtonConectar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonConectar.Click
-        Puerto_Impresora = ToolStripComboBoxPuertos.SelectedItem
+    Private Sub ToolStripButtonVistaPrevia_Click(sender As Object, e As EventArgs) Handles ToolStripButtonVistaPrevia.Click
 
-        If Not BCL.Impresora_Conectada() Then
-            If Not BCL.Conectar_Impresora(Puerto_Impresora) Then
-                'Si hubo un error al conectar hacer lo siguiente:
-                MsgBox("No se pudo conectar a la impresora.", MsgBoxStyle.Exclamation, "Error de conexion:")
-            End If
-        Else
-            BCL.Desconectar_Impresora()
-        End If
-
-        ActualizarLabelsConectar()
-        My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
     End Sub
 
-    Private Sub ToolStripButtonRecargarPuertos_Click(sender As Object, e As EventArgs) Handles ToolStripButtonRecargarPuertos.Click
-        SetSerialPortNames()
-    End Sub
-
-    Private Sub ActualizarLabelsConectar()
-        If (BCL.Impresora_Conectada()) Then
-            ToolStripButtonConectar.Text = "Desconectar"
-            ToolStripButtonConectar.Image = My.Resources.Resources._01
-
-            ToolStripLabelEstado.Text = "Conectado"
-            ToolStripLabelEstado.Image = My.Resources.Resources._021
-        Else
-            ToolStripButtonConectar.Text = "Conectar"
-            ToolStripButtonConectar.Image = My.Resources.Resources._02
-            ToolStripLabelEstado.Text = "Desconectado"
-            ToolStripLabelEstado.Image = My.Resources.Resources._011
-        End If
-    End Sub
-
-    Private Sub ToolStripComboBoxPuertos_NoBlue(sender As Object, e As EventArgs) Handles ToolStripComboBoxPuertos.DropDownClosed
-        ToolStripComboBoxPuertos.SelectionLength = 0
-    End Sub
-
-    Private Sub ToolStripComboBoxPuertos_Click(sender As Object, e As EventArgs) Handles ToolStripComboBoxPuertos.Click
-        My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
-    End Sub
-
-    Private Sub TransponerTextoABitArray(inputString As String)
+    Private Sub TransponerTextoABitArray(inputString As String, Hoja As Hoja_c)
         '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
         '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
         '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
@@ -131,12 +125,12 @@
         Dim Cord_X As Integer = 0
         Dim Cord_Y As Integer = 0
 
-        For Each bit As Boolean In BitMatrixHoja
+        For Each bit As Boolean In Hoja.BitMatrix
             bit = 0
         Next
 
         For char_index As Integer = 0 To inputString.Length() - 1
-            MarcarPuntos(inputString.Chars(char_index), Cord_X, Cord_Y)
+            MarcarPuntos(inputString.Chars(char_index), Cord_X, Cord_Y, Hoja)
 
             Cord_X = Cord_X + 2
 
@@ -147,7 +141,7 @@
         Next
     End Sub
 
-    Private Sub MarcarPuntos(inputChar As Char, x As Integer, y As Integer)
+    Private Sub MarcarPuntos(inputChar As Char, x As Integer, y As Integer, Hoja As Hoja_c)
         Dim Dot_TL As Boolean = 0 ' SUPERIOR IZQUIERDO
         Dim Dot_TR As Boolean = 0 ' SUPERIOR DERECHO
         Dim Dot_ML As Boolean = 0 ' MEDIO IZQUIERDA
@@ -162,7 +156,7 @@
         '⠀	⠂	⠆	⠒	⠲	⠢	⠖	⠶	⠦	⠔	⠴	⠐	⠰
 
         Select Case inputChar
-            Case " "
+            Case "⠀"
 
             Case "⠁"
                 Dot_TL = 1
@@ -421,118 +415,36 @@
                 Dot_BR = 1
         End Select
 
-        BitMatrixHoja(x, y) = Dot_TL
-        BitMatrixHoja(x, y + 1) = Dot_ML
-        BitMatrixHoja(x, y + 2) = Dot_BL
+        Hoja.BitMatrix(x, y) = Dot_TL
+        Hoja.BitMatrix(x, y + 1) = Dot_ML
+        Hoja.BitMatrix(x, y + 2) = Dot_BL
 
-        BitMatrixHoja(x + 1, y) = Dot_TR
-        BitMatrixHoja(x + 1, y + 1) = Dot_MR
-        BitMatrixHoja(x + 1, y + 2) = Dot_BR
-
-    End Sub
-
-    Private Sub DibujarBitmap()
-
-        Dim X As Integer = 142
-        Dim Y As Integer = 142
-
-        Dim cuenta_X As Integer = 0
-        Dim cuenta_Y As Integer = 0
-
-        For punto_y As Integer = BitMatrixHoja.GetLowerBound(1) To BitMatrixHoja.GetUpperBound(1)
-            For punto_x As Integer = BitMatrixHoja.GetLowerBound(0) To BitMatrixHoja.GetUpperBound(0)
-                DibujarPunto(X, Y, BitMatrixHoja(punto_x, punto_y))
-
-                cuenta_X = cuenta_X + 1
-
-                If (cuenta_X = 2) Then
-                    cuenta_X = 0
-                    X = X + 22
-                Else
-                    X = X + 15
-                End If
-            Next
-
-            X = 142
-
-            cuenta_Y = cuenta_Y + 1
-
-            If (cuenta_Y = 4) Then
-                cuenta_Y = 0
-                Y = Y + 32
-            Else
-                Y = Y + 15
-            End If
-        Next
-
-        PictureBox1.Image = BitmapHoja
-
-        'If (SaveFileDialog1.ShowDialog = DialogResult.OK) Then
-        '    PictureBox1.Image.Save(SaveFileDialog1.FileName, Imaging.ImageFormat.MemoryBmp)
-        'End If
+        Hoja.BitMatrix(x + 1, y) = Dot_TR
+        Hoja.BitMatrix(x + 1, y + 1) = Dot_MR
+        Hoja.BitMatrix(x + 1, y + 2) = Dot_BR
 
     End Sub
 
-    Private Sub DibujarPunto(x As Integer, y As Integer, valor As Boolean)
-        Try
-            Dim myColor As Color
-            If valor Then
-                myColor = Color.Black
-            Else
-                myColor = Color.White
-            End If
 
-            BitmapHoja.SetPixel(x - 1, y + 3, myColor)
-            BitmapHoja.SetPixel(x, y + 3, myColor)
-            BitmapHoja.SetPixel(x + 1, y + 3, myColor)
-
-            BitmapHoja.SetPixel(x - 2, y + 2, myColor)
-            BitmapHoja.SetPixel(x - 1, y + 2, myColor)
-            BitmapHoja.SetPixel(x, y + 2, myColor)
-            BitmapHoja.SetPixel(x + 1, y + 2, myColor)
-            BitmapHoja.SetPixel(x + 2, y + 2, myColor)
-
-            BitmapHoja.SetPixel(x - 3, y + 1, myColor)
-            BitmapHoja.SetPixel(x - 2, y + 1, myColor)
-            BitmapHoja.SetPixel(x - 1, y + 1, myColor)
-            BitmapHoja.SetPixel(x, y + 1, myColor)
-            BitmapHoja.SetPixel(x + 1, y + 1, myColor)
-            BitmapHoja.SetPixel(x + 2, y + 1, myColor)
-            BitmapHoja.SetPixel(x + 3, y + 1, myColor)
-
-            BitmapHoja.SetPixel(x - 3, y, myColor)
-            BitmapHoja.SetPixel(x - 2, y, myColor)
-            BitmapHoja.SetPixel(x - 1, y, myColor)
-            BitmapHoja.SetPixel(x, y, myColor)
-            BitmapHoja.SetPixel(x + 1, y, myColor)
-            BitmapHoja.SetPixel(x + 2, y, myColor)
-            BitmapHoja.SetPixel(x + 3, y, myColor)
-
-            BitmapHoja.SetPixel(x - 3, y - 1, myColor)
-            BitmapHoja.SetPixel(x - 2, y - 1, myColor)
-            BitmapHoja.SetPixel(x - 1, y - 1, myColor)
-            BitmapHoja.SetPixel(x, y - 1, myColor)
-            BitmapHoja.SetPixel(x + 1, y - 1, myColor)
-            BitmapHoja.SetPixel(x + 2, y - 1, myColor)
-            BitmapHoja.SetPixel(x + 3, y - 1, myColor)
-
-            BitmapHoja.SetPixel(x - 2, y - 2, myColor)
-            BitmapHoja.SetPixel(x - 1, y - 2, myColor)
-            BitmapHoja.SetPixel(x, y - 2, myColor)
-            BitmapHoja.SetPixel(x + 1, y - 2, myColor)
-            BitmapHoja.SetPixel(x + 2, y - 2, myColor)
-
-            BitmapHoja.SetPixel(x - 1, y - 3, myColor)
-            BitmapHoja.SetPixel(x, y - 3, myColor)
-            BitmapHoja.SetPixel(x + 1, y - 3, myColor)
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+    Private Sub ButtonTrackBarL_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarL.Click
+        If TrackBar1.Value > 1 Then
+            TrackBar1.Value = TrackBar1.Value - 1
+        End If
     End Sub
 
-    Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
+    Private Sub ButtonTrackBarR_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarR.Click
 
     End Sub
 End Class
 
+Class Hoja_c
+    Public Texto As String
+    Public BitMatrix(55, 71) As Boolean
+    Public Numero As UInt16
+
+    Public Sub New(texto As String, numero As UShort)
+        Me.Texto = texto
+        Me.BitMatrix = BitMatrix
+        Me.Numero = numero
+    End Sub
+End Class

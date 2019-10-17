@@ -1,0 +1,5 @@
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbprojAssemblyReference.cache
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.ImpresoraBraille.resources
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.Resources.resources
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbproj.GenerateResource.cache
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbproj.CoreCompileInputs.cache
