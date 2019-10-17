@@ -2,7 +2,7 @@
     Dim BCL As New BrailleComLib
     Dim Traductor As New TraductorBraille
     Dim Puerto_Impresora As String
-    Dim BitmapHoja As Bitmap
+    Dim BitmapHoja As New Bitmap(1204, 1702)
     Dim BitMatrixHoja(55, 71) As Boolean
 
 
@@ -140,7 +140,7 @@
 
             Cord_X = Cord_X + 2
 
-            If (Cord_X = 53) Then
+            If (Cord_X > 52) Then
                 Cord_X = 0
                 Cord_Y = Cord_Y + 3
             End If
@@ -427,12 +427,11 @@
 
         BitMatrixHoja(x + 1, y) = Dot_TR
         BitMatrixHoja(x + 1, y + 1) = Dot_MR
-        BitMatrixHoja(x + 1, y + 1) = Dot_BR
+        BitMatrixHoja(x + 1, y + 2) = Dot_BR
 
     End Sub
 
     Private Sub DibujarBitmap()
-        BitmapHoja = New Bitmap(1204, 1702)
 
         Dim X As Integer = 142
         Dim Y As Integer = 142
@@ -467,6 +466,11 @@
         Next
 
         PictureBox1.Image = BitmapHoja
+
+        'If (SaveFileDialog1.ShowDialog = DialogResult.OK) Then
+        '    PictureBox1.Image.Save(SaveFileDialog1.FileName, Imaging.ImageFormat.MemoryBmp)
+        'End If
+
     End Sub
 
     Private Sub DibujarPunto(x As Integer, y As Integer, valor As Boolean)

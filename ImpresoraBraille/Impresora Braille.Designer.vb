@@ -43,6 +43,7 @@ Partial Class ImpresoraBraille
         Me.Button3 = New System.Windows.Forms.Button()
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ToolStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -222,6 +223,10 @@ Partial Class ImpresoraBraille
         Me.PictureBox1.TabIndex = 15
         Me.PictureBox1.TabStop = False
         '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.DefaultExt = "bmp"
+        '
         'ImpresoraBraille
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -273,4 +278,5 @@ Partial Class ImpresoraBraille
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents SaveFileDialog1 As SaveFileDialog
 End Class
