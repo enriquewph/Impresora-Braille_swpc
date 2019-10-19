@@ -1,11 +1,12 @@
-﻿Imports ImpresoraBraille
-
-Public Class ImpresoraBraille
+﻿Public Class ImpresoraBraille
+    'Invocacion de clases
+    Dim TrabajoActual As New TrabajoActual_c
+    Dim Hoja_Funciones As Hoja_Funciones_c
     Dim BCL As New BrailleComLib
     Dim Traductor As New TraductorBraille
-    Dim Puerto_Impresora As String
-
     Dim ListaHojas As New List(Of Hoja_c)
+
+    Dim Puerto_Impresora As String
 
 #Region "Conexion y puerto serie"
     Private Sub ToolStripButtonConectar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonConectar.Click
@@ -83,8 +84,28 @@ Public Class ImpresoraBraille
     End Sub
 #End Region
 
+#Region "Previsualizacion"
+    Private Sub ToolStripButtonVistaPrevia_Click(sender As Object, e As EventArgs) Handles ToolStripButtonVistaPrevia.Click
+
+    End Sub
+
+    Private Sub ButtonTrackBarL_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarL.Click
+        If TrackBar1.Value > 1 Then
+            TrackBar1.Value = TrackBar1.Value - 1
+        End If
+    End Sub
+
+    Private Sub ButtonTrackBarR_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarR.Click
+        If (TrackBar1.Value < TrabajoActual.Hojas) Then
+
+        End If
+    End Sub
+
+#End Region
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetSerialPortNames()
+        CenterForm(Me)
     End Sub
 
     Private Sub ToolStripButtonEnviar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnviar.Click
@@ -112,339 +133,31 @@ Public Class ImpresoraBraille
         RichTextBox2.Text = TextoTraducido
     End Sub
 
-    Private Sub ToolStripButtonVistaPrevia_Click(sender As Object, e As EventArgs) Handles ToolStripButtonVistaPrevia.Click
-
+    Private Sub CenterForm(ByRef form As Form)
+        Dim screenSize As Size = My.Computer.Screen.Bounds.Size
+        Dim formSize As Size = form.Size
+        Dim newFormPos As New Point((screenSize.Width - form.Width) / 2, (screenSize.Height - form.Height) / 2)
+        form.Location = newFormPos
     End Sub
 
-    Private Sub TransponerTextoABitArray(inputString As String, Hoja As Hoja_c)
-        '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
-        '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
-        '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
-        '⠠	⠡	⠣	⠩	⠹	⠱	⠫	⠻	⠳	⠪	⠺	⠨	⠸
-        '⠀	⠂	⠆	⠒	⠲	⠢	⠖	⠶	⠦	⠔	⠴	⠐	⠰
-        Dim Cord_X As Integer = 0
-        Dim Cord_Y As Integer = 0
+    Private Sub ToolStripButtonVisorEnVivo_Click(sender As Object, e As EventArgs) Handles ToolStripButtonVisorEnVivo.Click
+        Dim totalSize As New Size(Me.Size.Width + VisorEnVivo.Size.Width, Me.Size.Height)
+        Dim newFormPos As New Point((My.Computer.Screen.Bounds.Size.Width - totalSize.Width) / 2, Me.Location.Y)
+        Dim visorFormPos As New Point(newFormPos.X + Me.Size.Width, newFormPos.Y)
 
-        For Each bit As Boolean In Hoja.BitMatrix
-            bit = 0
-        Next
-
-        For char_index As Integer = 0 To inputString.Length() - 1
-            MarcarPuntos(inputString.Chars(char_index), Cord_X, Cord_Y, Hoja)
-
-            Cord_X = Cord_X + 2
-
-            If (Cord_X > 52) Then
-                Cord_X = 0
-                Cord_Y = Cord_Y + 3
-            End If
-        Next
-    End Sub
-
-    Private Sub MarcarPuntos(inputChar As Char, x As Integer, y As Integer, Hoja As Hoja_c)
-        Dim Dot_TL As Boolean = 0 ' SUPERIOR IZQUIERDO
-        Dim Dot_TR As Boolean = 0 ' SUPERIOR DERECHO
-        Dim Dot_ML As Boolean = 0 ' MEDIO IZQUIERDA
-        Dim Dot_MR As Boolean = 0 ' MEDIO DERECHA
-        Dim Dot_BL As Boolean = 0 ' BASE IZQUIERDO
-        Dim Dot_BR As Boolean = 0 ' BASE DERECHO
-
-        '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
-        '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
-        '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
-        '⠠	⠡	⠣	⠩	⠹	⠱	⠫	⠻	⠳	⠪	⠺	⠨	⠸
-        '⠀	⠂	⠆	⠒	⠲	⠢	⠖	⠶	⠦	⠔	⠴	⠐	⠰
-
-        Select Case inputChar
-            Case "⠀"
-
-            Case "⠁"
-                Dot_TL = 1
-            Case "⠃"
-                Dot_TL = 1
-                Dot_ML = 1
-            Case "⠉"
-                Dot_TL = 1
-                Dot_TR = 1
-            Case "⠙"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_MR = 1
-            Case "⠑"
-                Dot_TL = 1
-                Dot_MR = 1
-            Case "⠋"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_ML = 1
-            Case "⠛"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_ML = 1
-            Case "⠓"
-                Dot_TL = 1
-                Dot_MR = 1
-                Dot_ML = 1
-            Case "⠊"
-                Dot_TR = 1
-                Dot_ML = 1
-            Case "⠚"
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_ML = 1
-            Case "⠈"
-                Dot_TR = 1
-            Case "⠘"
-                Dot_TR = 1
-                Dot_MR = 1
-            Case "⠄"
-                Dot_BL = 1
-            Case "⠅"
-                Dot_TL = 1
-                Dot_BL = 1
-            Case "⠇"
-                Dot_TL = 1
-                Dot_ML = 1
-                Dot_BL = 1
-            Case "⠍"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_BL = 1
-            Case "⠝"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_BL = 1
-            Case "⠕"
-                Dot_TL = 1
-                Dot_MR = 1
-                Dot_BL = 1
-            Case "⠏"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_ML = 1
-                Dot_BL = 1
-            Case "⠟"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_ML = 1
-                Dot_BL = 1
-            Case "⠗"
-                Dot_TL = 1
-                Dot_MR = 1
-                Dot_ML = 1
-                Dot_BL = 1
-            Case "⠎"
-                Dot_TR = 1
-                Dot_ML = 1
-                Dot_BL = 1
-            Case "⠞"
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_ML = 1
-                Dot_BL = 1
-            Case "⠌"
-                Dot_TR = 1
-                Dot_BL = 1
-            Case "⠜"
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_BL = 1
-            Case "⠤"
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠥"
-                Dot_BL = 1
-                Dot_BR = 1
-                Dot_TL = 1
-            Case "⠧"
-                Dot_TL = 1
-                Dot_ML = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠭"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠽"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠵"
-                Dot_TL = 1
-                Dot_MR = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠯"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_ML = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠿"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_ML = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠷"
-                Dot_TL = 1
-                Dot_MR = 1
-                Dot_ML = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠮"
-                Dot_TR = 1
-                Dot_ML = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠾"
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_ML = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠬"
-                Dot_TR = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠼"
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠠"
-                Dot_BR = 1
-            Case "⠡"
-                Dot_TL = 1
-                Dot_BR = 1
-            Case "⠣"
-                Dot_TL = 1
-                Dot_ML = 1
-                Dot_BR = 1
-            Case "⠩"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_BR = 1
-            Case "⠹"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_BR = 1
-            Case "⠱"
-                Dot_TL = 1
-                Dot_MR = 1
-                Dot_BR = 1
-            Case "⠫"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_ML = 1
-                Dot_BR = 1
-            Case "⠻"
-                Dot_TL = 1
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_ML = 1
-                Dot_BR = 1
-            Case "⠳"
-                Dot_TL = 1
-                Dot_MR = 1
-                Dot_ML = 1
-                Dot_BR = 1
-            Case "⠪"
-                Dot_TR = 1
-                Dot_ML = 1
-                Dot_BR = 1
-            Case "⠺"
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_ML = 1
-                Dot_BR = 1
-            Case "⠨"
-                Dot_TR = 1
-                Dot_BR = 1
-            Case "⠸"
-                Dot_TR = 1
-                Dot_MR = 1
-                Dot_BL = 1
-            Case "⠂"
-                Dot_ML = 1
-            Case "⠆"
-                Dot_ML = 1
-                Dot_BL = 1
-            Case "⠒"
-                Dot_ML = 1
-                Dot_MR = 1
-            Case "⠲"
-                Dot_ML = 1
-                Dot_MR = 1
-                Dot_BR = 1
-            Case "⠢"
-                Dot_ML = 1
-                Dot_BR = 1
-            Case "⠖"
-                Dot_ML = 1
-                Dot_MR = 1
-                Dot_BL = 1
-            Case "⠶"
-                Dot_ML = 1
-                Dot_MR = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠦"
-                Dot_ML = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠔"
-                Dot_MR = 1
-                Dot_BL = 1
-            Case "⠴"
-                Dot_MR = 1
-                Dot_BL = 1
-                Dot_BR = 1
-            Case "⠐"
-                Dot_MR = 1
-            Case "⠰"
-                Dot_MR = 1
-                Dot_BR = 1
-        End Select
-
-        Hoja.BitMatrix(x, y) = Dot_TL
-        Hoja.BitMatrix(x, y + 1) = Dot_ML
-        Hoja.BitMatrix(x, y + 2) = Dot_BL
-
-        Hoja.BitMatrix(x + 1, y) = Dot_TR
-        Hoja.BitMatrix(x + 1, y + 1) = Dot_MR
-        Hoja.BitMatrix(x + 1, y + 2) = Dot_BR
-
-    End Sub
-
-
-    Private Sub ButtonTrackBarL_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarL.Click
-        If TrackBar1.Value > 1 Then
-            TrackBar1.Value = TrackBar1.Value - 1
+        If VisorEnVivo.Visible = False Then
+            VisorEnVivo.Show()
+            Me.Location = newFormPos
+            VisorEnVivo.Location = visorFormPos
+        Else
+            VisorEnVivo.Hide()
+            CenterForm(Me)
         End If
     End Sub
 
-    Private Sub ButtonTrackBarR_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarR.Click
-
-    End Sub
-End Class
-
-Class Hoja_c
-    Public Texto As String
-    Public BitMatrix(55, 71) As Boolean
-    Public Numero As UInt16
-
-    Public Sub New(texto As String, numero As UShort)
-        Me.Texto = texto
-        Me.BitMatrix = BitMatrix
-        Me.Numero = numero
+    Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
+        If VisorEnVivo.Visible Then
+            VisorEnVivo.RichTextBoxVisor.Text = Traductor.TraducirTexto(RichTextBox1.Text)
+        End If
     End Sub
 End Class

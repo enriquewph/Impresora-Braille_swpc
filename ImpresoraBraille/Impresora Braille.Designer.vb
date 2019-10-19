@@ -49,12 +49,14 @@ Partial Class ImpresoraBraille
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.PrintPreviewControl1 = New System.Windows.Forms.PrintPreviewControl()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TrackBar1 = New System.Windows.Forms.TrackBar()
         Me.ButtonTrackBarL = New System.Windows.Forms.Button()
         Me.ButtonTrackBarR = New System.Windows.Forms.Button()
         Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
-        Me.PrintPreviewControl1 = New System.Windows.Forms.PrintPreviewControl()
+        Me.ToolStripButtonVisorEnVivo = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -77,7 +79,6 @@ Partial Class ImpresoraBraille
         '
         'RichTextBox2
         '
-        Me.RichTextBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RichTextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RichTextBox2.Location = New System.Drawing.Point(3, 3)
         Me.RichTextBox2.Name = "RichTextBox2"
@@ -99,7 +100,7 @@ Partial Class ImpresoraBraille
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonConectar, Me.ToolStripSeparator1, Me.ToolStrip1ButtonTraducir, Me.ToolStripSeparator5, Me.ToolStripButtonVistaPrevia, Me.ToolStripSeparator3, Me.ToolStripButtonEnviar})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonConectar, Me.ToolStripSeparator1, Me.ToolStrip1ButtonTraducir, Me.ToolStripSeparator6, Me.ToolStripButtonVisorEnVivo, Me.ToolStripSeparator5, Me.ToolStripButtonVistaPrevia, Me.ToolStripSeparator3, Me.ToolStripButtonEnviar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -298,6 +299,13 @@ Partial Class ImpresoraBraille
         Me.TabPage3.Text = "Previsualización"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'PrintPreviewControl1
+        '
+        Me.PrintPreviewControl1.Location = New System.Drawing.Point(541, 3)
+        Me.PrintPreviewControl1.Name = "PrintPreviewControl1"
+        Me.PrintPreviewControl1.Size = New System.Drawing.Size(227, 321)
+        Me.PrintPreviewControl1.TabIndex = 12
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -342,12 +350,20 @@ Partial Class ImpresoraBraille
         Me.RichTextBox3.TabIndex = 6
         Me.RichTextBox3.Text = ""
         '
-        'PrintPreviewControl1
+        'ToolStripButtonVisorEnVivo
         '
-        Me.PrintPreviewControl1.Location = New System.Drawing.Point(541, 3)
-        Me.PrintPreviewControl1.Name = "PrintPreviewControl1"
-        Me.PrintPreviewControl1.Size = New System.Drawing.Size(227, 321)
-        Me.PrintPreviewControl1.TabIndex = 12
+        Me.ToolStripButtonVisorEnVivo.Image = Global.ImpresoraBraille.My.Resources.Resources._461
+        Me.ToolStripButtonVisorEnVivo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButtonVisorEnVivo.Name = "ToolStripButtonVisorEnVivo"
+        Me.ToolStripButtonVisorEnVivo.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ToolStripButtonVisorEnVivo.Size = New System.Drawing.Size(94, 22)
+        Me.ToolStripButtonVisorEnVivo.Text = "Visor en vivo"
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
         '
         'ImpresoraBraille
         '
@@ -412,4 +428,6 @@ Partial Class ImpresoraBraille
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
     Friend WithEvents ToolStripButtonVistaPrevia As ToolStripButton
     Friend WithEvents PrintPreviewControl1 As PrintPreviewControl
+    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
+    Friend WithEvents ToolStripButtonVisorEnVivo As ToolStripButton
 End Class
