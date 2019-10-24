@@ -38,6 +38,10 @@ End Class
 
 Public Class Hoja_Funciones_c
     Public Sub TransponerTextoABitArray(ByRef Hoja As Hoja_c)
+
+    End Sub
+
+    Public Sub TransponerTextoABitArray_DEPRECATED(ByRef Hoja As Hoja_c)
         '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
         '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
         '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
@@ -49,6 +53,8 @@ Public Class Hoja_Funciones_c
         For Each bit As Boolean In Hoja.BitMatrix
             bit = 0
         Next
+
+
 
         For char_index As Integer = 0 To Hoja.Texto.Length() - 1
             MarcarPuntos(Hoja.Texto.Chars(char_index), Cord_X, Cord_Y, Hoja)

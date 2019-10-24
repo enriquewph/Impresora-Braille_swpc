@@ -102,6 +102,7 @@
         TrackBar1.Maximum = TrabajoActual.Hojas
         TrackBar1.Value = 1
         LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
+
     End Sub
 
     Private Sub ButtonTrackBarL_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarL.Click
@@ -180,6 +181,48 @@
             Hoja_Funciones.TransponerTextoABitArray(hoja)
         Next
     End Sub
+
+    Private Sub DebugBitArray()
+        Dim txt As String = ""
+        For Each hoja In ListaHojas
+            txt += "HOJA: " + hoja.Numero.ToString + vbLf
+            Dim cuentaCaracteres As Integer = 1
+            Dim cuentaRenglones As Integer = 1
+
+            For y As Integer = hoja.BitMatrix.GetLowerBound(1) To hoja.BitMatrix.GetUpperBound(1)
+                For x As Integer = hoja.BitMatrix.GetLowerBound(0) To hoja.BitMatrix.GetUpperBound(0)
+                    If hoja.BitMatrix(x, y) Then
+                        txt += "1"
+                    Else
+                        txt += "0"
+                    End If
+                    If (cuentaCaracteres = 2) Then
+                        txt += " "
+                        cuentaCaracteres = 0
+                    End If
+                    cuentaCaracteres = cuentaCaracteres + 1
+                Next
+
+                txt += vbLf
+                If (cuentaRenglones = 3) Then
+                    txt += vbLf
+                    cuentaRenglones = 0
+                End If
+                cuentaRenglones = cuentaRenglones + 1
+            Next
+            txt += "-----------------------------------" + vbLf
+        Next
+
+        Dim SaveFileDialog1 As New SaveFileDialog
+        SaveFileDialog1.DefaultExt = "*.txt"
+        SaveFileDialog1.Filter = "Archivo de texto|*.txt"
+        SaveFileDialog1.CreatePrompt = True
+        If SaveFileDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+            Using outputFile As New System.IO.StreamWriter(SaveFileDialog1.FileName)
+                outputFile.Write(txt)
+            End Using
+        End If
+    End Sub
 #End Region
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -240,5 +283,9 @@
         If VisorEnVivo.Visible Then
             VisorEnVivo.RichTextBoxVisor.Text = Traductor.TraducirTexto(RichTextBox1.Text)
         End If
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        DebugBitArray()
     End Sub
 End Class
