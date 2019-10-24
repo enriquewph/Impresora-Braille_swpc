@@ -23,13 +23,19 @@ Partial Class ImpresoraBraille
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ImpresoraBraille))
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.LabelEst = New System.Windows.Forms.Label()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.RecortePorFinDePalabraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButtonConectar = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStrip1ButtonTraducir = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButtonVisorEnVivo = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButtonVistaPrevia = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -50,13 +56,11 @@ Partial Class ImpresoraBraille
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.PrintPreviewControl1 = New System.Windows.Forms.PrintPreviewControl()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LabelPaginas = New System.Windows.Forms.Label()
         Me.TrackBar1 = New System.Windows.Forms.TrackBar()
         Me.ButtonTrackBarL = New System.Windows.Forms.Button()
         Me.ButtonTrackBarR = New System.Windows.Forms.Button()
         Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
-        Me.ToolStripButtonVisorEnVivo = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -100,13 +104,33 @@ Partial Class ImpresoraBraille
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonConectar, Me.ToolStripSeparator1, Me.ToolStrip1ButtonTraducir, Me.ToolStripSeparator6, Me.ToolStripButtonVisorEnVivo, Me.ToolStripSeparator5, Me.ToolStripButtonVistaPrevia, Me.ToolStripSeparator3, Me.ToolStripButtonEnviar})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.ToolStripSeparator7, Me.ToolStripButtonConectar, Me.ToolStripSeparator1, Me.ToolStrip1ButtonTraducir, Me.ToolStripSeparator6, Me.ToolStripButtonVisorEnVivo, Me.ToolStripSeparator5, Me.ToolStripButtonVistaPrevia, Me.ToolStripSeparator3, Me.ToolStripButtonEnviar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip1.Size = New System.Drawing.Size(784, 25)
         Me.ToolStrip1.TabIndex = 13
         Me.ToolStrip1.Text = "Herramientas"
+        '
+        'ToolStripDropDownButton1
+        '
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecortePorFinDePalabraToolStripMenuItem})
+        Me.ToolStripDropDownButton1.Image = Global.ImpresoraBraille.My.Resources.Resources._41
+        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(86, 22)
+        Me.ToolStripDropDownButton1.Text = "Opciones"
+        '
+        'RecortePorFinDePalabraToolStripMenuItem
+        '
+        Me.RecortePorFinDePalabraToolStripMenuItem.Name = "RecortePorFinDePalabraToolStripMenuItem"
+        Me.RecortePorFinDePalabraToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.RecortePorFinDePalabraToolStripMenuItem.Text = "Recorte por fin de palabra"
+        '
+        'ToolStripSeparator7
+        '
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 25)
         '
         'ToolStripButtonConectar
         '
@@ -132,6 +156,21 @@ Partial Class ImpresoraBraille
         Me.ToolStrip1ButtonTraducir.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.ToolStrip1ButtonTraducir.Size = New System.Drawing.Size(70, 22)
         Me.ToolStrip1ButtonTraducir.Text = "Traducir"
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripButtonVisorEnVivo
+        '
+        Me.ToolStripButtonVisorEnVivo.Image = Global.ImpresoraBraille.My.Resources.Resources._461
+        Me.ToolStripButtonVisorEnVivo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButtonVisorEnVivo.Name = "ToolStripButtonVisorEnVivo"
+        Me.ToolStripButtonVisorEnVivo.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ToolStripButtonVisorEnVivo.Size = New System.Drawing.Size(94, 22)
+        Me.ToolStripButtonVisorEnVivo.Text = "Visor en vivo"
         '
         'ToolStripSeparator5
         '
@@ -287,7 +326,7 @@ Partial Class ImpresoraBraille
         'TabPage3
         '
         Me.TabPage3.Controls.Add(Me.PrintPreviewControl1)
-        Me.TabPage3.Controls.Add(Me.Label1)
+        Me.TabPage3.Controls.Add(Me.LabelPaginas)
         Me.TabPage3.Controls.Add(Me.TrackBar1)
         Me.TabPage3.Controls.Add(Me.ButtonTrackBarL)
         Me.TabPage3.Controls.Add(Me.ButtonTrackBarR)
@@ -306,15 +345,15 @@ Partial Class ImpresoraBraille
         Me.PrintPreviewControl1.Size = New System.Drawing.Size(227, 321)
         Me.PrintPreviewControl1.TabIndex = 12
         '
-        'Label1
+        'LabelPaginas
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(618, 362)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(73, 13)
-        Me.Label1.TabIndex = 7
-        Me.Label1.Text = "Página 1 de 1"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LabelPaginas.AutoSize = True
+        Me.LabelPaginas.Location = New System.Drawing.Point(618, 362)
+        Me.LabelPaginas.Name = "LabelPaginas"
+        Me.LabelPaginas.Size = New System.Drawing.Size(73, 13)
+        Me.LabelPaginas.TabIndex = 7
+        Me.LabelPaginas.Text = "Página 1 de 1"
+        Me.LabelPaginas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TrackBar1
         '
@@ -350,21 +389,6 @@ Partial Class ImpresoraBraille
         Me.RichTextBox3.TabIndex = 6
         Me.RichTextBox3.Text = ""
         '
-        'ToolStripButtonVisorEnVivo
-        '
-        Me.ToolStripButtonVisorEnVivo.Image = Global.ImpresoraBraille.My.Resources.Resources._461
-        Me.ToolStripButtonVisorEnVivo.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButtonVisorEnVivo.Name = "ToolStripButtonVisorEnVivo"
-        Me.ToolStripButtonVisorEnVivo.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.ToolStripButtonVisorEnVivo.Size = New System.Drawing.Size(94, 22)
-        Me.ToolStripButtonVisorEnVivo.Text = "Visor en vivo"
-        '
-        'ToolStripSeparator6
-        '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
-        '
         'ImpresoraBraille
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -376,6 +400,7 @@ Partial Class ImpresoraBraille
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.LabelEst)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(800, 500)
         Me.MinimumSize = New System.Drawing.Size(800, 500)
@@ -421,7 +446,7 @@ Partial Class ImpresoraBraille
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripButtonEnviar As ToolStripButton
     Friend WithEvents RichTextBox3 As RichTextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LabelPaginas As Label
     Friend WithEvents TrackBar1 As TrackBar
     Friend WithEvents ButtonTrackBarL As Button
     Friend WithEvents ButtonTrackBarR As Button
@@ -430,4 +455,7 @@ Partial Class ImpresoraBraille
     Friend WithEvents PrintPreviewControl1 As PrintPreviewControl
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
     Friend WithEvents ToolStripButtonVisorEnVivo As ToolStripButton
+    Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
+    Friend WithEvents RecortePorFinDePalabraToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
 End Class

@@ -37,7 +37,7 @@
 End Class
 
 Public Class Hoja_Funciones_c
-    Private Sub TransponerTextoABitArray(inputString As String, Hoja As Hoja_c)
+    Public Sub TransponerTextoABitArray(ByRef Hoja As Hoja_c)
         '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
         '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
         '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
@@ -50,8 +50,8 @@ Public Class Hoja_Funciones_c
             bit = 0
         Next
 
-        For char_index As Integer = 0 To inputString.Length() - 1
-            MarcarPuntos(inputString.Chars(char_index), Cord_X, Cord_Y, Hoja)
+        For char_index As Integer = 0 To Hoja.Texto.Length() - 1
+            MarcarPuntos(Hoja.Texto.Chars(char_index), Cord_X, Cord_Y, Hoja)
 
             Cord_X = Cord_X + 2
 
@@ -62,7 +62,7 @@ Public Class Hoja_Funciones_c
         Next
     End Sub
 
-    Private Sub MarcarPuntos(inputChar As Char, x As Integer, y As Integer, Hoja As Hoja_c)
+    Public Sub MarcarPuntos(inputChar As Char, x As Integer, y As Integer, ByRef Hoja As Hoja_c)
         Dim Dot_TL As Boolean = 0 ' SUPERIOR IZQUIERDO
         Dim Dot_TR As Boolean = 0 ' SUPERIOR DERECHO
         Dim Dot_ML As Boolean = 0 ' MEDIO IZQUIERDA

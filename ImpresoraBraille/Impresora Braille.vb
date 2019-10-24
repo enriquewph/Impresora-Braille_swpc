@@ -1,11 +1,12 @@
 ﻿Public Class ImpresoraBraille
     'Invocacion de clases
+    Private Const HOJA_CARACTERESxRENGLON As Integer = 28
+    Private Const HOJA_LINEASxHOJA As Integer = 24
     Dim TrabajoActual As New TrabajoActual_c
-    Dim Hoja_Funciones As Hoja_Funciones_c
+    Dim Hoja_Funciones As New Hoja_Funciones_c
     Dim BCL As New BrailleComLib
     Dim Traductor As New TraductorBraille
     Dim ListaHojas As New List(Of Hoja_c)
-
     Dim Puerto_Impresora As String
 
 #Region "Conexion y puerto serie"
@@ -85,27 +86,107 @@
 #End Region
 
 #Region "Previsualizacion"
-    Private Sub ToolStripButtonVistaPrevia_Click(sender As Object, e As EventArgs) Handles ToolStripButtonVistaPrevia.Click
+    Private Sub RecortePorFinDePalabraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecortePorFinDePalabraToolStripMenuItem.Click
+        My.Settings.REC_PALABRA = RecortePorFinDePalabraToolStripMenuItem.Checked
+    End Sub
 
+    Private Sub ToolStripButtonVistaPrevia_Click(sender As Object, e As EventArgs) Handles ToolStripButtonVistaPrevia.Click
+        Try
+            ProcesarVistaPrevia()
+            ProcesarHojasGeneradas()
+        Catch ex As Exception
+            MsgBox(ex.Message + vbCrLf + ex.StackTrace, MsgBoxStyle.Exclamation, ex.Source)
+        End Try
+
+        TrackBar1.Minimum = 1
+        TrackBar1.Maximum = TrabajoActual.Hojas
+        TrackBar1.Value = 1
+        LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
     End Sub
 
     Private Sub ButtonTrackBarL_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarL.Click
-        If TrackBar1.Value > 1 Then
+        If TrackBar1.Value > TrackBar1.Minimum Then
             TrackBar1.Value = TrackBar1.Value - 1
         End If
+        LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
+        RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
     End Sub
 
     Private Sub ButtonTrackBarR_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarR.Click
-        If (TrackBar1.Value < TrabajoActual.Hojas) Then
-
+        If (TrackBar1.Value < TrackBar1.Maximum) Then
+            TrackBar1.Value = TrackBar1.Value + 1
         End If
+        LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
+        RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
     End Sub
 
+    Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
+        LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
+        RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
+    End Sub
+
+    Private Sub ProcesarVistaPrevia()
+        RichTextBox3.Clear()
+        TrackBar1.Value = 1
+        LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
+
+        Dim TextoTraducido As String = RichTextBox2.Text
+        'implementar corte x fin de palabra.
+        Dim TextoRecortado As String = Traductor.AjustarRenglones(TextoTraducido, HOJA_CARACTERESxRENGLON)
+
+        Dim TextoDividido As String() = TextoRecortado.Split(vbLf)
+
+        Dim Renglones_Cantidad As Integer = TextoDividido.Length
+
+        TrabajoActual.Hojas = Math.Ceiling(Renglones_Cantidad / HOJA_LINEASxHOJA)
+
+        ListaHojas.Clear()
+
+        If TrabajoActual.Hojas = 1 Then
+            Dim hoja As New Hoja_c(TextoRecortado, 1)
+            ListaHojas.Add(hoja)
+        Else
+            Dim startLine As Integer = 0
+            Dim endLine As Integer = HOJA_LINEASxHOJA - 1
+            Dim TextoHoja As String
+
+            For Hojas_Index As Integer = 1 To TrabajoActual.Hojas
+                TextoHoja = ""
+
+                If (endLine > TextoDividido.GetUpperBound(0)) Then
+                    endLine = TextoDividido.GetUpperBound(0)
+                End If
+
+                For i As Integer = startLine To endLine
+                    TextoHoja += TextoDividido(i)
+                    If (i < endLine) Then
+                        TextoHoja += vbLf
+                    End If
+                Next
+
+                Dim Hoja As New Hoja_c(TextoHoja, Hojas_Index)
+                ListaHojas.Add(Hoja)
+
+                startLine = startLine + HOJA_LINEASxHOJA
+                endLine = endLine + HOJA_LINEASxHOJA
+            Next
+        End If
+
+        RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
+    End Sub
+
+    Private Sub ProcesarHojasGeneradas()
+        For Each hoja In ListaHojas
+            Hoja_Funciones.TransponerTextoABitArray(hoja)
+        Next
+    End Sub
 #End Region
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetSerialPortNames()
         CenterForm(Me)
+        RecortePorFinDePalabraToolStripMenuItem.CheckOnClick = True
+        RecortePorFinDePalabraToolStripMenuItem.Checked = My.Settings.REC_PALABRA
     End Sub
 
     Private Sub ToolStripButtonEnviar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnviar.Click
