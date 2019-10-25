@@ -38,10 +38,6 @@ End Class
 
 Public Class Hoja_Funciones_c
     Public Sub TransponerTextoABitArray(ByRef Hoja As Hoja_c)
-
-    End Sub
-
-    Public Sub TransponerTextoABitArray_DEPRECATED(ByRef Hoja As Hoja_c)
         '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
         '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
         '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
@@ -54,16 +50,14 @@ Public Class Hoja_Funciones_c
             bit = 0
         Next
 
-
-
         For char_index As Integer = 0 To Hoja.Texto.Length() - 1
-            MarcarPuntos(Hoja.Texto.Chars(char_index), Cord_X, Cord_Y, Hoja)
-
-            Cord_X = Cord_X + 2
-
-            If (Cord_X > 52) Then
-                Cord_X = 0
-                Cord_Y = Cord_Y + 3
+            Dim caracter As Char = Hoja.Texto.Chars(char_index)
+            If caracter = vbLf Then
+                Cord_X = 0 'ir a posicion 0
+                Cord_Y = Cord_Y + 3 'ir a la linea de abajo
+            Else
+                MarcarPuntos(Hoja.Texto.Chars(char_index), Cord_X, Cord_Y, Hoja)
+                Cord_X = Cord_X + 2
             End If
         Next
     End Sub

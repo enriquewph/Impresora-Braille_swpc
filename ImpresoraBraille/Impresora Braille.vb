@@ -1,5 +1,6 @@
 ﻿Public Class ImpresoraBraille
     'Invocacion de clases
+
     Private Const HOJA_CARACTERESxRENGLON As Integer = 28
     Private Const HOJA_LINEASxHOJA As Integer = 24
     Dim TrabajoActual As New TrabajoActual_c
@@ -93,7 +94,7 @@
     Private Sub ToolStripButtonVistaPrevia_Click(sender As Object, e As EventArgs) Handles ToolStripButtonVistaPrevia.Click
         Try
             ProcesarVistaPrevia()
-            ProcesarHojasGeneradas()
+            ProcesarHojasGeneradas() ' luego sacar esto de aca ya que lagea el programa, dejarlo solamenta para imprimir.
         Catch ex As Exception
             MsgBox(ex.Message + vbCrLf + ex.StackTrace, MsgBoxStyle.Exclamation, ex.Source)
         End Try
@@ -102,7 +103,6 @@
         TrackBar1.Maximum = TrabajoActual.Hojas
         TrackBar1.Value = 1
         LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
-
     End Sub
 
     Private Sub ButtonTrackBarL_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarL.Click
@@ -213,10 +213,11 @@
             txt += "-----------------------------------" + vbLf
         Next
 
-        Dim SaveFileDialog1 As New SaveFileDialog
-        SaveFileDialog1.DefaultExt = "*.txt"
-        SaveFileDialog1.Filter = "Archivo de texto|*.txt"
-        SaveFileDialog1.CreatePrompt = True
+        Dim SaveFileDialog1 As New SaveFileDialog With {
+            .DefaultExt = "*.txt",
+            .Filter = "Archivo de texto|*.txt",
+            .CreatePrompt = True
+        }
         If SaveFileDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
             Using outputFile As New System.IO.StreamWriter(SaveFileDialog1.FileName)
                 outputFile.Write(txt)
@@ -286,6 +287,36 @@
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        DebugBitArray()
+        'DebugBitArray()
+        InitializePrintPreviewControl()
+    End Sub
+
+
+    Private WithEvents DocToPrint As New Printing.PrintDocument
+
+    Private Sub InitializePrintPreviewControl()
+
+        Me.PrintPreviewControl1 = New PrintPreviewControl With {
+            .Document = docToPrint,
+            .Zoom = 0.25,
+            .UseAntiAlias = True
+        }
+
+        Me.PrintPreviewControl1.Document.DocumentName = "c:\someFile"
+
+    End Sub
+
+    ' The PrintPreviewControl will display the document
+    ' by handling the documents PrintPage event
+    Private Sub DocToPrint_PrintPage(ByVal sender As Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles docToPrint.PrintPage
+
+        ' Insert code to render the page here.
+        ' This code will be called when the control is drawn.
+
+        ' The following code will render a simple
+        ' message on the document in the control.
+        Dim text As String = "In docToPrint_PrintPage method."
+        Dim printFont As New Font("Arial", 35, System.Drawing.FontStyle.Regular)
+        e.Graphics.DrawString(text, printFont, System.Drawing.Brushes.Black, 10, 10)
     End Sub
 End Class
