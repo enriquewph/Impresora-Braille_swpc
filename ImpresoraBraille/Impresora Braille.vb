@@ -5,7 +5,9 @@
     Private Const HOJA_LINEASxHOJA As Integer = 24
     Dim TrabajoActual As New TrabajoActual_c
     Dim Hoja_Funciones As New Hoja_Funciones_c
-    Dim BCL As New BrailleComLib
+
+    Dim WithEvents BCL As New BrailleComLib
+
     Dim Traductor As New TraductorBraille
     Dim ListaHojas As New List(Of Hoja_c)
     Dim Puerto_Impresora As String
@@ -241,21 +243,12 @@
             BCL.arrayHoja_a_enviar(0, i_ejeY) = i_ejeY * 2
         Next
 
-        'TransponerTextoABitArray(TextoAjustado)
-
         BCL.SendHojasTotales(1)
         BCL.SendHoja(1)
     End Sub
 
     Private Sub ToolStrip1ButtonTraducir_Click(sender As Object, e As EventArgs) Handles ToolStrip1ButtonTraducir.Click
-        RichTextBox2.Clear()
-        Dim TextoATraducir As String = RichTextBox1.Text
-
-        Dim TextoTraducido As String = Traductor.TraducirTexto(TextoATraducir)
-        'Dim TextoAjustado As String = Traductor.AjustarRenglones(TextoTraducido, 28)
-
-
-        RichTextBox2.Text = TextoTraducido
+        RichTextBox2.Text = Traductor.TraducirTexto(RichTextBox1.Text)
     End Sub
 
     Private Sub CenterForm(ByRef form As Form)
@@ -287,36 +280,10 @@
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        'DebugBitArray()
-        InitializePrintPreviewControl()
+        DebugBitArray()
     End Sub
 
-
-    Private WithEvents DocToPrint As New Printing.PrintDocument
-
-    Private Sub InitializePrintPreviewControl()
-
-        Me.PrintPreviewControl1 = New PrintPreviewControl With {
-            .Document = docToPrint,
-            .Zoom = 0.25,
-            .UseAntiAlias = True
-        }
-
-        Me.PrintPreviewControl1.Document.DocumentName = "c:\someFile"
-
-    End Sub
-
-    ' The PrintPreviewControl will display the document
-    ' by handling the documents PrintPage event
-    Private Sub DocToPrint_PrintPage(ByVal sender As Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles docToPrint.PrintPage
-
-        ' Insert code to render the page here.
-        ' This code will be called when the control is drawn.
-
-        ' The following code will render a simple
-        ' message on the document in the control.
-        Dim text As String = "In docToPrint_PrintPage method."
-        Dim printFont As New Font("Arial", 35, System.Drawing.FontStyle.Regular)
-        e.Graphics.DrawString(text, printFont, System.Drawing.Brushes.Black, 10, 10)
+    Private Sub StatusUpdateEv(ByVal Args As BrailleComLib.StatusUpdateArgs) Handles BCL.StatusUpdate
+        MsgBox("Evento:" + Args.IdEvento.ToString + " " + Args.Dato.ToString)
     End Sub
 End Class

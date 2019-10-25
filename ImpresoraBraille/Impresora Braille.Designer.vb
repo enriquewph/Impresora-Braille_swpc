@@ -40,6 +40,7 @@ Partial Class ImpresoraBraille
         Me.ToolStripButtonVistaPrevia = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButtonEnviar = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -61,7 +62,6 @@ Partial Class ImpresoraBraille
         Me.ButtonTrackBarL = New System.Windows.Forms.Button()
         Me.ButtonTrackBarR = New System.Windows.Forms.Button()
         Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -202,6 +202,16 @@ Partial Class ImpresoraBraille
         Me.ToolStripButtonEnviar.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.ToolStripButtonEnviar.Size = New System.Drawing.Size(73, 22)
         Me.ToolStripButtonEnviar.Text = "Imprimir"
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton1.Image = Global.ImpresoraBraille.My.Resources.Resources._31
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ToolStripButton1.Size = New System.Drawing.Size(64, 22)
+        Me.ToolStripButton1.Text = "DEBUG"
         '
         'ToolStrip2
         '
@@ -384,21 +394,13 @@ Partial Class ImpresoraBraille
         '
         'RichTextBox3
         '
+        Me.RichTextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RichTextBox3.Location = New System.Drawing.Point(3, 3)
         Me.RichTextBox3.Name = "RichTextBox3"
         Me.RichTextBox3.Size = New System.Drawing.Size(427, 375)
         Me.RichTextBox3.TabIndex = 6
         Me.RichTextBox3.Text = ""
-        '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton1.Image = Global.ImpresoraBraille.My.Resources.Resources._31
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.ToolStripButton1.Size = New System.Drawing.Size(64, 22)
-        Me.ToolStripButton1.Text = "DEBUG"
+        Me.RichTextBox3.WordWrap = False
         '
         'ImpresoraBraille
         '
