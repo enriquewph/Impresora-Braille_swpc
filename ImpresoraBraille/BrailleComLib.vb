@@ -1,24 +1,35 @@
-﻿Public Class BrailleComLib
+﻿Imports System.IO.Ports
+
+Public Class BrailleComLib
 
 #Region "Constantes de comandos UART"
-    Private Const BCLS_HANDSHAKE As Byte = &HF0
-    Private Const BCLS_PREPARAR_IMPRESION As Byte = &HF1
-    Private Const BCLS_HOJA_NUMERO As Byte = &HF2
-    Private Const BCLS_HOJA_ACTUAL As Byte = &HF3
-    Private Const BCLR_CMD_VALIDO As Byte = &HF4
-    Private Const BCLR_CMD_INVALIDO As Byte = &HF5
-    Private Const BCLE_IMPRESION_OK As Byte = &HF6
-    Private Const BCLE_IMPRESION_ERROR As Byte = &HF7
-    Private Const BCLE_RECEPCION_OK As Byte = &HF8
-    Private Const BCLE_RECEPCION_ERROR As Byte = &HF9
+    Public Const BCLS_HANDSHAKE As Byte = &HF0
+    Public Const BCLS_PREPARAR_IMPRESION As Byte = &HF1
+    Public Const BCLS_HOJA_NUMERO As Byte = &HF2
+    Public Const BCLS_HOJA_ACTUAL As Byte = &HF3
+    Public Const BCLR_CMD_VALIDO As Byte = &HF4
+    Public Const BCLR_CMD_INVALIDO As Byte = &HF5
+    Public Const BCLE_RECEPCION_OK As Byte = &HF6
+    Public Const BCLE_RECEPCION_ERROR As Byte = &HF7
 
-    Private Const UART_TIMEOUT As Byte = &HFD
+    Public Const UART_TIMEOUT As Byte = &HFD
+
+
+    'Respuestas dadas por eventos.
+    Public Const BCLE_EVENTO_PREFIX As Byte = &HF8             'Para indicar un evento de los de abajo:
+    Public Const BCLE_EVENTO_IMPRESION_OK As Byte = &HA1       'Para indicar que la hoja se termino de imprimir.
+    Public Const BCLE_EVENTO_IMPRESION_FAIL As Byte = &HA2     'Para indicar que hubo un Error al imprimir la hoja.
+    Public Const BCLE_EVENTO_SHUTDOWN As Byte = &HA3           'Para indicar que el usuario presiono el boton de apagado.
+    Public Const BCLE_EVENTO_LINEA_TERMINADA As Byte = &HA4    'Va acompañada de el numero de linea justo a continuacion.
+
 #End Region
 
     'Inicializacion de objetos
     Public arrayHoja_a_enviar(6, 71) As Byte
-    Private SerialPort1 As New System.IO.Ports.SerialPort
+    Private SerialPort1 As New SerialPort
     Private Puerto_Iniciado As Boolean = False
+
+    Public Event StatusUpdate(ByVal Args As StatusUpdateArgs)   'Evento alzado por la libreria , utilizar constantes de arriba.
 
 #Region "Rutinas de Conexion, desconexion y handshake"
 
@@ -33,6 +44,7 @@
             If PortIsAvailable(Puerto) Then
                 SerialPort1.ReadTimeout = 200
                 SerialPort1.BaudRate = 115200
+                AddHandler SerialPort1.DataReceived, AddressOf DataReceivedHandler
                 SerialPort1.Open()
                 Puerto_Iniciado = True
             End If
@@ -201,6 +213,25 @@
         End If
         Return False
     End Function
+
+    Private Sub DataReceivedHandler(sender As Object, e As SerialDataReceivedEventArgs)
+        Dim sp As SerialPort = CType(sender, SerialPort)
+        Dim InData(3) As Byte
+        If (sp.Read(InData, 0, 3) = 3 And InData(0) = BCLE_EVENTO_PREFIX) Then
+            'el dato recibido es un evento.
+            Dim args As New StatusUpdateArgs(InData(1), InData(2))
+            RaiseEvent StatusUpdate(args)
+        End If
+    End Sub
+
+    Public Structure StatusUpdateArgs
+        Dim IdEvento As Byte
+        Dim Dato As Byte
+        Public Sub New(idEvento As Byte, dato As Byte)
+            Me.IdEvento = idEvento
+            Me.Dato = dato
+        End Sub
+    End Structure
 #Region "Rutinas de invalidaciones"
     Protected Overrides Sub Finalize()
         MyBase.Finalize()

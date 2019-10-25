@@ -23,3 +23,4 @@ C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debu
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.exe
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.xml
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.pdb
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.VisorEnVivo.resources

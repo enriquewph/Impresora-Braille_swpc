@@ -68,6 +68,9 @@
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>iconfinder_Print_1493286.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -95,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrailleComLib.vb" />
+    <Compile Include="Hoja_c.vb" />
     <Compile Include="Impresora Braille.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -117,7 +121,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TrabajoActual_c.vb" />
     <Compile Include="TraductorBraille.vb" />
+    <Compile Include="VisorEnVivo.Designer.vb">
+      <DependentUpon>VisorEnVivo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VisorEnVivo.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Impresora Braille.resx">
@@ -128,6 +139,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisorEnVivo.resx">
+      <DependentUpon>VisorEnVivo.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +240,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="recursos\asp_net_icons_v10_icons_pack_120549\select_all_16x16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="iconfinder_Print_1493286.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

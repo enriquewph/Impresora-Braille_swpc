@@ -48,7 +48,7 @@
         Dim InputChar As String = ch.ToString.ToLower
 
 
-        '   ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
+        '⠀  ⠁	⠃	⠉	⠙	⠑	⠋	⠛	⠓	⠊	⠚	⠈	⠘
         '⠄	⠅	⠇	⠍	⠝	⠕	⠏	⠟	⠗	⠎	⠞	⠌	⠜
         '⠤	⠥	⠧	⠭	⠽	⠵	⠯	⠿	⠷	⠮	⠾	⠬	⠼
         '⠠	⠡	⠣	⠩	⠹	⠱	⠫	⠻	⠳	⠪	⠺	⠨	⠸
@@ -85,7 +85,7 @@
 
         Select Case InputChar
             Case " "
-                OutputChar = " "
+                OutputChar = "⠀"
             Case "a"
                 OutputChar = "⠁"
             Case "b"
