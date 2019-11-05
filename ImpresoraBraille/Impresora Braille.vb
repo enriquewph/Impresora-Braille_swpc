@@ -273,26 +273,12 @@ Public Class ImpresoraBraille
         form.Location = newFormPos
     End Sub
 
-    Private Sub ToolStripButtonVisorEnVivo_Click(sender As Object, e As EventArgs) Handles ToolStripButtonVisorEnVivo.Click
-        Dim totalSize As New Size(Me.Size.Width + VisorEnVivo.Size.Width, Me.Size.Height)
-        Dim newFormPos As New Point((My.Computer.Screen.Bounds.Size.Width - totalSize.Width) / 2, Me.Location.Y)
-        Dim visorFormPos As New Point(newFormPos.X + Me.Size.Width, newFormPos.Y)
+    Private Sub ToolStripButtonVisorEnVivo_Click(sender As Object, e As EventArgs)
 
-        If VisorEnVivo.Visible = False Then
-            VisorEnVivo.Show()
-            Me.Location = newFormPos
-            VisorEnVivo.Location = visorFormPos
-            VisorEnVivo.RichTextBoxVisor.Text = Traductor.TraducirTexto(RichTextBox1.Text)
-        Else
-            VisorEnVivo.Hide()
-            CenterForm(Me)
-        End If
     End Sub
 
     Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
-        If VisorEnVivo.Visible Then
-            VisorEnVivo.RichTextBoxVisor.Text = Traductor.TraducirTexto(RichTextBox1.Text)
-        End If
+        RichTextBoxVisor.Text = Traductor.TraducirTexto(RichTextBox1.Text)
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click

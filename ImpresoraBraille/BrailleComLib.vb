@@ -138,16 +138,17 @@ Public Class BrailleComLib
     End Function
 
     Public Function PortIsAvailable(ByVal port As String) As Boolean
-        Dim TempPort As New System.IO.Ports.SerialPort
-        TempPort.PortName = port
+        Dim TempPort As New System.IO.Ports.SerialPort With {
+            .PortName = port
+        }
         'Surely there's a better way to test for availability
         'than trying to open the port and catching errors.
         Try
             TempPort.Open()
+            TempPort.Close()
         Catch ex As UnauthorizedAccessException
             Return False
         End Try
-        TempPort.Close()
         Return True
     End Function
 

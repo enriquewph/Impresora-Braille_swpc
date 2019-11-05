@@ -24,3 +24,15 @@ C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debu
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.xml
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.pdb
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.VisorEnVivo.resources
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.exe.config
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.exe
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.pdb
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.vbprojAssemblyReference.cache
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.ImpresoraBraille.resources
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.Resources.resources
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.vbproj.GenerateResource.cache
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.vbproj.CoreCompileInputs.cache
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.exe
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.pdb

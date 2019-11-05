@@ -124,12 +124,6 @@
     <Compile Include="Preview_c.vb" />
     <Compile Include="TrabajoActual_c.vb" />
     <Compile Include="TraductorBraille.vb" />
-    <Compile Include="VisorEnVivo.Designer.vb">
-      <DependentUpon>VisorEnVivo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="VisorEnVivo.vb">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Impresora Braille.resx">
@@ -140,9 +134,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VisorEnVivo.resx">
-      <DependentUpon>VisorEnVivo.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
