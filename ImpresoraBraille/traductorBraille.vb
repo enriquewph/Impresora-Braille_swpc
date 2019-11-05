@@ -13,13 +13,13 @@
             If (i > 0) Then
                 letra_ant = inputArray(i - 1)
             Else
-                letra_ant = vbNewLine
+                letra_ant = vbLf
             End If
 
             If (i < inputArray.GetUpperBound(0)) Then
                 letra_sig = inputArray(i + 1)
             Else
-                letra_sig = vbNewLine
+                letra_sig = vbLf
             End If
 
 
@@ -84,6 +84,8 @@
         End If
 
         Select Case InputChar
+            Case vbLf
+                OutputChar = vbLf
             Case " "
                 OutputChar = "⠀"
             Case "a"
@@ -318,6 +320,30 @@
         Return OutputChar
     End Function
 
+    Public Function AjustarRenglones(InputString As String, longitud_Renglon As Integer) As String ' Toma un string a la entrada y corta los renglones antes de los 28 caracteres
+        Dim OutputString As String = ""
+
+        Dim CuentaLetras As Integer = 0
+
+        For Each letra As Char In InputString
+
+            If (CuentaLetras >= longitud_Renglon) Then
+                OutputString += vbLf
+                CuentaLetras = 0
+            End If
+
+            If letra = vbLf Then
+                CuentaLetras = 0
+                OutputString += vbLf
+            Else
+                OutputString += letra
+            End If
+
+            CuentaLetras = CuentaLetras + 1
+        Next
+
+        Return OutputString
+    End Function
     'Invalidaciones, obviarlas.
     Protected Overrides Sub Finalize()
         MyBase.Finalize()

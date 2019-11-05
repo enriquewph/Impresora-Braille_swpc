@@ -121,6 +121,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Preview_c.vb" />
     <Compile Include="TrabajoActual_c.vb" />
     <Compile Include="TraductorBraille.vb" />
     <Compile Include="VisorEnVivo.Designer.vb">

@@ -1,15 +1,16 @@
-﻿Public Class ImpresoraBraille
+﻿Imports System.Drawing.Printing
+Public Class ImpresoraBraille
     'Invocacion de clases
 
     Private Const HOJA_CARACTERESxRENGLON As Integer = 28
     Private Const HOJA_LINEASxHOJA As Integer = 24
     Dim TrabajoActual As New TrabajoActual_c
     Dim Hoja_Funciones As New Hoja_Funciones_c
-
     Dim WithEvents BCL As New BrailleComLib
-
     Dim Traductor As New TraductorBraille
-    Dim ListaHojas As New List(Of Hoja_c)
+    Public ListaHojas As New List(Of Hoja_c)
+    Dim Preview As Preview_c
+
     Dim Puerto_Impresora As String
 
 #Region "Conexion y puerto serie"
@@ -105,6 +106,11 @@
         TrackBar1.Maximum = TrabajoActual.Hojas
         TrackBar1.Value = 1
         LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
+
+
+        Preview = New Preview_c(Me)
+        PrintPreviewControl1.Document = Preview.PreviewDocument
+        PrintPreviewControl1.StartPage = TrackBar1.Value - 1
     End Sub
 
     Private Sub ButtonTrackBarL_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarL.Click
@@ -113,6 +119,7 @@
         End If
         LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
         RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
+        PrintPreviewControl1.StartPage = TrackBar1.Value - 1
     End Sub
 
     Private Sub ButtonTrackBarR_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarR.Click
@@ -121,11 +128,13 @@
         End If
         LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
         RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
+        PrintPreviewControl1.StartPage = TrackBar1.Value - 1
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
         LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
         RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
+        PrintPreviewControl1.StartPage = TrackBar1.Value - 1
     End Sub
 
     Private Sub ProcesarVistaPrevia()
@@ -182,6 +191,12 @@
         For Each hoja In ListaHojas
             Hoja_Funciones.TransponerTextoABitArray(hoja)
         Next
+    End Sub
+
+    Private Sub ProcesarVistaPrevia_Documento()
+
+        'Preview.Guardar()
+        'PrintPreviewControl1.Document = Preview.Generar_Documento(ListaHojas)
     End Sub
 
     Private Sub DebugBitArray()
@@ -267,6 +282,7 @@
             VisorEnVivo.Show()
             Me.Location = newFormPos
             VisorEnVivo.Location = visorFormPos
+            VisorEnVivo.RichTextBoxVisor.Text = Traductor.TraducirTexto(RichTextBox1.Text)
         Else
             VisorEnVivo.Hide()
             CenterForm(Me)
@@ -280,7 +296,8 @@
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        DebugBitArray()
+        'DebugBitArray()
+        ProcesarVistaPrevia_Documento()
     End Sub
 
     Private Sub StatusUpdateEv(ByVal Args As BrailleComLib.StatusUpdateArgs) Handles BCL.StatusUpdate

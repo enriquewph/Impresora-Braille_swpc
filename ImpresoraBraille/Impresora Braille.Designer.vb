@@ -351,10 +351,13 @@ Partial Class ImpresoraBraille
         '
         'PrintPreviewControl1
         '
+        Me.PrintPreviewControl1.AutoZoom = False
         Me.PrintPreviewControl1.Location = New System.Drawing.Point(541, 3)
         Me.PrintPreviewControl1.Name = "PrintPreviewControl1"
         Me.PrintPreviewControl1.Size = New System.Drawing.Size(227, 321)
         Me.PrintPreviewControl1.TabIndex = 12
+        Me.PrintPreviewControl1.UseAntiAlias = True
+        Me.PrintPreviewControl1.Zoom = 0.25R
         '
         'LabelPaginas
         '
@@ -397,7 +400,7 @@ Partial Class ImpresoraBraille
         Me.RichTextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RichTextBox3.Location = New System.Drawing.Point(3, 3)
         Me.RichTextBox3.Name = "RichTextBox3"
-        Me.RichTextBox3.Size = New System.Drawing.Size(427, 375)
+        Me.RichTextBox3.Size = New System.Drawing.Size(532, 375)
         Me.RichTextBox3.TabIndex = 6
         Me.RichTextBox3.Text = ""
         Me.RichTextBox3.WordWrap = False
