@@ -55,16 +55,16 @@ Partial Class ImpresoraBraille
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.RichTextBoxVisor = New System.Windows.Forms.RichTextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
         Me.PrintPreviewControl1 = New System.Windows.Forms.PrintPreviewControl()
         Me.LabelPaginas = New System.Windows.Forms.Label()
+        Me.ButtonTrackBarR = New System.Windows.Forms.Button()
         Me.TrackBar1 = New System.Windows.Forms.TrackBar()
         Me.ButtonTrackBarL = New System.Windows.Forms.Button()
-        Me.ButtonTrackBarR = New System.Windows.Forms.Button()
-        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
-        Me.RichTextBoxVisor = New System.Windows.Forms.RichTextBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ToolStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -75,8 +75,8 @@ Partial Class ImpresoraBraille
         Me.SplitContainer1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
-        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RichTextBox1
@@ -354,6 +354,17 @@ Partial Class ImpresoraBraille
         Me.SplitContainer1.SplitterWidth = 10
         Me.SplitContainer1.TabIndex = 1
         '
+        'RichTextBoxVisor
+        '
+        Me.RichTextBoxVisor.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RichTextBoxVisor.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RichTextBoxVisor.Location = New System.Drawing.Point(0, 0)
+        Me.RichTextBoxVisor.Name = "RichTextBoxVisor"
+        Me.RichTextBoxVisor.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
+        Me.RichTextBoxVisor.Size = New System.Drawing.Size(375, 379)
+        Me.RichTextBoxVisor.TabIndex = 1
+        Me.RichTextBoxVisor.Text = ""
+        '
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.RichTextBox2)
@@ -375,6 +386,30 @@ Partial Class ImpresoraBraille
         Me.TabPage3.Text = "Previsualización"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.RichTextBox3)
+        Me.Panel1.Controls.Add(Me.PrintPreviewControl1)
+        Me.Panel1.Controls.Add(Me.LabelPaginas)
+        Me.Panel1.Controls.Add(Me.ButtonTrackBarR)
+        Me.Panel1.Controls.Add(Me.TrackBar1)
+        Me.Panel1.Controls.Add(Me.ButtonTrackBarL)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(776, 385)
+        Me.Panel1.TabIndex = 13
+        '
+        'RichTextBox3
+        '
+        Me.RichTextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RichTextBox3.Location = New System.Drawing.Point(3, 7)
+        Me.RichTextBox3.Name = "RichTextBox3"
+        Me.RichTextBox3.Size = New System.Drawing.Size(463, 375)
+        Me.RichTextBox3.TabIndex = 6
+        Me.RichTextBox3.Text = ""
+        Me.RichTextBox3.WordWrap = False
+        '
         'PrintPreviewControl1
         '
         Me.PrintPreviewControl1.AutoZoom = False
@@ -395,6 +430,15 @@ Partial Class ImpresoraBraille
         Me.LabelPaginas.Text = "Página 1 de 1"
         Me.LabelPaginas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'ButtonTrackBarR
+        '
+        Me.ButtonTrackBarR.Location = New System.Drawing.Point(748, 334)
+        Me.ButtonTrackBarR.Name = "ButtonTrackBarR"
+        Me.ButtonTrackBarR.Size = New System.Drawing.Size(20, 30)
+        Me.ButtonTrackBarR.TabIndex = 10
+        Me.ButtonTrackBarR.Text = ">"
+        Me.ButtonTrackBarR.UseVisualStyleBackColor = True
+        '
         'TrackBar1
         '
         Me.TrackBar1.BackColor = System.Drawing.Color.White
@@ -411,50 +455,6 @@ Partial Class ImpresoraBraille
         Me.ButtonTrackBarL.TabIndex = 9
         Me.ButtonTrackBarL.Text = "<"
         Me.ButtonTrackBarL.UseVisualStyleBackColor = True
-        '
-        'ButtonTrackBarR
-        '
-        Me.ButtonTrackBarR.Location = New System.Drawing.Point(748, 334)
-        Me.ButtonTrackBarR.Name = "ButtonTrackBarR"
-        Me.ButtonTrackBarR.Size = New System.Drawing.Size(20, 30)
-        Me.ButtonTrackBarR.TabIndex = 10
-        Me.ButtonTrackBarR.Text = ">"
-        Me.ButtonTrackBarR.UseVisualStyleBackColor = True
-        '
-        'RichTextBox3
-        '
-        Me.RichTextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBox3.Location = New System.Drawing.Point(3, 7)
-        Me.RichTextBox3.Name = "RichTextBox3"
-        Me.RichTextBox3.Size = New System.Drawing.Size(463, 375)
-        Me.RichTextBox3.TabIndex = 6
-        Me.RichTextBox3.Text = ""
-        Me.RichTextBox3.WordWrap = False
-        '
-        'RichTextBoxVisor
-        '
-        Me.RichTextBoxVisor.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RichTextBoxVisor.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBoxVisor.Location = New System.Drawing.Point(0, 0)
-        Me.RichTextBoxVisor.Name = "RichTextBoxVisor"
-        Me.RichTextBoxVisor.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
-        Me.RichTextBoxVisor.Size = New System.Drawing.Size(375, 379)
-        Me.RichTextBoxVisor.TabIndex = 1
-        Me.RichTextBoxVisor.Text = ""
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.RichTextBox3)
-        Me.Panel1.Controls.Add(Me.PrintPreviewControl1)
-        Me.Panel1.Controls.Add(Me.LabelPaginas)
-        Me.Panel1.Controls.Add(Me.ButtonTrackBarR)
-        Me.Panel1.Controls.Add(Me.TrackBar1)
-        Me.Panel1.Controls.Add(Me.ButtonTrackBarL)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(776, 385)
-        Me.Panel1.TabIndex = 13
         '
         'ImpresoraBraille
         '
@@ -483,9 +483,9 @@ Partial Class ImpresoraBraille
         Me.SplitContainer1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
-        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
