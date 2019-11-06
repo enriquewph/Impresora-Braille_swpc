@@ -25,12 +25,17 @@ Public Class BrailleComLib
 #End Region
 
     'Inicializacion de objetos
-    Public arrayHoja_a_enviar(6, 71) As Byte
+    Private arrayHoja_a_enviar(6, 71) As Byte
     Private SerialPort1 As New SerialPort
     Private Puerto_Iniciado As Boolean = False
+    Private hoja_mem As Hoja_c
+    Private _trabajoAct As TrabajoActual_c
 
     Public Event StatusUpdate(ByVal Args As StatusUpdateArgs)   'Evento alzado por la libreria , utilizar constantes de arriba.
 
+    Public Sub New(ByRef trabajoAct As Object)
+        _trabajoAct = trabajoAct
+    End Sub
 #Region "Rutinas de Conexion, desconexion y handshake"
 
     Public Function Conectar_Impresora(ByVal Puerto As String)
@@ -167,42 +172,54 @@ Public Class BrailleComLib
     End Sub
 #End Region
 
-    Public Sub SendHoja(HojaActual As Byte) ' prepara la impresora para recibir el array, manda la hoja y espera el OK.
-        SendHojaActual(HojaActual)
+    Public Sub SendHoja(hoja As Hoja_c) ' prepara la impresora para recibir el array, manda la hoja y espera el OK.
+        'Dim SerialSendBuffer() As Byte
 
-        If (PrepararImpresion()) Then
-            If Not SendArray() Then
-                MsgBox("Hubo un error al comunicarse con la impresora")
-            End If
-        End If
+        Dim bytes_x_renglon As UShort = Math.Ceiling((hoja.BitMatrix.GetUpperBound(0) + 1) / 8)
+        Dim renglones As UShort = hoja.BitMatrix.GetUpperBound(1) + 1
+        Dim cantidad_de_bytes As UShort = bytes_x_renglon * renglones
 
+
+        Dim SerialSendBuffer(cantidad_de_bytes - 1) As Byte
+
+        For Each dato In SerialSendBuffer
+            dato = 0
+        Next
+
+        'MsgBox("Renglones: " + renglones.ToString + " bytes x renglon: " + bytes_x_renglon.ToString + " Bytes: " + cantidad_de_bytes.ToString)
+
+        'Transferir BitMatrix a BitArray
+        Dim bitArray(hoja.BitMatrix.Length - 1) As Boolean
+        Dim index As Integer = 0
+        For y As Integer = hoja.BitMatrix.GetLowerBound(1) To hoja.BitMatrix.GetUpperBound(1)
+            For x As Integer = hoja.BitMatrix.GetLowerBound(0) To hoja.BitMatrix.GetUpperBound(0)
+                bitArray(index) = hoja.BitMatrix(x, y)
+                index += 1
+            Next
+        Next
+
+        'Convertir BitArray en ByteArray
+
+        Dim txt As String = ""
+        For Each dato In SerialSendBuffer
+            txt += dato.ToString
+        Next
+        MsgBox(txt)
+
+        'Dim resultado As Boolean = SendArray(SerialSendBuffer)
     End Sub
 
-    Public Function SendArray() ' Retorna 1 si fue exitoso 0 si hubo algun error
+    Public Function SendArray(array() As Byte) As Boolean ' Retorna 1 si fue exitoso 0 si hubo algun error
+        'TODO: Cambiar tipo a UINT8 para definir retornos personalizados que indiquen checksum malo y demas.
         If SerialPort1.IsOpen Then
-
-            Dim SerialSendBuffer(505) As Byte
-
-            For Each dato In SerialSendBuffer
-                dato = 0
-            Next
-
             Dim Index As Integer = 0
             Dim csum_long As Long = 0
 
-            For i_ejeY As Integer = arrayHoja_a_enviar.GetLowerBound(1) To arrayHoja_a_enviar.GetUpperBound(1)
-                For i_ejeX As Integer = arrayHoja_a_enviar.GetLowerBound(0) To arrayHoja_a_enviar.GetUpperBound(0)
-                    SerialSendBuffer(Index) = arrayHoja_a_enviar(i_ejeX, i_ejeY)
-                    csum_long += SerialSendBuffer(Index)
-                    Index = Index + 1
-                Next
-            Next
-
             'calculo del checksum
-            SerialSendBuffer(504) = csum_long Mod 256
+            array(504) = csum_long Mod 256
 
             'envio de la hoja
-            SerialPort1.Write(SerialSendBuffer, 0, 505)
+            SerialPort1.Write(array, 0, 505)
 
 
             Dim respuesta As Byte = GetResponse()

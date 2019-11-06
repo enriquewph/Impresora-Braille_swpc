@@ -33,6 +33,7 @@ Public Class Preview_c
     End Sub
 
     Public Sub Guardar()
+        NumeroDeHoja = 1
         PreviewDocument.Print()
     End Sub
 

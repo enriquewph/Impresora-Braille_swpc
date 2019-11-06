@@ -6,10 +6,10 @@ Public Class ImpresoraBraille
     Private Const HOJA_LINEASxHOJA As Integer = 24
     Dim TrabajoActual As New TrabajoActual_c
     Dim Hoja_Funciones As New Hoja_Funciones_c
-    Dim WithEvents BCL As New BrailleComLib
     Dim Traductor As New TraductorBraille
     Public ListaHojas As New List(Of Hoja_c)
     Dim Preview As Preview_c
+    Dim WithEvents BCL As New BrailleComLib(TrabajoActual)
 
     Dim Puerto_Impresora As String
 
@@ -195,7 +195,7 @@ Public Class ImpresoraBraille
 
     Private Sub ProcesarVistaPrevia_Documento()
 
-        'Preview.Guardar()
+        Preview.Guardar()
         'PrintPreviewControl1.Document = Preview.Generar_Documento(ListaHojas)
     End Sub
 
@@ -251,15 +251,9 @@ Public Class ImpresoraBraille
     End Sub
 
     Private Sub ToolStripButtonEnviar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnviar.Click
-        For i_ejeY As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(1) To BCL.arrayHoja_a_enviar.GetUpperBound(1)
-            For i_ejeX As Integer = BCL.arrayHoja_a_enviar.GetLowerBound(0) To BCL.arrayHoja_a_enviar.GetUpperBound(0)
-                BCL.arrayHoja_a_enviar(i_ejeX, i_ejeY) = 0
-            Next
-            BCL.arrayHoja_a_enviar(0, i_ejeY) = i_ejeY * 2
-        Next
-
-        BCL.SendHojasTotales(1)
-        BCL.SendHoja(1)
+        If ListaHojas.Count > 0 Then
+            BCL.SendHoja(ListaHojas(0))
+        End If
     End Sub
 
     Private Sub ToolStrip1ButtonTraducir_Click(sender As Object, e As EventArgs) Handles ToolStrip1ButtonTraducir.Click
@@ -273,16 +267,12 @@ Public Class ImpresoraBraille
         form.Location = newFormPos
     End Sub
 
-    Private Sub ToolStripButtonVisorEnVivo_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
         RichTextBoxVisor.Text = Traductor.TraducirTexto(RichTextBox1.Text)
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        'DebugBitArray()
+        DebugBitArray()
         ProcesarVistaPrevia_Documento()
     End Sub
 

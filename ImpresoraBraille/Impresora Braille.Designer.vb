@@ -24,82 +24,60 @@ Partial Class ImpresoraBraille
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ImpresoraBraille))
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
-        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.LabelEst = New System.Windows.Forms.Label()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.RecortePorFinDePalabraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButtonConectar = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStrip1ButtonTraducir = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButtonVistaPrevia = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButtonEnviar = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripLabelEstado = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButtonRecargarPuertos = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripComboBoxPuertos = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripLabelPuerto = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.TabControlAdv1 = New Syncfusion.Windows.Forms.Tools.TabControlAdv()
+        Me.TabPageAdv1 = New Syncfusion.Windows.Forms.Tools.TabPageAdv()
+        Me.TabSplitterContainer1 = New Syncfusion.Windows.Forms.Tools.TabSplitterContainer()
+        Me.TabSplitterPage1 = New Syncfusion.Windows.Forms.Tools.TabSplitterPage()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.TabSplitterPage2 = New Syncfusion.Windows.Forms.Tools.TabSplitterPage()
         Me.RichTextBoxVisor = New System.Windows.Forms.RichTextBox()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
+        Me.TabPageAdv2 = New Syncfusion.Windows.Forms.Tools.TabPageAdv()
+        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
+        Me.TabPageAdv3 = New Syncfusion.Windows.Forms.Tools.TabPageAdv()
         Me.PrintPreviewControl1 = New System.Windows.Forms.PrintPreviewControl()
         Me.LabelPaginas = New System.Windows.Forms.Label()
+        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
         Me.ButtonTrackBarR = New System.Windows.Forms.Button()
-        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
         Me.ButtonTrackBarL = New System.Windows.Forms.Button()
+        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripLabelEstado = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripButtonRecargarPuertos = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripLabelPuerto = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.RecortePorFinDePalabraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripButtonConectar = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStrip1ButtonTraducir = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButtonVistaPrevia = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButtonEnviar = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer1.Panel1.SuspendLayout()
-        Me.SplitContainer1.Panel2.SuspendLayout()
-        Me.SplitContainer1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
-        Me.Panel1.SuspendLayout()
+        CType(Me.TabControlAdv1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControlAdv1.SuspendLayout()
+        Me.TabPageAdv1.SuspendLayout()
+        Me.TabSplitterContainer1.SuspendLayout()
+        Me.TabSplitterPage1.SuspendLayout()
+        Me.TabSplitterPage2.SuspendLayout()
+        Me.TabPageAdv2.SuspendLayout()
+        Me.TabPageAdv3.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RichTextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBox1.Location = New System.Drawing.Point(0, 0)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth
-        Me.RichTextBox1.Size = New System.Drawing.Size(385, 379)
-        Me.RichTextBox1.TabIndex = 0
-        Me.RichTextBox1.Text = ""
-        '
-        'RichTextBox2
-        '
-        Me.RichTextBox2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RichTextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBox2.Location = New System.Drawing.Point(3, 3)
-        Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth
-        Me.RichTextBox2.Size = New System.Drawing.Size(770, 379)
-        Me.RichTextBox2.TabIndex = 11
-        Me.RichTextBox2.Text = ""
         '
         'LabelEst
         '
@@ -122,6 +100,339 @@ Partial Class ImpresoraBraille
         Me.ToolStrip1.TabIndex = 13
         Me.ToolStrip1.Text = "Herramientas"
         '
+        'ToolStripSeparator7
+        '
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStrip2
+        '
+        Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripSeparator2, Me.ToolStripLabelEstado, Me.ToolStripSeparator4, Me.ToolStripButtonRecargarPuertos, Me.ToolStripComboBoxPuertos, Me.ToolStripLabelPuerto, Me.ToolStripSeparator8, Me.ToolStripLabel2, Me.ToolStripProgressBar1})
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 436)
+        Me.ToolStrip2.Name = "ToolStrip2"
+        Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.ToolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ToolStrip2.Size = New System.Drawing.Size(784, 25)
+        Me.ToolStrip2.TabIndex = 14
+        Me.ToolStrip2.Text = "Estado"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripComboBoxPuertos
+        '
+        Me.ToolStripComboBoxPuertos.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripComboBoxPuertos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ToolStripComboBoxPuertos.Name = "ToolStripComboBoxPuertos"
+        Me.ToolStripComboBoxPuertos.Size = New System.Drawing.Size(85, 25)
+        Me.ToolStripComboBoxPuertos.ToolTipText = "Puerto de la impresora"
+        '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripProgressBar1
+        '
+        Me.ToolStripProgressBar1.AutoSize = False
+        Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
+        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(350, 22)
+        Me.ToolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.ToolStripProgressBar1.ToolTipText = "Progreso"
+        '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.DefaultExt = "bmp"
+        '
+        'TabControlAdv1
+        '
+        Me.TabControlAdv1.ActiveTabFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.TabControlAdv1.ActiveTabForeColor = System.Drawing.Color.Empty
+        Me.TabControlAdv1.BeforeTouchSize = New System.Drawing.Size(784, 411)
+        Me.TabControlAdv1.CloseButtonForeColor = System.Drawing.Color.Empty
+        Me.TabControlAdv1.CloseButtonHoverForeColor = System.Drawing.Color.Empty
+        Me.TabControlAdv1.CloseButtonPressedForeColor = System.Drawing.Color.Empty
+        Me.TabControlAdv1.CloseTabOnMiddleClick = False
+        Me.TabControlAdv1.Controls.Add(Me.TabPageAdv1)
+        Me.TabControlAdv1.Controls.Add(Me.TabPageAdv2)
+        Me.TabControlAdv1.Controls.Add(Me.TabPageAdv3)
+        Me.TabControlAdv1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlAdv1.FocusOnTabClick = False
+        Me.TabControlAdv1.InActiveTabForeColor = System.Drawing.Color.Empty
+        Me.TabControlAdv1.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlAdv1.Name = "TabControlAdv1"
+        Me.TabControlAdv1.SeparatorColor = System.Drawing.SystemColors.ControlDark
+        Me.TabControlAdv1.ShowSeparator = False
+        Me.TabControlAdv1.Size = New System.Drawing.Size(784, 411)
+        Me.TabControlAdv1.TabIndex = 16
+        Me.TabControlAdv1.TabStyle = GetType(Syncfusion.Windows.Forms.Tools.TabRendererOffice2016Colorful)
+        Me.TabControlAdv1.ThemeName = "TabRendererOffice2016Colorful"
+        Me.TabControlAdv1.ThemeStyle.PrimitiveButtonStyle.DisabledNextPageImage = Nothing
+        '
+        'TabPageAdv1
+        '
+        Me.TabPageAdv1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.TabPageAdv1.Controls.Add(Me.TabSplitterContainer1)
+        Me.TabPageAdv1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(38, Byte), Integer))
+        Me.TabPageAdv1.Image = Global.ImpresoraBraille.My.Resources.Resources.left_align
+        Me.TabPageAdv1.ImageSize = New System.Drawing.Size(24, 24)
+        Me.TabPageAdv1.Location = New System.Drawing.Point(1, 33)
+        Me.TabPageAdv1.Name = "TabPageAdv1"
+        Me.TabPageAdv1.ShowCloseButton = True
+        Me.TabPageAdv1.Size = New System.Drawing.Size(781, 376)
+        Me.TabPageAdv1.TabIndex = 1
+        Me.TabPageAdv1.Text = " Editor de texto"
+        Me.TabPageAdv1.ThemesEnabled = False
+        '
+        'TabSplitterContainer1
+        '
+        Me.TabSplitterContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabSplitterContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.TabSplitterContainer1.Name = "TabSplitterContainer1"
+        Me.TabSplitterContainer1.PrimaryPages.AddRange(New Syncfusion.Windows.Forms.Tools.TabSplitterPage() {Me.TabSplitterPage1})
+        Me.TabSplitterContainer1.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.TabSplitterContainer1.SecondaryPages.AddRange(New Syncfusion.Windows.Forms.Tools.TabSplitterPage() {Me.TabSplitterPage2})
+        Me.TabSplitterContainer1.Size = New System.Drawing.Size(781, 376)
+        Me.TabSplitterContainer1.SplitterBackColor = System.Drawing.Color.White
+        Me.TabSplitterContainer1.SplitterPosition = 188
+        Me.TabSplitterContainer1.Style = Syncfusion.Windows.Forms.Tools.TabSplitterContainerStyle.Office2016Colorful
+        Me.TabSplitterContainer1.TabIndex = 0
+        Me.TabSplitterContainer1.Text = "Texto normal"
+        Me.TabSplitterContainer1.ThemeName = "Office2016Colorful"
+        '
+        'TabSplitterPage1
+        '
+        Me.TabSplitterPage1.AutoScroll = True
+        Me.TabSplitterPage1.Controls.Add(Me.RichTextBox1)
+        Me.TabSplitterPage1.Hide = False
+        Me.TabSplitterPage1.Image = Global.ImpresoraBraille.My.Resources.Resources.notepad_16x16
+        Me.TabSplitterPage1.Location = New System.Drawing.Point(0, 0)
+        Me.TabSplitterPage1.Name = "TabSplitterPage1"
+        Me.TabSplitterPage1.Size = New System.Drawing.Size(781, 188)
+        Me.TabSplitterPage1.TabIndex = 1
+        Me.TabSplitterPage1.Text = " Texto normal"
+        '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RichTextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RichTextBox1.Location = New System.Drawing.Point(0, 0)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth
+        Me.RichTextBox1.Size = New System.Drawing.Size(781, 188)
+        Me.RichTextBox1.TabIndex = 0
+        Me.RichTextBox1.Text = ""
+        '
+        'TabSplitterPage2
+        '
+        Me.TabSplitterPage2.AutoScroll = True
+        Me.TabSplitterPage2.Controls.Add(Me.RichTextBoxVisor)
+        Me.TabSplitterPage2.Hide = False
+        Me.TabSplitterPage2.Image = Global.ImpresoraBraille.My.Resources.Resources._461
+        Me.TabSplitterPage2.Location = New System.Drawing.Point(0, 208)
+        Me.TabSplitterPage2.Name = "TabSplitterPage2"
+        Me.TabSplitterPage2.Size = New System.Drawing.Size(781, 168)
+        Me.TabSplitterPage2.TabIndex = 2
+        Me.TabSplitterPage2.Text = "Traduccion en tiempo real"
+        '
+        'RichTextBoxVisor
+        '
+        Me.RichTextBoxVisor.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RichTextBoxVisor.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RichTextBoxVisor.Location = New System.Drawing.Point(0, 0)
+        Me.RichTextBoxVisor.Name = "RichTextBoxVisor"
+        Me.RichTextBoxVisor.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
+        Me.RichTextBoxVisor.Size = New System.Drawing.Size(781, 168)
+        Me.RichTextBoxVisor.TabIndex = 1
+        Me.RichTextBoxVisor.Text = ""
+        '
+        'TabPageAdv2
+        '
+        Me.TabPageAdv2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.TabPageAdv2.Controls.Add(Me.RichTextBox2)
+        Me.TabPageAdv2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(38, Byte), Integer))
+        Me.TabPageAdv2.Image = Global.ImpresoraBraille.My.Resources.Resources.braille
+        Me.TabPageAdv2.ImageSize = New System.Drawing.Size(24, 24)
+        Me.TabPageAdv2.Location = New System.Drawing.Point(1, 33)
+        Me.TabPageAdv2.Name = "TabPageAdv2"
+        Me.TabPageAdv2.ShowCloseButton = True
+        Me.TabPageAdv2.Size = New System.Drawing.Size(781, 376)
+        Me.TabPageAdv2.TabIndex = 2
+        Me.TabPageAdv2.Text = "Texto Traducido"
+        Me.TabPageAdv2.ThemesEnabled = False
+        '
+        'RichTextBox2
+        '
+        Me.RichTextBox2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RichTextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RichTextBox2.Location = New System.Drawing.Point(0, 0)
+        Me.RichTextBox2.Name = "RichTextBox2"
+        Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth
+        Me.RichTextBox2.Size = New System.Drawing.Size(781, 376)
+        Me.RichTextBox2.TabIndex = 11
+        Me.RichTextBox2.Text = ""
+        '
+        'TabPageAdv3
+        '
+        Me.TabPageAdv3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.TabPageAdv3.Controls.Add(Me.PrintPreviewControl1)
+        Me.TabPageAdv3.Controls.Add(Me.LabelPaginas)
+        Me.TabPageAdv3.Controls.Add(Me.RichTextBox3)
+        Me.TabPageAdv3.Controls.Add(Me.ButtonTrackBarR)
+        Me.TabPageAdv3.Controls.Add(Me.ButtonTrackBarL)
+        Me.TabPageAdv3.Controls.Add(Me.TrackBar1)
+        Me.TabPageAdv3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(38, Byte), Integer))
+        Me.TabPageAdv3.Image = Global.ImpresoraBraille.My.Resources.Resources.file
+        Me.TabPageAdv3.ImageSize = New System.Drawing.Size(24, 24)
+        Me.TabPageAdv3.Location = New System.Drawing.Point(1, 33)
+        Me.TabPageAdv3.Name = "TabPageAdv3"
+        Me.TabPageAdv3.ShowCloseButton = True
+        Me.TabPageAdv3.Size = New System.Drawing.Size(781, 376)
+        Me.TabPageAdv3.TabIndex = 3
+        Me.TabPageAdv3.Text = "Previsualización"
+        Me.TabPageAdv3.ThemesEnabled = False
+        '
+        'PrintPreviewControl1
+        '
+        Me.PrintPreviewControl1.AutoZoom = False
+        Me.PrintPreviewControl1.Location = New System.Drawing.Point(544, 8)
+        Me.PrintPreviewControl1.Name = "PrintPreviewControl1"
+        Me.PrintPreviewControl1.Size = New System.Drawing.Size(227, 321)
+        Me.PrintPreviewControl1.TabIndex = 12
+        Me.PrintPreviewControl1.UseAntiAlias = True
+        Me.PrintPreviewControl1.Zoom = 0.25R
+        '
+        'LabelPaginas
+        '
+        Me.LabelPaginas.AutoSize = True
+        Me.LabelPaginas.Location = New System.Drawing.Point(621, 367)
+        Me.LabelPaginas.Name = "LabelPaginas"
+        Me.LabelPaginas.Size = New System.Drawing.Size(73, 13)
+        Me.LabelPaginas.TabIndex = 7
+        Me.LabelPaginas.Text = "Página 1 de 1"
+        Me.LabelPaginas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'RichTextBox3
+        '
+        Me.RichTextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RichTextBox3.Location = New System.Drawing.Point(11, 8)
+        Me.RichTextBox3.Name = "RichTextBox3"
+        Me.RichTextBox3.Size = New System.Drawing.Size(400, 372)
+        Me.RichTextBox3.TabIndex = 6
+        Me.RichTextBox3.Text = ""
+        Me.RichTextBox3.WordWrap = False
+        '
+        'ButtonTrackBarR
+        '
+        Me.ButtonTrackBarR.Location = New System.Drawing.Point(751, 335)
+        Me.ButtonTrackBarR.Name = "ButtonTrackBarR"
+        Me.ButtonTrackBarR.Size = New System.Drawing.Size(20, 30)
+        Me.ButtonTrackBarR.TabIndex = 10
+        Me.ButtonTrackBarR.Text = ">"
+        Me.ButtonTrackBarR.UseVisualStyleBackColor = True
+        '
+        'ButtonTrackBarL
+        '
+        Me.ButtonTrackBarL.Location = New System.Drawing.Point(544, 335)
+        Me.ButtonTrackBarL.Name = "ButtonTrackBarL"
+        Me.ButtonTrackBarL.Size = New System.Drawing.Size(20, 30)
+        Me.ButtonTrackBarL.TabIndex = 9
+        Me.ButtonTrackBarL.Text = "<"
+        Me.ButtonTrackBarL.UseVisualStyleBackColor = True
+        '
+        'TrackBar1
+        '
+        Me.TrackBar1.BackColor = System.Drawing.Color.White
+        Me.TrackBar1.Location = New System.Drawing.Point(570, 335)
+        Me.TrackBar1.Name = "TrackBar1"
+        Me.TrackBar1.Size = New System.Drawing.Size(175, 45)
+        Me.TrackBar1.TabIndex = 8
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.ToolStripLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripLabel1.Image = Global.ImpresoraBraille.My.Resources.Resources._011
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(44, 22)
+        Me.ToolStripLabel1.Text = "Rev 1.0"
+        Me.ToolStripLabel1.ToolTipText = "Revision 1.0 2019"
+        '
+        'ToolStripLabelEstado
+        '
+        Me.ToolStripLabelEstado.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripLabelEstado.AutoSize = False
+        Me.ToolStripLabelEstado.BackColor = System.Drawing.Color.Transparent
+        Me.ToolStripLabelEstado.Image = Global.ImpresoraBraille.My.Resources.Resources._011
+        Me.ToolStripLabelEstado.Name = "ToolStripLabelEstado"
+        Me.ToolStripLabelEstado.Size = New System.Drawing.Size(98, 22)
+        Me.ToolStripLabelEstado.Text = "Desconectado"
+        Me.ToolStripLabelEstado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ToolStripLabelEstado.ToolTipText = "Estado de la impresora"
+        '
+        'ToolStripButtonRecargarPuertos
+        '
+        Me.ToolStripButtonRecargarPuertos.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButtonRecargarPuertos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButtonRecargarPuertos.Image = Global.ImpresoraBraille.My.Resources.Resources._25
+        Me.ToolStripButtonRecargarPuertos.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButtonRecargarPuertos.Name = "ToolStripButtonRecargarPuertos"
+        Me.ToolStripButtonRecargarPuertos.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButtonRecargarPuertos.Text = "ToolStripButton1"
+        Me.ToolStripButtonRecargarPuertos.ToolTipText = "Recargar puertos"
+        '
+        'ToolStripLabelPuerto
+        '
+        Me.ToolStripLabelPuerto.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripLabelPuerto.BackColor = System.Drawing.Color.Transparent
+        Me.ToolStripLabelPuerto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripLabelPuerto.Image = Global.ImpresoraBraille.My.Resources.Resources._011
+        Me.ToolStripLabelPuerto.Name = "ToolStripLabelPuerto"
+        Me.ToolStripLabelPuerto.Size = New System.Drawing.Size(45, 22)
+        Me.ToolStripLabelPuerto.Text = "Puerto:"
+        Me.ToolStripLabelPuerto.ToolTipText = "Puerto de la impresora"
+        '
+        'ToolStripLabel2
+        '
+        Me.ToolStripLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.ToolStripLabel2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripLabel2.Image = Global.ImpresoraBraille.My.Resources.Resources._011
+        Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        Me.ToolStripLabel2.Size = New System.Drawing.Size(57, 22)
+        Me.ToolStripLabel2.Text = "Progreso:"
+        Me.ToolStripLabel2.ToolTipText = "Puerto de la impresora"
+        '
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecortePorFinDePalabraToolStripMenuItem})
@@ -137,11 +448,6 @@ Partial Class ImpresoraBraille
         Me.RecortePorFinDePalabraToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
         Me.RecortePorFinDePalabraToolStripMenuItem.Text = "Recorte por fin de palabra"
         '
-        'ToolStripSeparator7
-        '
-        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 25)
-        '
         'ToolStripButtonConectar
         '
         Me.ToolStripButtonConectar.Image = Global.ImpresoraBraille.My.Resources.Resources._02
@@ -152,12 +458,6 @@ Partial Class ImpresoraBraille
         Me.ToolStripButtonConectar.Text = "Conectar"
         Me.ToolStripButtonConectar.ToolTipText = "Conectarse / Desconectarse de la impresora"
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
         'ToolStrip1ButtonTraducir
         '
         Me.ToolStrip1ButtonTraducir.Image = Global.ImpresoraBraille.My.Resources.Resources._49
@@ -167,12 +467,6 @@ Partial Class ImpresoraBraille
         Me.ToolStrip1ButtonTraducir.Size = New System.Drawing.Size(70, 22)
         Me.ToolStrip1ButtonTraducir.Text = "Traducir"
         '
-        'ToolStripSeparator6
-        '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
-        '
         'ToolStripButtonVistaPrevia
         '
         Me.ToolStripButtonVistaPrevia.Image = Global.ImpresoraBraille.My.Resources.Resources.select_all_16x16
@@ -181,12 +475,6 @@ Partial Class ImpresoraBraille
         Me.ToolStripButtonVistaPrevia.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.ToolStripButtonVistaPrevia.Size = New System.Drawing.Size(87, 22)
         Me.ToolStripButtonVistaPrevia.Text = "Vista Previa"
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
         '
         'ToolStripButtonEnviar
         '
@@ -207,262 +495,13 @@ Partial Class ImpresoraBraille
         Me.ToolStripButton1.Size = New System.Drawing.Size(64, 22)
         Me.ToolStripButton1.Text = "DEBUG"
         '
-        'ToolStrip2
-        '
-        Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripSeparator2, Me.ToolStripLabelEstado, Me.ToolStripSeparator4, Me.ToolStripButtonRecargarPuertos, Me.ToolStripComboBoxPuertos, Me.ToolStripLabelPuerto, Me.ToolStripSeparator8, Me.ToolStripLabel2, Me.ToolStripProgressBar1})
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 436)
-        Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.ToolStrip2.Size = New System.Drawing.Size(784, 25)
-        Me.ToolStrip2.TabIndex = 14
-        Me.ToolStrip2.Text = "Estado"
-        '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.ToolStripLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripLabel1.Image = Global.ImpresoraBraille.My.Resources.Resources._011
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(44, 22)
-        Me.ToolStripLabel1.Text = "Rev 1.0"
-        Me.ToolStripLabel1.ToolTipText = "Revision 1.0 2019"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripLabelEstado
-        '
-        Me.ToolStripLabelEstado.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripLabelEstado.AutoSize = False
-        Me.ToolStripLabelEstado.BackColor = System.Drawing.Color.Transparent
-        Me.ToolStripLabelEstado.Image = Global.ImpresoraBraille.My.Resources.Resources._011
-        Me.ToolStripLabelEstado.Name = "ToolStripLabelEstado"
-        Me.ToolStripLabelEstado.Size = New System.Drawing.Size(98, 22)
-        Me.ToolStripLabelEstado.Text = "Desconectado"
-        Me.ToolStripLabelEstado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ToolStripLabelEstado.ToolTipText = "Estado de la impresora"
-        '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripButtonRecargarPuertos
-        '
-        Me.ToolStripButtonRecargarPuertos.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButtonRecargarPuertos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButtonRecargarPuertos.Image = Global.ImpresoraBraille.My.Resources.Resources._25
-        Me.ToolStripButtonRecargarPuertos.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButtonRecargarPuertos.Name = "ToolStripButtonRecargarPuertos"
-        Me.ToolStripButtonRecargarPuertos.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButtonRecargarPuertos.Text = "ToolStripButton1"
-        Me.ToolStripButtonRecargarPuertos.ToolTipText = "Recargar puertos"
-        '
-        'ToolStripComboBoxPuertos
-        '
-        Me.ToolStripComboBoxPuertos.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripComboBoxPuertos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ToolStripComboBoxPuertos.Name = "ToolStripComboBoxPuertos"
-        Me.ToolStripComboBoxPuertos.Size = New System.Drawing.Size(85, 25)
-        Me.ToolStripComboBoxPuertos.ToolTipText = "Puerto de la impresora"
-        '
-        'ToolStripLabelPuerto
-        '
-        Me.ToolStripLabelPuerto.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripLabelPuerto.BackColor = System.Drawing.Color.Transparent
-        Me.ToolStripLabelPuerto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripLabelPuerto.Image = Global.ImpresoraBraille.My.Resources.Resources._011
-        Me.ToolStripLabelPuerto.Name = "ToolStripLabelPuerto"
-        Me.ToolStripLabelPuerto.Size = New System.Drawing.Size(45, 22)
-        Me.ToolStripLabelPuerto.Text = "Puerto:"
-        Me.ToolStripLabelPuerto.ToolTipText = "Puerto de la impresora"
-        '
-        'ToolStripSeparator8
-        '
-        Me.ToolStripSeparator8.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripLabel2
-        '
-        Me.ToolStripLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.ToolStripLabel2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripLabel2.Image = Global.ImpresoraBraille.My.Resources.Resources._011
-        Me.ToolStripLabel2.Name = "ToolStripLabel2"
-        Me.ToolStripLabel2.Size = New System.Drawing.Size(57, 22)
-        Me.ToolStripLabel2.Text = "Progreso:"
-        Me.ToolStripLabel2.ToolTipText = "Puerto de la impresora"
-        '
-        'ToolStripProgressBar1
-        '
-        Me.ToolStripProgressBar1.AutoSize = False
-        Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
-        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(350, 22)
-        Me.ToolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.ToolStripProgressBar1.ToolTipText = "Progreso"
-        '
-        'SaveFileDialog1
-        '
-        Me.SaveFileDialog1.DefaultExt = "bmp"
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Location = New System.Drawing.Point(0, 25)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(784, 411)
-        Me.TabControl1.TabIndex = 15
-        '
-        'TabPage1
-        '
-        Me.TabPage1.Controls.Add(Me.SplitContainer1)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(776, 385)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Editor de texto"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'SplitContainer1
-        '
-        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(3, 3)
-        Me.SplitContainer1.Name = "SplitContainer1"
-        '
-        'SplitContainer1.Panel1
-        '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.RichTextBox1)
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.RichTextBoxVisor)
-        Me.SplitContainer1.Size = New System.Drawing.Size(770, 379)
-        Me.SplitContainer1.SplitterDistance = 385
-        Me.SplitContainer1.SplitterWidth = 10
-        Me.SplitContainer1.TabIndex = 1
-        '
-        'RichTextBoxVisor
-        '
-        Me.RichTextBoxVisor.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RichTextBoxVisor.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBoxVisor.Location = New System.Drawing.Point(0, 0)
-        Me.RichTextBoxVisor.Name = "RichTextBoxVisor"
-        Me.RichTextBoxVisor.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
-        Me.RichTextBoxVisor.Size = New System.Drawing.Size(375, 379)
-        Me.RichTextBoxVisor.TabIndex = 1
-        Me.RichTextBoxVisor.Text = ""
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.RichTextBox2)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(776, 385)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Editor de texto traducido"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'TabPage3
-        '
-        Me.TabPage3.Controls.Add(Me.Panel1)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(776, 385)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Previsualización"
-        Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.RichTextBox3)
-        Me.Panel1.Controls.Add(Me.PrintPreviewControl1)
-        Me.Panel1.Controls.Add(Me.LabelPaginas)
-        Me.Panel1.Controls.Add(Me.ButtonTrackBarR)
-        Me.Panel1.Controls.Add(Me.TrackBar1)
-        Me.Panel1.Controls.Add(Me.ButtonTrackBarL)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(776, 385)
-        Me.Panel1.TabIndex = 13
-        '
-        'RichTextBox3
-        '
-        Me.RichTextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBox3.Location = New System.Drawing.Point(3, 7)
-        Me.RichTextBox3.Name = "RichTextBox3"
-        Me.RichTextBox3.Size = New System.Drawing.Size(463, 375)
-        Me.RichTextBox3.TabIndex = 6
-        Me.RichTextBox3.Text = ""
-        Me.RichTextBox3.WordWrap = False
-        '
-        'PrintPreviewControl1
-        '
-        Me.PrintPreviewControl1.AutoZoom = False
-        Me.PrintPreviewControl1.Location = New System.Drawing.Point(541, 7)
-        Me.PrintPreviewControl1.Name = "PrintPreviewControl1"
-        Me.PrintPreviewControl1.Size = New System.Drawing.Size(227, 321)
-        Me.PrintPreviewControl1.TabIndex = 12
-        Me.PrintPreviewControl1.UseAntiAlias = True
-        Me.PrintPreviewControl1.Zoom = 0.25R
-        '
-        'LabelPaginas
-        '
-        Me.LabelPaginas.AutoSize = True
-        Me.LabelPaginas.Location = New System.Drawing.Point(618, 366)
-        Me.LabelPaginas.Name = "LabelPaginas"
-        Me.LabelPaginas.Size = New System.Drawing.Size(73, 13)
-        Me.LabelPaginas.TabIndex = 7
-        Me.LabelPaginas.Text = "Página 1 de 1"
-        Me.LabelPaginas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ButtonTrackBarR
-        '
-        Me.ButtonTrackBarR.Location = New System.Drawing.Point(748, 334)
-        Me.ButtonTrackBarR.Name = "ButtonTrackBarR"
-        Me.ButtonTrackBarR.Size = New System.Drawing.Size(20, 30)
-        Me.ButtonTrackBarR.TabIndex = 10
-        Me.ButtonTrackBarR.Text = ">"
-        Me.ButtonTrackBarR.UseVisualStyleBackColor = True
-        '
-        'TrackBar1
-        '
-        Me.TrackBar1.BackColor = System.Drawing.Color.White
-        Me.TrackBar1.Location = New System.Drawing.Point(567, 334)
-        Me.TrackBar1.Name = "TrackBar1"
-        Me.TrackBar1.Size = New System.Drawing.Size(175, 45)
-        Me.TrackBar1.TabIndex = 8
-        '
-        'ButtonTrackBarL
-        '
-        Me.ButtonTrackBarL.Location = New System.Drawing.Point(541, 334)
-        Me.ButtonTrackBarL.Name = "ButtonTrackBarL"
-        Me.ButtonTrackBarL.Size = New System.Drawing.Size(20, 30)
-        Me.ButtonTrackBarL.TabIndex = 9
-        Me.ButtonTrackBarL.Text = "<"
-        Me.ButtonTrackBarL.UseVisualStyleBackColor = True
-        '
         'ImpresoraBraille
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(784, 461)
-        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.TabControlAdv1)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.LabelEst)
@@ -475,16 +514,15 @@ Partial Class ImpresoraBraille
         Me.ToolStrip1.PerformLayout()
         Me.ToolStrip2.ResumeLayout(False)
         Me.ToolStrip2.PerformLayout()
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.SplitContainer1.Panel1.ResumeLayout(False)
-        Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainer1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage3.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
+        CType(Me.TabControlAdv1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControlAdv1.ResumeLayout(False)
+        Me.TabPageAdv1.ResumeLayout(False)
+        Me.TabSplitterContainer1.ResumeLayout(False)
+        Me.TabSplitterPage1.ResumeLayout(False)
+        Me.TabSplitterPage2.ResumeLayout(False)
+        Me.TabPageAdv2.ResumeLayout(False)
+        Me.TabPageAdv3.ResumeLayout(False)
+        Me.TabPageAdv3.PerformLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -508,10 +546,6 @@ Partial Class ImpresoraBraille
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
     Friend WithEvents ToolStrip1ButtonTraducir As ToolStripButton
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents TabPage3 As TabPage
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripButtonEnviar As ToolStripButton
     Friend WithEvents RichTextBox3 As RichTextBox
@@ -528,7 +562,12 @@ Partial Class ImpresoraBraille
     Friend WithEvents ToolStripButton1 As ToolStripButton
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
-    Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents RichTextBoxVisor As RichTextBox
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents TabControlAdv1 As Syncfusion.Windows.Forms.Tools.TabControlAdv
+    Friend WithEvents TabPageAdv1 As Syncfusion.Windows.Forms.Tools.TabPageAdv
+    Friend WithEvents TabSplitterContainer1 As Syncfusion.Windows.Forms.Tools.TabSplitterContainer
+    Friend WithEvents TabPageAdv2 As Syncfusion.Windows.Forms.Tools.TabPageAdv
+    Friend WithEvents TabPageAdv3 As Syncfusion.Windows.Forms.Tools.TabPageAdv
+    Friend WithEvents TabSplitterPage1 As Syncfusion.Windows.Forms.Tools.TabSplitterPage
+    Friend WithEvents TabSplitterPage2 As Syncfusion.Windows.Forms.Tools.TabSplitterPage
 End Class

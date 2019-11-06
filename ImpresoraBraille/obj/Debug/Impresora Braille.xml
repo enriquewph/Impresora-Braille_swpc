@@ -137,7 +137,37 @@ Impresora Braille
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:ImpresoraBraille.My.Resources.Resources.braille">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:ImpresoraBraille.My.Resources.Resources.file">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:ImpresoraBraille.My.Resources.Resources.g944">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:ImpresoraBraille.My.Resources.Resources.g944_2">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:ImpresoraBraille.My.Resources.Resources.iconfinder_sync_126579">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:ImpresoraBraille.My.Resources.Resources.left_align">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:ImpresoraBraille.My.Resources.Resources.notepad_16x16">
 <summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>

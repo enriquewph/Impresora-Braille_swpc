@@ -11,7 +11,7 @@
     <AssemblyName>Impresora Braille</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -28,6 +28,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -249,6 +250,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="iconfinder_Print_1493286.ico" />
+    <None Include="recursos\file.png" />
+    <None Include="recursos\braille.png" />
+    <None Include="recursos\g944-2.png" />
+    <None Include="recursos\g944.png" />
+    <None Include="recursos\asp_net_icons_v10_icons_pack_120549\notepad_16x16.gif" />
+    <None Include="recursos\left-align.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

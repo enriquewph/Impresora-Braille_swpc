@@ -35,3 +35,19 @@ C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.vbproj.Cor
 C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.exe
 C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.xml
 C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.pdb
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Grid.Base.dll
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Grid.Windows.dll
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Shared.Base.dll
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Shared.Windows.dll
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.SpellChecker.Base.dll
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Tools.Base.dll
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Tools.Windows.dll
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Grid.Base.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Grid.Windows.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Shared.Base.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Shared.Windows.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.SpellChecker.Base.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Tools.Base.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Tools.Windows.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Grid.Windows.XmlSerializers.dll
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.vbproj.CopyComplete
