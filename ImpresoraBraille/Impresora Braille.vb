@@ -4,18 +4,24 @@ Public Class ImpresoraBraille
 
     Private Const HOJA_CARACTERESxRENGLON As Integer = 28
     Private Const HOJA_LINEASxHOJA As Integer = 24
-    Dim TrabajoActual As New TrabajoActual_c
-    Dim Hoja_Funciones As New Hoja_Funciones_c
-    Dim Traductor As New TraductorBraille
+
     Public ListaHojas As New List(Of Hoja_c)
+
+    Dim TrabajoActual As New TrabajoActual_c
+
+    Dim Hoja_Funciones As New Hoja_Funciones_c
+
+    Dim Traductor As New TraductorBraille
+
     Dim Preview As Preview_c
+
     Dim WithEvents BCL As New BrailleComLib(TrabajoActual)
 
     Dim Puerto_Impresora As String
 
 #Region "Conexion y puerto serie"
-    Private Sub ToolStripButtonConectar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonConectar.Click
-        Puerto_Impresora = ToolStripComboBoxPuertos.SelectedItem
+    Private Sub ButtonConectar_Click(sender As Object, e As EventArgs) Handles ButtonConectar.Click
+        Puerto_Impresora = ComboBoxPuertos.SelectedItem
 
         If Not BCL.Impresora_Conectada() Then
             If Not BCL.Conectar_Impresora(Puerto_Impresora) Then
@@ -27,40 +33,40 @@ Public Class ImpresoraBraille
         End If
 
         ActualizarLabelsConectar()
-        My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
+        My.Settings.COM = ComboBoxPuertos.SelectedItem
     End Sub
 
-    Private Sub ToolStripButtonRecargarPuertos_Click(sender As Object, e As EventArgs) Handles ToolStripButtonRecargarPuertos.Click
+    Private Sub ButtonRecargarPuertos_Click(sender As Object, e As EventArgs) Handles ButtonRecargarPuertos.Click
         SetSerialPortNames()
     End Sub
 
-    Private Sub ToolStripComboBoxPuertos_NoBlue(sender As Object, e As EventArgs) Handles ToolStripComboBoxPuertos.DropDownClosed
-        ToolStripComboBoxPuertos.SelectionLength = 0
+    Private Sub ComboBoxPuertos_NoBlue(sender As Object, e As EventArgs) Handles ComboBoxPuertos.LostFocus
+        ComboBoxPuertos.SelectionLength = 0
     End Sub
 
-    Private Sub ToolStripComboBoxPuertos_Click(sender As Object, e As EventArgs) Handles ToolStripComboBoxPuertos.Click
-        My.Settings.COM = ToolStripComboBoxPuertos.SelectedItem
+    Private Sub ComboBoxPuertos_Click(sender As Object, e As EventArgs) Handles ComboBoxPuertos.Click
+        My.Settings.COM = ComboBoxPuertos.SelectedItem
     End Sub
 
     Private Sub ActualizarLabelsConectar()
         If (BCL.Impresora_Conectada()) Then
-            ToolStripButtonConectar.Text = "Desconectar"
-            ToolStripButtonConectar.Image = My.Resources.Resources._01
+            ButtonConectar.Text = "Desconectar"
+            ButtonConectar.Image = My.Resources.Resources._01
 
-            ToolStripLabelEstado.Text = "Conectado"
-            ToolStripLabelEstado.Image = My.Resources.Resources._021
+            LabelEstado.Text = "Conectado"
+            PictureBox1.Image = My.Resources.Resources._021
         Else
-            ToolStripButtonConectar.Text = "Conectar"
-            ToolStripButtonConectar.Image = My.Resources.Resources._02
-            ToolStripLabelEstado.Text = "Desconectado"
-            ToolStripLabelEstado.Image = My.Resources.Resources._011
+            ButtonConectar.Text = "Conectar"
+            ButtonConectar.Image = My.Resources.Resources._02
+            LabelEstado.Text = "Desconectado"
+            PictureBox1.Image = My.Resources.Resources._011
         End If
     End Sub
 
     Private Sub SetSerialPortNames()
         ' Show all available COM ports.
 
-        Dim ComboBox As ToolStripComboBox = ToolStripComboBoxPuertos
+        Dim ComboBox As ComboBox = ComboBoxPuertos
 
         Dim ElegidoPrevio As String = My.Settings.COM
 
@@ -89,6 +95,27 @@ Public Class ImpresoraBraille
     End Sub
 #End Region
 
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetSerialPortNames()
+        CenterForm(Me)
+        RecortePorFinDePalabraToolStripMenuItem.CheckOnClick = True
+        RecortePorFinDePalabraToolStripMenuItem.Checked = My.Settings.REC_PALABRA
+
+        TrackBarEx1.Minimum = 1
+        TrackBarEx1.Maximum = 1
+        TrackBarEx1.Value = 1
+        LabelPaginas.Text = "Página " + TrackBarEx1.Value.ToString + " de " + TrackBarEx1.Maximum.ToString
+    End Sub
+
+    Private Sub Form1SizeChanged() Handles Me.SizeChanged
+        UI_UPDATE()
+    End Sub
+
+    Private Sub UI_UPDATE()
+        LabelPaginas.Text = "Página " + TrackBarEx1.Value.ToString + " de " + TrackBarEx1.Maximum.ToString
+        PrintPreviewControl1.StartPage = TrackBarEx1.Value - 1
+    End Sub
+
 #Region "Previsualizacion"
     Private Sub RecortePorFinDePalabraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecortePorFinDePalabraToolStripMenuItem.Click
         My.Settings.REC_PALABRA = RecortePorFinDePalabraToolStripMenuItem.Checked
@@ -101,46 +128,26 @@ Public Class ImpresoraBraille
         Catch ex As Exception
             MsgBox(ex.Message + vbCrLf + ex.StackTrace, MsgBoxStyle.Exclamation, ex.Source)
         End Try
-
-        TrackBar1.Minimum = 1
-        TrackBar1.Maximum = TrabajoActual.Hojas
-        TrackBar1.Value = 1
-        LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
+        TrackBarEx1.Minimum = 1
+        TrackBarEx1.Maximum = TrabajoActual.Hojas
+        TrackBarEx1.Value = 1
+        LabelPaginas.Text = "Página " + TrackBarEx1.Value.ToString + " de " + TrackBarEx1.Maximum.ToString
 
 
         Preview = New Preview_c(Me)
         PrintPreviewControl1.Document = Preview.PreviewDocument
-        PrintPreviewControl1.StartPage = TrackBar1.Value - 1
+        PrintPreviewControl1.StartPage = TrackBarEx1.Value - 1
+        PrintPreviewControl1.AutoZoom = 1
     End Sub
 
-    Private Sub ButtonTrackBarL_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarL.Click
-        If TrackBar1.Value > TrackBar1.Minimum Then
-            TrackBar1.Value = TrackBar1.Value - 1
-        End If
-        LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
-        RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
-        PrintPreviewControl1.StartPage = TrackBar1.Value - 1
-    End Sub
-
-    Private Sub ButtonTrackBarR_Click(sender As Object, e As EventArgs) Handles ButtonTrackBarR.Click
-        If (TrackBar1.Value < TrackBar1.Maximum) Then
-            TrackBar1.Value = TrackBar1.Value + 1
-        End If
-        LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
-        RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
-        PrintPreviewControl1.StartPage = TrackBar1.Value - 1
-    End Sub
-
-    Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
-        LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
-        RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
-        PrintPreviewControl1.StartPage = TrackBar1.Value - 1
+    Private Sub TrackBarEx1_Click(sender As Object, e As EventArgs) Handles TrackBarEx1.Scroll
+        LabelPaginas.Text = "Página " + TrackBarEx1.Value.ToString + " de " + TrackBarEx1.Maximum.ToString
+        PrintPreviewControl1.StartPage = TrackBarEx1.Value - 1
     End Sub
 
     Private Sub ProcesarVistaPrevia()
-        RichTextBox3.Clear()
-        TrackBar1.Value = 1
-        LabelPaginas.Text = "Página " + TrackBar1.Value.ToString + " de " + TrackBar1.Maximum.ToString
+        TrackBarEx1.Value = 1
+        LabelPaginas.Text = "Página " + TrackBarEx1.Value.ToString + " de " + TrackBarEx1.Maximum.ToString
 
         Dim TextoTraducido As String = RichTextBox2.Text
         'implementar corte x fin de palabra.
@@ -183,8 +190,6 @@ Public Class ImpresoraBraille
                 endLine = endLine + HOJA_LINEASxHOJA
             Next
         End If
-
-        RichTextBox3.Text = ListaHojas(TrackBar1.Value - 1).Texto
     End Sub
 
     Private Sub ProcesarHojasGeneradas()
@@ -243,20 +248,14 @@ Public Class ImpresoraBraille
     End Sub
 #End Region
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetSerialPortNames()
-        CenterForm(Me)
-        RecortePorFinDePalabraToolStripMenuItem.CheckOnClick = True
-        RecortePorFinDePalabraToolStripMenuItem.Checked = My.Settings.REC_PALABRA
-    End Sub
-
-    Private Sub ToolStripButtonEnviar_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnviar.Click
+    Private Sub ButtonEnviar_Click(sender As Object, e As EventArgs) Handles ButtonEnviar.Click
         If ListaHojas.Count > 0 Then
-            BCL.SendHoja(ListaHojas(0))
+            sender.BCL.SendHojasTotales(ListaHojas.Count)
+            sender.BCL.SendHoja(ListaHojas(0))
         End If
     End Sub
 
-    Private Sub ToolStrip1ButtonTraducir_Click(sender As Object, e As EventArgs) Handles ToolStrip1ButtonTraducir.Click
+    Private Sub ButtonTraducir_Click(sender As Object, e As EventArgs) Handles ButtonTraducir.Click
         RichTextBox2.Text = Traductor.TraducirTexto(RichTextBox1.Text)
     End Sub
 
@@ -272,7 +271,7 @@ Public Class ImpresoraBraille
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        DebugBitArray()
+        'DebugBitArray()
         ProcesarVistaPrevia_Documento()
     End Sub
 

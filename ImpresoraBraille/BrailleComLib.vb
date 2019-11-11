@@ -113,7 +113,7 @@ Public Class BrailleComLib
             Return UART_TIMEOUT
         End Try
 
-        If ByteRecibido <> UART_TIMEOUT Then
+        If ByteRecibido <> UART_TIMEOUT Then 'fabriestuvoaqui
             Return ByteRecibido
         End If
         Return UART_TIMEOUT
@@ -173,24 +173,11 @@ Public Class BrailleComLib
 #End Region
 
     Public Sub SendHoja(hoja As Hoja_c) ' prepara la impresora para recibir el array, manda la hoja y espera el OK.
-        'Dim SerialSendBuffer() As Byte
-
-        Dim bytes_x_renglon As UShort = Math.Ceiling((hoja.BitMatrix.GetUpperBound(0) + 1) / 8)
-        Dim renglones As UShort = hoja.BitMatrix.GetUpperBound(1) + 1
-        Dim cantidad_de_bytes As UShort = bytes_x_renglon * renglones
-
-
-        Dim SerialSendBuffer(cantidad_de_bytes - 1) As Byte
-
-        For Each dato In SerialSendBuffer
-            dato = 0
-        Next
-
-        'MsgBox("Renglones: " + renglones.ToString + " bytes x renglon: " + bytes_x_renglon.ToString + " Bytes: " + cantidad_de_bytes.ToString)
 
         'Transferir BitMatrix a BitArray
         Dim bitArray(hoja.BitMatrix.Length - 1) As Boolean
         Dim index As Integer = 0
+
         For y As Integer = hoja.BitMatrix.GetLowerBound(1) To hoja.BitMatrix.GetUpperBound(1)
             For x As Integer = hoja.BitMatrix.GetLowerBound(0) To hoja.BitMatrix.GetUpperBound(0)
                 bitArray(index) = hoja.BitMatrix(x, y)
@@ -200,26 +187,151 @@ Public Class BrailleComLib
 
         'Convertir BitArray en ByteArray
 
-        Dim txt As String = ""
-        For Each dato In SerialSendBuffer
-            txt += dato.ToString
-        Next
-        MsgBox(txt)
+        Dim SerialSendBuffer(Math.Ceiling(hoja.BitMatrix.Length / 8) - 1) As Byte 'excluye byte de checksum
 
-        'Dim resultado As Boolean = SendArray(SerialSendBuffer)
+        For Each dato In SerialSendBuffer
+            dato = 0
+        Next
+
+        For i As Integer = SerialSendBuffer.GetLowerBound(0) To SerialSendBuffer.GetUpperBound(0)
+            If (8 * i) <= bitArray.GetUpperBound(0) Then
+                If bitArray(8 * i) Then
+                    SerialSendBuffer(i) += 1
+                End If
+            End If
+
+            If ((8 * i) + 1) <= bitArray.GetUpperBound(0) Then
+                If bitArray((8 * i) + 1) Then
+                    SerialSendBuffer(i) += 2
+                End If
+            End If
+
+            If ((8 * i) + 2) <= bitArray.GetUpperBound(0) Then
+                If bitArray((8 * i) + 2) Then
+                    SerialSendBuffer(i) += 4
+                End If
+            End If
+
+            If ((8 * i) + 3) <= bitArray.GetUpperBound(0) Then
+                If bitArray((8 * i) + 3) Then
+                    SerialSendBuffer(i) += 8
+                End If
+            End If
+
+            If ((8 * i) + 4) <= bitArray.GetUpperBound(0) Then
+                If bitArray((8 * i) + 4) Then
+                    SerialSendBuffer(i) += 16
+                End If
+            End If
+
+            If ((8 * i) + 5) <= bitArray.GetUpperBound(0) Then
+                If bitArray((8 * i) + 5) Then
+                    SerialSendBuffer(i) += 32
+                End If
+            End If
+
+            If ((8 * i) + 6) <= bitArray.GetUpperBound(0) Then
+                If bitArray((8 * i) + 6) Then
+                    SerialSendBuffer(i) += 64
+                End If
+            End If
+
+            If ((8 * i) + 7) <= bitArray.GetUpperBound(0) Then
+                If bitArray((8 * i) + 7) Then
+                    SerialSendBuffer(i) += 128
+                End If
+            End If
+        Next
+
+        SendHojaActual(hoja.Numero)
+        SendCommand(BCLS_PREPARAR_IMPRESION, 0)
+        SendArray(SerialSendBuffer)
+        'DebugBitArray_arduino(hoja)
+        'DebugArray(SerialSendBuffer)
+    End Sub
+
+    Private Sub DebugBitArray_arduino(hoja As Hoja_c)
+        Dim txt As String = "bool bitArray["
+        txt += (hoja.BitMatrix.GetUpperBound(0) + 1).ToString
+        txt += "]["
+        txt += (hoja.BitMatrix.GetUpperBound(1) + 1).ToString
+        txt += "] = {"
+        For y As Integer = hoja.BitMatrix.GetLowerBound(1) To hoja.BitMatrix.GetUpperBound(1)
+            If y > hoja.BitMatrix.GetLowerBound(1) Then
+                txt += "                         "
+            End If
+            For x As Integer = hoja.BitMatrix.GetLowerBound(0) To hoja.BitMatrix.GetUpperBound(0)
+                If hoja.BitMatrix(x, y) Then
+                    txt += "1"
+                Else
+                    txt += "0"
+                End If
+
+                If y < hoja.BitMatrix.GetUpperBound(1) Or x < hoja.BitMatrix.GetUpperBound(0) Then
+                    txt += ", "
+                End If
+            Next
+            If y < hoja.BitMatrix.GetUpperBound(1) Then
+                txt += vbNewLine
+            End If
+        Next
+        txt += "};"
+
+        Dim SaveFileDialog1 As New SaveFileDialog With {
+            .DefaultExt = "*.c",
+            .Filter = "c program file|*.c",
+            .CreatePrompt = True
+        }
+        If SaveFileDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+            Using outputFile As New System.IO.StreamWriter(SaveFileDialog1.FileName)
+                outputFile.Write(txt)
+            End Using
+        End If
+    End Sub
+
+    Private Sub DebugArray(array() As Byte)
+        Dim txt As String = "uint8_t SerialSendBuffer["
+        txt += array.Count.ToString
+        txt += "] = {"
+
+        For i As Integer = array.GetLowerBound(0) To array.GetUpperBound(0)
+            txt += array(i).ToString
+            If i < array.GetUpperBound(0) Then
+                txt += ", "
+            End If
+        Next
+        txt += "};"
+
+        Dim SaveFileDialog1 As New SaveFileDialog With {
+            .DefaultExt = "*.c",
+            .Filter = "c program file|*.c",
+            .CreatePrompt = True
+        }
+        If SaveFileDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+            Using outputFile As New System.IO.StreamWriter(SaveFileDialog1.FileName)
+                outputFile.Write(txt)
+            End Using
+        End If
     End Sub
 
     Public Function SendArray(array() As Byte) As Boolean ' Retorna 1 si fue exitoso 0 si hubo algun error
         'TODO: Cambiar tipo a UINT8 para definir retornos personalizados que indiquen checksum malo y demas.
+
         If SerialPort1.IsOpen Then
-            Dim Index As Integer = 0
-            Dim csum_long As Long = 0
 
             'calculo del checksum
-            array(504) = csum_long Mod 256
+            Dim csum_long As Long = 0
+            For Each dato In array
+                csum_long += dato
+            Next
+            Dim checksum(0) As Byte
+            checksum(0) = csum_long Mod 256
 
             'envio de la hoja
-            SerialPort1.Write(array, 0, 505)
+            SerialPort1.Write(array, 0, array.Count)
+
+            'envio del checksum
+            SerialPort1.Write(checksum, 0, 1)
 
 
             Dim respuesta As Byte = GetResponse()
@@ -229,6 +341,7 @@ Public Class BrailleComLib
                 Return False
             End If
         End If
+
         Return False
     End Function
 
@@ -250,6 +363,7 @@ Public Class BrailleComLib
             Me.Dato = dato
         End Sub
     End Structure
+
 #Region "Rutinas de invalidaciones"
     Protected Overrides Sub Finalize()
         MyBase.Finalize()
