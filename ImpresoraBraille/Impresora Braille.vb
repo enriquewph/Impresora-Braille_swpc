@@ -1,23 +1,16 @@
 ﻿Imports System.Drawing.Printing
 Public Class ImpresoraBraille
-    'Invocacion de clases
-
+#Region "Invocacion de clases"
     Private Const HOJA_CARACTERESxRENGLON As Integer = 28
     Private Const HOJA_LINEASxHOJA As Integer = 24
-
     Public ListaHojas As New List(Of Hoja_c)
-
     Dim TrabajoActual As New TrabajoActual_c
-
     Dim Hoja_Funciones As New Hoja_Funciones_c
-
     Dim Traductor As New TraductorBraille
-
     Dim Preview As Preview_c
-
     Dim WithEvents BCL As New BrailleComLib(TrabajoActual)
-
     Dim Puerto_Impresora As String
+#End Region
 
 #Region "Conexion y puerto serie"
     Private Sub ButtonConectar_Click(sender As Object, e As EventArgs) Handles ButtonConectar.Click
@@ -95,33 +88,9 @@ Public Class ImpresoraBraille
     End Sub
 #End Region
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetSerialPortNames()
-        CenterForm(Me)
-        RecortePorFinDePalabraToolStripMenuItem.CheckOnClick = True
-        RecortePorFinDePalabraToolStripMenuItem.Checked = My.Settings.REC_PALABRA
-
-        TrackBarEx1.Minimum = 1
-        TrackBarEx1.Maximum = 1
-        TrackBarEx1.Value = 1
-        LabelPaginas.Text = "Página " + TrackBarEx1.Value.ToString + " de " + TrackBarEx1.Maximum.ToString
-    End Sub
-
-    Private Sub Form1SizeChanged() Handles Me.SizeChanged
-        UI_UPDATE()
-    End Sub
-
-    Private Sub UI_UPDATE()
-        LabelPaginas.Text = "Página " + TrackBarEx1.Value.ToString + " de " + TrackBarEx1.Maximum.ToString
-        PrintPreviewControl1.StartPage = TrackBarEx1.Value - 1
-    End Sub
-
 #Region "Previsualizacion"
-    Private Sub RecortePorFinDePalabraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecortePorFinDePalabraToolStripMenuItem.Click
-        My.Settings.REC_PALABRA = RecortePorFinDePalabraToolStripMenuItem.Checked
-    End Sub
 
-    Private Sub ToolStripButtonVistaPrevia_Click(sender As Object, e As EventArgs) Handles ToolStripButtonVistaPrevia.Click
+    Private Sub ButtonProcesar_Click(sender As Object, e As EventArgs) Handles ButtonProcesar.Click
         Try
             ProcesarVistaPrevia()
             ProcesarHojasGeneradas() ' luego sacar esto de aca ya que lagea el programa, dejarlo solamenta para imprimir.
@@ -248,11 +217,32 @@ Public Class ImpresoraBraille
     End Sub
 #End Region
 
+#Region "Subrutinas varias"
     Private Sub ButtonEnviar_Click(sender As Object, e As EventArgs) Handles ButtonEnviar.Click
         If ListaHojas.Count > 0 Then
             sender.BCL.SendHojasTotales(ListaHojas.Count)
             sender.BCL.SendHoja(ListaHojas(0))
         End If
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetSerialPortNames()
+        CenterForm(Me)
+        TrackBarEx1.Minimum = 1
+        TrackBarEx1.Maximum = 1
+        TrackBarEx1.Value = 1
+        LabelPaginas.Text = "Página " + TrackBarEx1.Value.ToString + " de " + TrackBarEx1.Maximum.ToString
+        ComboBoxTeclas.SelectedIndex = 0
+        ComboBoxTraductor.SelectedIndex = 0
+    End Sub
+
+    Private Sub Form1SizeChanged() Handles Me.SizeChanged
+        UI_UPDATE()
+    End Sub
+
+    Private Sub UI_UPDATE()
+        LabelPaginas.Text = "Página " + TrackBarEx1.Value.ToString + " de " + TrackBarEx1.Maximum.ToString
+        PrintPreviewControl1.StartPage = TrackBarEx1.Value - 1
     End Sub
 
     Private Sub ButtonTraducir_Click(sender As Object, e As EventArgs) Handles ButtonTraducir.Click
@@ -270,12 +260,14 @@ Public Class ImpresoraBraille
         RichTextBoxVisor.Text = Traductor.TraducirTexto(RichTextBox1.Text)
     End Sub
 
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        'DebugBitArray()
-        ProcesarVistaPrevia_Documento()
-    End Sub
-
     Private Sub StatusUpdateEv(ByVal Args As BrailleComLib.StatusUpdateArgs) Handles BCL.StatusUpdate
         MsgBox("Evento:" + Args.IdEvento.ToString + " " + Args.Dato.ToString)
     End Sub
+#End Region
+
+#Region "editor de texto traducido"
+    Sub Form1_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles RichTextBox2.KeyPress
+        e.Handled = True
+    End Sub
+#End Region
 End Class
