@@ -52,17 +52,17 @@ Partial Class ImpresoraBraille
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonNL_Palabra = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonNL_Fijo = New System.Windows.Forms.RadioButton()
         Me.ButtonProcesar = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.IntegerTextBox1 = New Syncfusion.Windows.Forms.Tools.IntegerTextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBoxCopias = New Syncfusion.Windows.Forms.Tools.IntegerTextBox()
+        Me.TextBoxPaginas = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonPag_Custom = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonPag_Actual = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonPag_Todo = New System.Windows.Forms.RadioButton()
         Me.ButtonEnviar = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LabelEstado = New System.Windows.Forms.Label()
@@ -99,7 +99,7 @@ Partial Class ImpresoraBraille
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        CType(Me.IntegerTextBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TextBoxCopias, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
@@ -400,8 +400,8 @@ Partial Class ImpresoraBraille
         '
         'GroupBox6
         '
-        Me.GroupBox6.Controls.Add(Me.RadioButton5)
-        Me.GroupBox6.Controls.Add(Me.RadioButton4)
+        Me.GroupBox6.Controls.Add(Me.RadioButtonNL_Palabra)
+        Me.GroupBox6.Controls.Add(Me.RadioButtonNL_Fijo)
         Me.GroupBox6.Location = New System.Drawing.Point(6, 18)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(208, 79)
@@ -409,27 +409,27 @@ Partial Class ImpresoraBraille
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Nuevo renglón:"
         '
-        'RadioButton5
+        'RadioButtonNL_Palabra
         '
-        Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.Location = New System.Drawing.Point(6, 42)
-        Me.RadioButton5.Name = "RadioButton5"
-        Me.RadioButton5.Size = New System.Drawing.Size(100, 30)
-        Me.RadioButton5.TabIndex = 5
-        Me.RadioButton5.Text = "Fín de palabra" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "próximo a borde"
-        Me.RadioButton5.UseVisualStyleBackColor = True
+        Me.RadioButtonNL_Palabra.AutoSize = True
+        Me.RadioButtonNL_Palabra.Location = New System.Drawing.Point(6, 42)
+        Me.RadioButtonNL_Palabra.Name = "RadioButtonNL_Palabra"
+        Me.RadioButtonNL_Palabra.Size = New System.Drawing.Size(100, 30)
+        Me.RadioButtonNL_Palabra.TabIndex = 5
+        Me.RadioButtonNL_Palabra.Text = "Fín de palabra" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "próximo a borde"
+        Me.RadioButtonNL_Palabra.UseVisualStyleBackColor = True
         '
-        'RadioButton4
+        'RadioButtonNL_Fijo
         '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Checked = True
-        Me.RadioButton4.Location = New System.Drawing.Point(6, 19)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(133, 17)
-        Me.RadioButton4.TabIndex = 4
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "Fijo, por ancho de hoja"
-        Me.RadioButton4.UseVisualStyleBackColor = True
+        Me.RadioButtonNL_Fijo.AutoSize = True
+        Me.RadioButtonNL_Fijo.Checked = True
+        Me.RadioButtonNL_Fijo.Location = New System.Drawing.Point(6, 19)
+        Me.RadioButtonNL_Fijo.Name = "RadioButtonNL_Fijo"
+        Me.RadioButtonNL_Fijo.Size = New System.Drawing.Size(133, 17)
+        Me.RadioButtonNL_Fijo.TabIndex = 4
+        Me.RadioButtonNL_Fijo.TabStop = True
+        Me.RadioButtonNL_Fijo.Text = "Fijo, por ancho de hoja"
+        Me.RadioButtonNL_Fijo.UseVisualStyleBackColor = True
         '
         'ButtonProcesar
         '
@@ -457,12 +457,12 @@ Partial Class ImpresoraBraille
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.IntegerTextBox1)
-        Me.GroupBox2.Controls.Add(Me.TextBox1)
+        Me.GroupBox2.Controls.Add(Me.TextBoxCopias)
+        Me.GroupBox2.Controls.Add(Me.TextBoxPaginas)
         Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.RadioButton3)
-        Me.GroupBox2.Controls.Add(Me.RadioButton2)
-        Me.GroupBox2.Controls.Add(Me.RadioButton1)
+        Me.GroupBox2.Controls.Add(Me.RadioButtonPag_Custom)
+        Me.GroupBox2.Controls.Add(Me.RadioButtonPag_Actual)
+        Me.GroupBox2.Controls.Add(Me.RadioButtonPag_Todo)
         Me.GroupBox2.Location = New System.Drawing.Point(6, 95)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(223, 92)
@@ -470,22 +470,25 @@ Partial Class ImpresoraBraille
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Páginas"
         '
-        'IntegerTextBox1
+        'TextBoxCopias
         '
-        Me.IntegerTextBox1.BeforeTouchSize = New System.Drawing.Size(46, 20)
-        Me.IntegerTextBox1.IntegerValue = CType(1, Long)
-        Me.IntegerTextBox1.Location = New System.Drawing.Point(168, 19)
-        Me.IntegerTextBox1.Name = "IntegerTextBox1"
-        Me.IntegerTextBox1.Size = New System.Drawing.Size(46, 20)
-        Me.IntegerTextBox1.TabIndex = 1
-        Me.IntegerTextBox1.Text = "1"
+        Me.TextBoxCopias.BeforeTouchSize = New System.Drawing.Size(46, 20)
+        Me.TextBoxCopias.IntegerValue = CType(1, Long)
+        Me.TextBoxCopias.Location = New System.Drawing.Point(168, 19)
+        Me.TextBoxCopias.MaxValue = CType(100, Long)
+        Me.TextBoxCopias.MinValue = CType(1, Long)
+        Me.TextBoxCopias.Name = "TextBoxCopias"
+        Me.TextBoxCopias.Size = New System.Drawing.Size(46, 20)
+        Me.TextBoxCopias.TabIndex = 1
+        Me.TextBoxCopias.Text = "1"
         '
-        'TextBox1
+        'TextBoxPaginas
         '
-        Me.TextBox1.Location = New System.Drawing.Point(77, 64)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(137, 20)
-        Me.TextBox1.TabIndex = 3
+        Me.TextBoxPaginas.Location = New System.Drawing.Point(77, 64)
+        Me.TextBoxPaginas.Name = "TextBoxPaginas"
+        Me.TextBoxPaginas.Size = New System.Drawing.Size(137, 20)
+        Me.TextBoxPaginas.TabIndex = 3
+        Me.TextBoxPaginas.Text = "1-3;5"
         '
         'Label1
         '
@@ -496,37 +499,37 @@ Partial Class ImpresoraBraille
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Copias:"
         '
-        'RadioButton3
+        'RadioButtonPag_Custom
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(5, 65)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(66, 17)
-        Me.RadioButton3.TabIndex = 2
-        Me.RadioButton3.Text = "Páginas:"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.RadioButtonPag_Custom.AutoSize = True
+        Me.RadioButtonPag_Custom.Location = New System.Drawing.Point(5, 65)
+        Me.RadioButtonPag_Custom.Name = "RadioButtonPag_Custom"
+        Me.RadioButtonPag_Custom.Size = New System.Drawing.Size(66, 17)
+        Me.RadioButtonPag_Custom.TabIndex = 2
+        Me.RadioButtonPag_Custom.Text = "Páginas:"
+        Me.RadioButtonPag_Custom.UseVisualStyleBackColor = True
         '
-        'RadioButton2
+        'RadioButtonPag_Actual
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(5, 42)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(91, 17)
-        Me.RadioButton2.TabIndex = 1
-        Me.RadioButton2.Text = "Página Actual"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.RadioButtonPag_Actual.AutoSize = True
+        Me.RadioButtonPag_Actual.Location = New System.Drawing.Point(5, 42)
+        Me.RadioButtonPag_Actual.Name = "RadioButtonPag_Actual"
+        Me.RadioButtonPag_Actual.Size = New System.Drawing.Size(91, 17)
+        Me.RadioButtonPag_Actual.TabIndex = 1
+        Me.RadioButtonPag_Actual.Text = "Página Actual"
+        Me.RadioButtonPag_Actual.UseVisualStyleBackColor = True
         '
-        'RadioButton1
+        'RadioButtonPag_Todo
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Checked = True
-        Me.RadioButton1.Location = New System.Drawing.Point(5, 19)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(50, 17)
-        Me.RadioButton1.TabIndex = 0
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Todo"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.RadioButtonPag_Todo.AutoSize = True
+        Me.RadioButtonPag_Todo.Checked = True
+        Me.RadioButtonPag_Todo.Location = New System.Drawing.Point(5, 19)
+        Me.RadioButtonPag_Todo.Name = "RadioButtonPag_Todo"
+        Me.RadioButtonPag_Todo.Size = New System.Drawing.Size(50, 17)
+        Me.RadioButtonPag_Todo.TabIndex = 0
+        Me.RadioButtonPag_Todo.TabStop = True
+        Me.RadioButtonPag_Todo.Text = "Todo"
+        Me.RadioButtonPag_Todo.UseVisualStyleBackColor = True
         '
         'ButtonEnviar
         '
@@ -578,9 +581,9 @@ Partial Class ImpresoraBraille
         'ButtonConectar
         '
         Me.ButtonConectar.Image = Global.ImpresoraBraille.My.Resources.Resources._02
-        Me.ButtonConectar.Location = New System.Drawing.Point(128, 42)
+        Me.ButtonConectar.Location = New System.Drawing.Point(116, 42)
         Me.ButtonConectar.Name = "ButtonConectar"
-        Me.ButtonConectar.Size = New System.Drawing.Size(86, 23)
+        Me.ButtonConectar.Size = New System.Drawing.Size(98, 23)
         Me.ButtonConectar.TabIndex = 3
         Me.ButtonConectar.Text = "Conectar"
         Me.ButtonConectar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -599,6 +602,7 @@ Partial Class ImpresoraBraille
         '
         'ComboBoxPuertos
         '
+        Me.ComboBoxPuertos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxPuertos.FormattingEnabled = True
         Me.ComboBoxPuertos.Location = New System.Drawing.Point(53, 18)
         Me.ComboBoxPuertos.Name = "ComboBoxPuertos"
@@ -768,7 +772,7 @@ Partial Class ImpresoraBraille
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        CType(Me.IntegerTextBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TextBoxCopias, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -804,12 +808,12 @@ Partial Class ImpresoraBraille
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents IntegerTextBox1 As Syncfusion.Windows.Forms.Tools.IntegerTextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TextBoxCopias As Syncfusion.Windows.Forms.Tools.IntegerTextBox
+    Friend WithEvents TextBoxPaginas As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents RadioButtonPag_Custom As RadioButton
+    Friend WithEvents RadioButtonPag_Actual As RadioButton
+    Friend WithEvents RadioButtonPag_Todo As RadioButton
     Friend WithEvents LabelEstado As Label
     Friend WithEvents ButtonConectar As Button
     Friend WithEvents ButtonRecargarPuertos As Button
@@ -822,8 +826,8 @@ Partial Class ImpresoraBraille
     Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
     Friend WithEvents GroupBox5 As GroupBox
     Friend WithEvents GroupBox6 As GroupBox
-    Friend WithEvents RadioButton5 As RadioButton
-    Friend WithEvents RadioButton4 As RadioButton
+    Friend WithEvents RadioButtonNL_Palabra As RadioButton
+    Friend WithEvents RadioButtonNL_Fijo As RadioButton
     Friend WithEvents ToolStrip3 As ToolStrip
     Friend WithEvents ButtonTraducir As ToolStripButton
     Friend WithEvents Panel1 As Panel

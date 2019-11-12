@@ -51,16 +51,6 @@ C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debu
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Tools.Windows.xml
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Grid.Windows.XmlSerializers.dll
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.vbproj.CopyComplete
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.BulletGraph.Windows.dll
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Gauge.Windows.dll
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Pdf.Base.dll
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.PdfViewer.Windows.dll
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Compression.Base.dll
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.BulletGraph.Windows.xml
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Gauge.Windows.xml
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Pdf.Base.xml
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.PdfViewer.Windows.xml
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Compression.Base.xml
 C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Grid.Base.dll
 C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Grid.Windows.dll
 C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Shared.Base.dll
@@ -79,3 +69,9 @@ C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Grid.Windows.Xml
 C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\ImpresoraBraille.vbproj.CopyComplete
 C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Core.WinForms.dll
 C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Core.WinForms.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Core.WinForms.dll
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Syncfusion.Core.WinForms.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.exe.manifest
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.application
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.exe.manifest
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.application

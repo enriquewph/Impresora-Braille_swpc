@@ -1,8 +1,13 @@
 ﻿Class TrabajoActual_c
     Private _hojas As Integer
+    Public listaHojas As List(Of Hoja_c)
+    Public hojaActual As Integer
+    Public nuevaHoja As Boolean
+    Public hojas_procesadas As Boolean
 
     Public Sub New()
         _hojas = 1
+        hojas_procesadas = False
     End Sub
 
     Public Property Hojas As Integer

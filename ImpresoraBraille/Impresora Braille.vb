@@ -107,6 +107,8 @@ Public Class ImpresoraBraille
         PrintPreviewControl1.Document = Preview.PreviewDocument
         PrintPreviewControl1.StartPage = TrackBarEx1.Value - 1
         PrintPreviewControl1.AutoZoom = 1
+
+        TrabajoActual.hojas_procesadas = True
     End Sub
 
     Private Sub TrackBarEx1_Click(sender As Object, e As EventArgs) Handles TrackBarEx1.Scroll
@@ -219,9 +221,8 @@ Public Class ImpresoraBraille
 
 #Region "Subrutinas varias"
     Private Sub ButtonEnviar_Click(sender As Object, e As EventArgs) Handles ButtonEnviar.Click
-        If ListaHojas.Count > 0 Then
-            sender.BCL.SendHojasTotales(ListaHojas.Count)
-            sender.BCL.SendHoja(ListaHojas(0))
+        If TrabajoActual.hojas_procesadas Then
+            Imprimir()
         End If
     End Sub
 
@@ -259,15 +260,62 @@ Public Class ImpresoraBraille
     Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
         RichTextBoxVisor.Text = Traductor.TraducirTexto(RichTextBox1.Text)
     End Sub
-
-    Private Sub StatusUpdateEv(ByVal Args As BrailleComLib.StatusUpdateArgs) Handles BCL.StatusUpdate
-        MsgBox("Evento:" + Args.IdEvento.ToString + " " + Args.Dato.ToString)
-    End Sub
 #End Region
 
 #Region "editor de texto traducido"
     Sub Form1_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles RichTextBox2.KeyPress
         e.Handled = True
     End Sub
+#End Region
+
+#Region "rutinas de impresion"
+
+    Private Sub Imprimir()
+        TrabajoActual.listaHojas = ListaHojas
+
+        TrabajoActual.hojaActual = 1
+        TrabajoActual.Hojas = TrabajoActual.listaHojas.Count
+
+        ToolStripProgressBar1.Minimum = 0
+        ToolStripProgressBar1.Value = 0
+        ToolStripProgressBar1.Maximum = TrabajoActual.Hojas * HOJA_LINEASxHOJA * 3
+
+        BCL.SendHojasTotales(TrabajoActual.Hojas)
+        Imprimir_handler()
+    End Sub
+
+    Private Sub Imprimir_handler()
+        BCL.SendHoja(TrabajoActual.listaHojas(TrabajoActual.hojaActual - 1))
+    End Sub
+
+    Private Sub Impresion_ok() Handles BCL.impresion_ok
+        If (TrabajoActual.hojaActual < TrabajoActual.Hojas) Then
+            TrabajoActual.hojaActual += 1
+            Imprimir_handler()
+        End If
+    End Sub
+
+    Private Sub Impresion_fail(dato As Byte) Handles BCL.impresion_fail
+        If (MsgBox("Codigo de error: " + dato.ToString + vbNewLine + "Desea reintentar?", MsgBoxStyle.RetryCancel, "Error en la impresión") = MsgBoxResult.Retry) Then
+            BCL.SendHoja(TrabajoActual.listaHojas(TrabajoActual.hojaActual - 1))
+        Else
+            MsgBox("Se canceló la impresión.")
+        End If
+    End Sub
+
+    Private Sub LineaTerminada() Handles BCL.linea_terminada
+        ToolStripProgressBar1.Value += 1
+    End Sub
+
+    Private Sub Printer_Shutdown() Handles BCL.shutdown
+
+    End Sub
+
+    Private Sub TextBoxPaginas_keyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxPaginas.KeyPress
+        If e.KeyChar = " " Then
+            e.Handled = True
+        End If
+    End Sub
+
 #End Region
 End Class

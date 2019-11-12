@@ -3,24 +3,24 @@
 Public Class BrailleComLib
 
 #Region "Constantes de comandos UART"
-    Public Const BCLS_HANDSHAKE As Byte = &HF0
-    Public Const BCLS_PREPARAR_IMPRESION As Byte = &HF1
-    Public Const BCLS_HOJA_NUMERO As Byte = &HF2
-    Public Const BCLS_HOJA_ACTUAL As Byte = &HF3
-    Public Const BCLR_CMD_VALIDO As Byte = &HF4
-    Public Const BCLR_CMD_INVALIDO As Byte = &HF5
-    Public Const BCLE_RECEPCION_OK As Byte = &HF6
-    Public Const BCLE_RECEPCION_ERROR As Byte = &HF7
+    Public ReadOnly BCLS_HANDSHAKE As Byte = &HF0
+    Public ReadOnly BCLS_PREPARAR_IMPRESION As Byte = &HF1
+    Public ReadOnly BCLS_HOJA_NUMERO As Byte = &HF2
+    Public ReadOnly BCLS_HOJA_ACTUAL As Byte = &HF3
+    Public ReadOnly BCLR_CMD_VALIDO As Byte = &HF4
+    Public ReadOnly BCLR_CMD_INVALIDO As Byte = &HF5
+    Public ReadOnly BCLE_RECEPCION_OK As Byte = &HF6
+    Public ReadOnly BCLE_RECEPCION_ERROR As Byte = &HF7
 
-    Public Const UART_TIMEOUT As Byte = &HFD
+    Public ReadOnly UART_TIMEOUT As Byte = &HFD
 
 
     'Respuestas dadas por eventos.
-    Public Const BCLE_EVENTO_PREFIX As Byte = &HF8             'Para indicar un evento de los de abajo:
-    Public Const BCLE_EVENTO_IMPRESION_OK As Byte = &HA1       'Para indicar que la hoja se termino de imprimir.
-    Public Const BCLE_EVENTO_IMPRESION_FAIL As Byte = &HA2     'Para indicar que hubo un Error al imprimir la hoja.
-    Public Const BCLE_EVENTO_SHUTDOWN As Byte = &HA3           'Para indicar que el usuario presiono el boton de apagado.
-    Public Const BCLE_EVENTO_LINEA_TERMINADA As Byte = &HA4    'Va acompañada de el numero de linea justo a continuacion.
+    Public ReadOnly BCLE_EVENTO_PREFIX As Byte = &HF8             'Para indicar un evento de los de abajo:
+    Public ReadOnly BCLE_EVENTO_IMPRESION_OK As Byte = &HA1       'Para indicar que la hoja se termino de imprimir.
+    Public ReadOnly BCLE_EVENTO_IMPRESION_FAIL As Byte = &HA2     'Para indicar que hubo un Error al imprimir la hoja.
+    Public ReadOnly BCLE_EVENTO_SHUTDOWN As Byte = &HA3           'Para indicar que el usuario presiono el boton de apagado.
+    Public ReadOnly BCLE_EVENTO_LINEA_TERMINADA As Byte = &HA4    'Va acompañada de el numero de linea justo a continuacion.
 
 #End Region
 
@@ -31,7 +31,10 @@ Public Class BrailleComLib
     Private hoja_mem As Hoja_c
     Private _trabajoAct As TrabajoActual_c
 
-    Public Event StatusUpdate(ByVal Args As StatusUpdateArgs)   'Evento alzado por la libreria , utilizar constantes de arriba.
+    Public Event impresion_ok()   'Evento alzado por la libreria , utilizar constantes de arriba.
+    Public Event impresion_fail(dato As Byte)   'Evento alzado por la libreria , utilizar constantes de arriba.
+    Public Event linea_terminada(dato As Byte)   'Evento alzado por la libreria , utilizar constantes de arriba.
+    Public Event shutdown()   'Evento alzado por la libreria , utilizar constantes de arriba.
 
     Public Sub New(ByRef trabajoAct As Object)
         _trabajoAct = trabajoAct
@@ -243,11 +246,21 @@ Public Class BrailleComLib
             End If
         Next
 
-        SendHojaActual(hoja.Numero)
-        SendCommand(BCLS_PREPARAR_IMPRESION, 0)
-        SendArray(SerialSendBuffer)
-        'DebugBitArray_arduino(hoja)
-        'DebugArray(SerialSendBuffer)
+        Dim reintentar As Boolean = True
+        While reintentar
+            SendHojaActual(hoja.Numero)
+            SendCommand(BCLS_PREPARAR_IMPRESION, 0)
+            If SendArray(SerialSendBuffer) = False Then
+                If MsgBox("Hubo un error al enviar la hoja..." + vbNewLine + "¿Desea reintentar?", MsgBoxStyle.RetryCancel, "Error de comunicacion") = MsgBoxResult.Retry Then
+                    reintentar = True
+                Else
+                    reintentar = False
+                End If
+            Else
+                reintentar = False
+            End If
+        End While
+
     End Sub
 
     Private Sub DebugBitArray_arduino(hoja As Hoja_c)
@@ -314,7 +327,7 @@ Public Class BrailleComLib
         End If
     End Sub
 
-    Public Function SendArray(array() As Byte) As Boolean ' Retorna 1 si fue exitoso 0 si hubo algun error
+    Private Function SendArray(array() As Byte) As Boolean ' Retorna 1 si fue exitoso 0 si hubo algun error
         'TODO: Cambiar tipo a UINT8 para definir retornos personalizados que indiquen checksum malo y demas.
 
         If SerialPort1.IsOpen Then
@@ -348,11 +361,27 @@ Public Class BrailleComLib
     Private Sub DataReceivedHandler(sender As Object, e As SerialDataReceivedEventArgs)
         Dim sp As SerialPort = CType(sender, SerialPort)
         Dim InData(3) As Byte
-        If (sp.Read(InData, 0, 3) = 3 And InData(0) = BCLE_EVENTO_PREFIX) Then
-            'el dato recibido es un evento.
-            Dim args As New StatusUpdateArgs(InData(1), InData(2))
-            RaiseEvent StatusUpdate(args)
-        End If
+        Try
+            If (sp.Read(InData, 0, 3) = 3 And InData(0) = BCLE_EVENTO_PREFIX) Then
+                'el dato recibido es un evento.
+                Dim args As New StatusUpdateArgs(InData(1), InData(2))
+
+                MsgBox("Evento:" + args.IdEvento.ToString + " " + args.Dato.ToString)
+
+                Select Case args.IdEvento
+                    Case BCLE_EVENTO_IMPRESION_FAIL
+                        RaiseEvent impresion_fail(args.Dato)
+                    Case BCLE_EVENTO_IMPRESION_OK
+                        RaiseEvent impresion_ok()
+                    Case BCLE_EVENTO_LINEA_TERMINADA
+                        RaiseEvent linea_terminada(args.Dato)
+                    Case BCLE_EVENTO_SHUTDOWN
+                        RaiseEvent shutdown()
+                End Select
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Public Structure StatusUpdateArgs

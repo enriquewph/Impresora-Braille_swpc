@@ -26,3 +26,5 @@ C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Rele
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.exe
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.xml
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.pdb
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Core.WinForms.dll
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Core.WinForms.xml
