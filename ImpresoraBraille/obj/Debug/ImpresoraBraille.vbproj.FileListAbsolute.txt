@@ -75,3 +75,4 @@ C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debu
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Debug\Impresora Braille.application
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.exe.manifest
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.application
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Debug\Impresora Braille.TrustInfo.xml

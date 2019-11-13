@@ -8,24 +8,26 @@ Public Class ImpresoraBraille
     Dim Hoja_Funciones As New Hoja_Funciones_c
     Dim Traductor As New TraductorBraille
     Dim Preview As Preview_c
-    Dim WithEvents BCL As New BrailleComLib(TrabajoActual)
+    Dim WithEvents BCL As New BrailleComLib(Me, TrabajoActual)
     Dim Puerto_Impresora As String
 #End Region
 
 #Region "Conexion y puerto serie"
     Private Sub ButtonConectar_Click(sender As Object, e As EventArgs) Handles ButtonConectar.Click
         Puerto_Impresora = ComboBoxPuertos.SelectedItem
+        If BCL.Impresora_Conectada = False Then
+            Dim conexion As BrailleComLib.ConnectionResponse = BCL.Conectar_Impresora(Puerto_Impresora)
 
-        If Not BCL.Impresora_Conectada() Then
-            If Not BCL.Conectar_Impresora(Puerto_Impresora) Then
-                'Si hubo un error al conectar hacer lo siguiente:
-                MsgBox("No se pudo conectar a la impresora.", MsgBoxStyle.Exclamation, "Error de conexion:")
+            If conexion.result = False Then
+                MsgBox(conexion.message, MsgBoxStyle.Exclamation, "Error de conexion:")
             End If
         Else
             BCL.Desconectar_Impresora()
         End If
 
+
         ActualizarLabelsConectar()
+
         My.Settings.COM = ComboBoxPuertos.SelectedItem
     End Sub
 
@@ -42,7 +44,7 @@ Public Class ImpresoraBraille
     End Sub
 
     Private Sub ActualizarLabelsConectar()
-        If (BCL.Impresora_Conectada()) Then
+        If (BCL.Impresora_Conectada) Then
             ButtonConectar.Text = "Desconectar"
             ButtonConectar.Image = My.Resources.Resources._01
 
@@ -227,6 +229,7 @@ Public Class ImpresoraBraille
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Control.CheckForIllegalCrossThreadCalls = False
         SetSerialPortNames()
         CenterForm(Me)
         TrackBarEx1.Minimum = 1
@@ -284,14 +287,33 @@ Public Class ImpresoraBraille
         Imprimir_handler()
     End Sub
 
+    Private Sub Impresion_Terminada()
+        ToolStripProgressBar1.Value = 0
+        MsgBox("Se termino la impresión")
+    End Sub
+
+    Private Sub Cancelar_Impresion()
+        TrabajoActual.hojaActual = 1
+
+        ToolStripProgressBar1.Minimum = 0
+        ToolStripProgressBar1.Value = 0
+        ToolStripProgressBar1.Maximum = TrabajoActual.Hojas * HOJA_LINEASxHOJA * 3
+
+        MsgBox("Hubo un error y se canceló la impresion.")
+    End Sub
+
     Private Sub Imprimir_handler()
-        BCL.SendHoja(TrabajoActual.listaHojas(TrabajoActual.hojaActual - 1))
+        If BCL.SendHoja(TrabajoActual.listaHojas(TrabajoActual.hojaActual - 1)) = False Then
+            Cancelar_Impresion()
+        End If
     End Sub
 
     Private Sub Impresion_ok() Handles BCL.impresion_ok
         If (TrabajoActual.hojaActual < TrabajoActual.Hojas) Then
             TrabajoActual.hojaActual += 1
             Imprimir_handler()
+        Else
+            Impresion_Terminada()
         End If
     End Sub
 
@@ -304,11 +326,11 @@ Public Class ImpresoraBraille
     End Sub
 
     Private Sub LineaTerminada() Handles BCL.linea_terminada
-        ToolStripProgressBar1.Value += 1
+        ToolStripProgressBar1.PerformStep()
     End Sub
 
     Private Sub Printer_Shutdown() Handles BCL.shutdown
-
+        MsgBox("Printer shutdown..")
     End Sub
 
     Private Sub TextBoxPaginas_keyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxPaginas.KeyPress
@@ -317,5 +339,10 @@ Public Class ImpresoraBraille
         End If
     End Sub
 
+    Private Sub ButtonGuardarPDF_Click(sender As Object, e As EventArgs) Handles ButtonGuardarPDF.Click
+        If TrabajoActual.hojas_procesadas Then
+            Preview.PreviewDocument.Print()
+        End If
+    End Sub
 #End Region
 End Class

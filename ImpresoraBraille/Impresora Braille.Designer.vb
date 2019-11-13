@@ -50,6 +50,7 @@ Partial Class ImpresoraBraille
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.ButtonGuardarPDF = New System.Windows.Forms.Button()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.RadioButtonNL_Palabra = New System.Windows.Forms.RadioButton()
@@ -379,14 +380,27 @@ Partial Class ImpresoraBraille
         '
         'GroupBox7
         '
+        Me.GroupBox7.Controls.Add(Me.ButtonGuardarPDF)
         Me.GroupBox7.Controls.Add(Me.GroupBox5)
         Me.GroupBox7.Controls.Add(Me.ButtonProcesar)
         Me.GroupBox7.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(235, 179)
+        Me.GroupBox7.Size = New System.Drawing.Size(235, 226)
         Me.GroupBox7.TabIndex = 5
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Documento:"
+        '
+        'ButtonGuardarPDF
+        '
+        Me.ButtonGuardarPDF.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonGuardarPDF.Image = Global.ImpresoraBraille.My.Resources.Resources._462
+        Me.ButtonGuardarPDF.Location = New System.Drawing.Point(6, 177)
+        Me.ButtonGuardarPDF.Name = "ButtonGuardarPDF"
+        Me.ButtonGuardarPDF.Size = New System.Drawing.Size(223, 42)
+        Me.ButtonGuardarPDF.TabIndex = 5
+        Me.ButtonGuardarPDF.Text = "    Guardar en PDF"
+        Me.ButtonGuardarPDF.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.ButtonGuardarPDF.UseVisualStyleBackColor = True
         '
         'GroupBox5
         '
@@ -723,8 +737,8 @@ Partial Class ImpresoraBraille
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(47, 17)
-        Me.ToolStripStatusLabel1.Text = "Rev 1.0 "
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(62, 17)
+        Me.ToolStripStatusLabel1.Text = "Rev 1.0.0.0"
         '
         'ToolStripStatusLabel2
         '
@@ -737,6 +751,8 @@ Partial Class ImpresoraBraille
         '
         Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
         Me.ToolStripProgressBar1.Size = New System.Drawing.Size(300, 16)
+        Me.ToolStripProgressBar1.Step = 1
+        Me.ToolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         '
         'ImpresoraBraille
         '
@@ -845,4 +861,5 @@ Partial Class ImpresoraBraille
     Friend WithEvents ComboBoxTraductor As ToolStripComboBox
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
+    Friend WithEvents ButtonGuardarPDF As Button
 End Class
