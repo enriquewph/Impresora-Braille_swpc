@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Impresora Braille.exe" size="144864">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Impresora Braille.exe" size="145376">
       <assemblyIdentity name="Impresora Braille" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>mKhSmUXMoVjCbPEyF11uPrKhQEtGGyviMOQDRSEiMf0=</dsig:DigestValue>
+        <dsig:DigestValue>FilIjRnAPePOQTOv9xVQlHRwEvrYgZ471IYRn3b/bLI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

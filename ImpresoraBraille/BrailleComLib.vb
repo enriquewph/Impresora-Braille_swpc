@@ -88,6 +88,7 @@ Public Class BrailleComLib
     Public Function Handshake() As Boolean
         'Si recibe esto la impresora, debe continuar su funcionamiento normal
         Try
+            responseReceived.Reset()
             SendCommand(BCLS_HANDSHAKE, 0)
             Return GetResponse().Equals(BCLR_CMD_VALIDO)
         Catch ex As Exception
@@ -106,18 +107,30 @@ Public Class BrailleComLib
         Return SerialPortList
     End Function
     Public Function SendHojasTotales(Hojas As Byte)
+        Dim retorno As Boolean = False
+        SerialEventEnable = False
         SendCommand(BCLS_HOJA_NUMERO, Hojas)
-        Return GetResponse().Equals(BCLR_CMD_VALIDO)
+        retorno = GetResponse().Equals(BCLR_CMD_VALIDO)
+        SerialEventEnable = True
+        Return retorno
     End Function
 
     Public Function SendHojaActual(Hoja As Byte)
+        Dim retorno As Boolean = False
+        SerialEventEnable = False
         SendCommand(BCLS_HOJA_ACTUAL, Hoja)
-        Return GetResponse().Equals(BCLR_CMD_VALIDO)
+        retorno = GetResponse().Equals(BCLR_CMD_VALIDO)
+        SerialEventEnable = True
+        Return retorno
     End Function
 
     Public Function PrepararImpresion()
+        Dim retorno As Boolean = False
+        SerialEventEnable = False
         SendCommand(BCLS_PREPARAR_IMPRESION, 0)
-        Return GetResponse().Equals(BCLR_CMD_VALIDO)
+        retorno = GetResponse().Equals(BCLR_CMD_VALIDO)
+        SerialEventEnable = True
+        Return retorno
     End Function
 #End Region
 
@@ -193,40 +206,37 @@ Public Class BrailleComLib
             End If
         Next
 
-        SendCommand(BCLS_HOJA_ACTUAL, hoja.Numero)
-        SendCommand(BCLS_PREPARAR_IMPRESION, 0)
+        SendHojaActual(hoja.Numero)
+        PrepararImpresion()
         Return SendArray(SerialSendBuffer)
 
     End Function
     Private Function SendArray(array() As Byte) As Boolean ' Retorna 1 si fue exitoso 0 si hubo algun error
         'TODO: Cambiar tipo a UINT8 para definir retornos personalizados que indiquen checksum malo y demas.
 
-        If SerialPort1.IsOpen Then
+        'calculo del checksum
+        Dim csum_long As Long = 0
+        For Each dato In array
+            csum_long += dato
+        Next
+        Dim checksum(0) As Byte
+        checksum(0) = csum_long Mod 256
 
-            'calculo del checksum
-            Dim csum_long As Long = 0
-            For Each dato In array
-                csum_long += dato
-            Next
-            Dim checksum(0) As Byte
-            checksum(0) = csum_long Mod 256
+        'envio del checksum
+        SerialEventEnable = False
+        SerialClearBuffer()
+        'envio de la hoja
+        SerialPort1.Write(array, 0, array.Count)
+        SerialPort1.Write(checksum, 0, 1)
+        Dim respuesta As Byte = GetResponse()
+        SerialEventEnable = True
 
-            'envio de la hoja
-            SerialPort1.Write(array, 0, array.Count)
-
-            'envio del checksum
-            SerialPort1.Write(checksum, 0, 1)
-
-
-            Dim respuesta As Byte = GetResponse()
-            If respuesta = BCLE_RECEPCION_OK Then
-                Return True
-            ElseIf respuesta = BCLE_RECEPCION_ERROR Then
-                Return False
-            End If
+        If (respuesta = BCLE_RECEPCION_OK) Then
+            Return True
+        Else
+            Return False
         End If
 
-        Return False
     End Function
 #End Region
 
@@ -237,7 +247,6 @@ Public Class BrailleComLib
             SerialSendBuffer(0) = cmd
             SerialSendBuffer(1) = val
             SerialPort1.Write(SerialSendBuffer, 0, 2)
-
             Return True
         Catch ex As Exception
             Return False
@@ -247,46 +256,59 @@ Public Class BrailleComLib
 
 #Region "Recepcion de datos"
     Private lastResponse() As Byte
+    Private SerialEventEnable As Boolean = True
 
-    Private Function GetResponse() As Byte
+    Private Sub SerialClearBuffer()
+        SerialPort1.DiscardInBuffer()
         responseReceived.Reset()
-        If responseReceived.WaitOne(1500, True) Then
-            Return lastResponse(0)
-        Else
+    End Sub
+
+    Private Function GetResponse() As Byte 'lee un solo byte.
+        Try
+            Dim inputByte As Byte = SerialPort1.ReadByte
+            Return inputByte
+        Catch ex As Exception
             Return UART_TIMEOUT
-        End If
+        End Try
     End Function
 
     Private Sub DataReceivedHandler(sender As Object, e As SerialDataReceivedEventArgs)
-        Dim sp As SerialPort = CType(sender, SerialPort)
+        If SerialEventEnable Then
+            Dim sp As SerialPort = CType(sender, SerialPort)
 
-        Try
-            Dim IncomingBytes As Integer = sp.BytesToRead
-            Dim InBuffer(IncomingBytes - 1) As Byte
-            Dim AssignedBytes As Integer = sp.Read(InBuffer, 0, IncomingBytes)
+            Try
+                Dim InBuffer(sp.BytesToRead - 1) As Byte
+                Dim AssignedBytes As Integer = sp.Read(InBuffer, 0, sp.BytesToRead)
+                Dim InString As String = ""
+                For Each dato In InBuffer
+                    InString += "{" + Hex(dato) + "}"
+                Next
+                Dim sn As ImpresoraBraille = CType(_sender, ImpresoraBraille)
+                sn.ListBox1.Items.Add(InString)
 
-            If AssignedBytes = 3 And InBuffer(0) = BCLE_EVENTO_PREFIX Then
-                'el dato recibido es un evento.
-                Dim args As New StatusUpdateArgs(InBuffer(1), InBuffer(2))
+                If AssignedBytes = 3 And InBuffer(0) = BCLE_EVENTO_PREFIX Then
+                    'el dato recibido es un evento.
+                    Dim args As New StatusUpdateArgs(InBuffer(1), InBuffer(2))
 
-                Select Case args.IdEvento
-                    Case BCLE_EVENTO_IMPRESION_FAIL
-                        RaiseEvent impresion_fail(args.Dato)
-                    Case BCLE_EVENTO_IMPRESION_OK
-                        RaiseEvent impresion_ok()
-                    Case BCLE_EVENTO_LINEA_TERMINADA
-                        RaiseEvent linea_terminada(args.Dato)
-                    Case BCLE_EVENTO_SHUTDOWN
-                        RaiseEvent shutdown()
-                End Select
-            Else
-                lastResponse = InBuffer
-                responseReceived.Set()
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error en ""DataReceivedHandler"":")
-        End Try
+                    Select Case args.IdEvento
+                        Case BCLE_EVENTO_IMPRESION_FAIL
+                            RaiseEvent impresion_fail(args.Dato)
+                        Case BCLE_EVENTO_IMPRESION_OK
+                            RaiseEvent impresion_ok()
+                        Case BCLE_EVENTO_LINEA_TERMINADA
+                            RaiseEvent linea_terminada(args.Dato)
+                        Case BCLE_EVENTO_SHUTDOWN
+                            RaiseEvent shutdown()
+                    End Select
+                Else
+                    lastResponse = InBuffer
+                    responseReceived.Set()
+                End If
 
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical, "Error en ""DataReceivedHandler"":")
+            End Try
+        End If
     End Sub
 #End Region
 

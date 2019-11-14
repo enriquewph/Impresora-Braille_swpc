@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\quiqu\Desktop\BrailleSoft\</PublishUrl>
+    <PublishUrl>C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\releases\1004\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <ProductName>Impresora Braille</ProductName>
     <PublisherName>Enrique Walter Philippeaux</PublisherName>
     <SuiteName>Braille ITSVILLADA</SuiteName>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

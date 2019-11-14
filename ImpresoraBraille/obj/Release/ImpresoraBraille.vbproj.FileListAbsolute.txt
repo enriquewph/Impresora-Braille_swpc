@@ -31,5 +31,5 @@ C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Rele
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Impresora Braille.application
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.exe.manifest
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.application
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbprojAssemblyReference.cache
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.TrustInfo.xml
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbprojAssemblyReference.cache

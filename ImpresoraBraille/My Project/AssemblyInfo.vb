@@ -1,4 +1,5 @@
-﻿Imports System
+﻿Imports System.Resources
+Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -12,7 +13,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Software para Impresora Braille ITSV")>
 <Assembly: AssemblyCompany("Enrique Walter Philippeaux - ITS Villada")>
 <Assembly: AssemblyProduct("Impresora Braille")>
-<Assembly: AssemblyCopyright("MIT 2019")>
+<Assembly: AssemblyCopyright("GPL-3.0")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +32,6 @@ Imports System.Runtime.InteropServices
 ' mediante el carácter '*', como se muestra a continuación:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.0.0.4")>
+<Assembly: AssemblyFileVersion("1.0.0.4")>
+<Assembly: NeutralResourcesLanguage("es")>

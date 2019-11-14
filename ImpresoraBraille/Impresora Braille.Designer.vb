@@ -80,9 +80,10 @@ Partial Class ImpresoraBraille
         Me.LabelPaginas = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.LabelRevision = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
         CType(Me.TabControlAdv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControlAdv1.SuspendLayout()
         Me.TabPageAdv1.SuspendLayout()
@@ -371,6 +372,7 @@ Partial Class ImpresoraBraille
         '
         Me.FlowLayoutPanel1.Controls.Add(Me.GroupBox7)
         Me.FlowLayoutPanel1.Controls.Add(Me.GroupBox4)
+        Me.FlowLayoutPanel1.Controls.Add(Me.ListBox1)
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(3, 3)
@@ -726,7 +728,7 @@ Partial Class ImpresoraBraille
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripProgressBar1})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LabelRevision, Me.ToolStripStatusLabel2, Me.ToolStripProgressBar1})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 439)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -734,11 +736,11 @@ Partial Class ImpresoraBraille
         Me.StatusStrip1.TabIndex = 17
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'ToolStripStatusLabel1
+        'LabelRevision
         '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(62, 17)
-        Me.ToolStripStatusLabel1.Text = "Rev 1.0.0.0"
+        Me.LabelRevision.Name = "LabelRevision"
+        Me.LabelRevision.Size = New System.Drawing.Size(62, 17)
+        Me.LabelRevision.Text = "Rev 1.0.0.0"
         '
         'ToolStripStatusLabel2
         '
@@ -753,6 +755,14 @@ Partial Class ImpresoraBraille
         Me.ToolStripProgressBar1.Size = New System.Drawing.Size(300, 16)
         Me.ToolStripProgressBar1.Step = 1
         Me.ToolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        '
+        'ListBox1
+        '
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.Location = New System.Drawing.Point(244, 251)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(223, 108)
+        Me.ListBox1.TabIndex = 6
         '
         'ImpresoraBraille
         '
@@ -848,7 +858,7 @@ Partial Class ImpresoraBraille
     Friend WithEvents ButtonTraducir As ToolStripButton
     Friend WithEvents Panel1 As Panel
     Friend WithEvents StatusStrip1 As StatusStrip
-    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
+    Friend WithEvents LabelRevision As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
     Friend WithEvents ToolStripProgressBar1 As ToolStripProgressBar
     Friend WithEvents GroupBox7 As GroupBox
@@ -862,4 +872,5 @@ Partial Class ImpresoraBraille
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
     Friend WithEvents ButtonGuardarPDF As Button
+    Friend WithEvents ListBox1 As ListBox
 End Class

@@ -238,6 +238,8 @@ Public Class ImpresoraBraille
         LabelPaginas.Text = "Página " + TrackBarEx1.Value.ToString + " de " + TrackBarEx1.Maximum.ToString
         ComboBoxTeclas.SelectedIndex = 0
         ComboBoxTraductor.SelectedIndex = 0
+
+        LabelRevision.Text = "Rev " + My.Application.Info.Version.ToString
     End Sub
 
     Private Sub Form1SizeChanged() Handles Me.SizeChanged
