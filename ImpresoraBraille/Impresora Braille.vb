@@ -319,8 +319,14 @@ Public Class ImpresoraBraille
         End If
     End Sub
 
+    Dim eventMessage() As String =
+    {
+        "No hay hoja en la impresora",
+        "Error random 1"
+    }
+
     Private Sub Impresion_fail(dato As Byte) Handles BCL.impresion_fail
-        If (MsgBox("Codigo de error: " + dato.ToString + vbNewLine + "Desea reintentar?", MsgBoxStyle.RetryCancel, "Error en la impresión") = MsgBoxResult.Retry) Then
+        If (MsgBox(eventMessage(dato) + vbNewLine + "¿Desea reintentar la impresión?", MsgBoxStyle.RetryCancel, "Error en la impresión") = MsgBoxResult.Retry) Then
             BCL.SendHoja(TrabajoActual.listaHojas(TrabajoActual.hojaActual - 1))
         Else
             MsgBox("Se canceló la impresión.")

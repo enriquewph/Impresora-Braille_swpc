@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xrml="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <assemblyIdentity name="Impresora Braille.application" version="1.0.0.2" publicKeyToken="0000000000000000" language="es-AR" processorArchitecture="msil" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <assemblyIdentity name="Impresora Braille.application" version="1.0.0.3" publicKeyToken="0000000000000000" language="es-AR" processorArchitecture="msil" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <description asmv2:publisher="Enrique Walter Philippeaux" co.v1:suiteName="Braille ITSVILLADA" asmv2:product="Impresora Braille" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true" />
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
@@ -8,13 +8,13 @@
   </compatibleFrameworks>
   <dependency>
     <dependentAssembly dependencyType="install" codebase="Impresora Braille.exe.manifest" size="11604">
-      <assemblyIdentity name="Impresora Braille.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="es-AR" processorArchitecture="msil" type="win32" />
+      <assemblyIdentity name="Impresora Braille.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="es-AR" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Lsq5p8IpZ+Zllrrs7Zfm9BSlQ4y9ik9lDLqeRsUOZo4=</dsig:DigestValue>
+        <dsig:DigestValue>1AICbeZ73fEYdzE55Vwc6bhRTML+RFflcIijVkG3F84=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
