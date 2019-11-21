@@ -222,9 +222,16 @@ Public Class ImpresoraBraille
 #End Region
 
 #Region "Subrutinas varias"
+
     Private Sub ButtonEnviar_Click(sender As Object, e As EventArgs) Handles ButtonEnviar.Click
         If TrabajoActual.hojas_procesadas Then
-            Imprimir()
+            If BCL.Impresora_Conectada Then
+                Imprimir()
+            Else
+                MsgBox("Por favor, conecte la impresora primero.", MsgBoxStyle.OkOnly, "Error en la impresión")
+            End If
+        Else
+            MsgBox("Por favor, procese el documento primero.", MsgBoxStyle.OkOnly, "Error en la impresión")
         End If
     End Sub
 
@@ -351,6 +358,16 @@ Public Class ImpresoraBraille
         If TrabajoActual.hojas_procesadas Then
             Preview.PreviewDocument.Print()
         End If
+    End Sub
+
+    Private Sub TimerImpresion_Tick(sender As Object, e As EventArgs) Handles TimerImpresion.Tick
+
+    End Sub
+
+
+    Private Sub ActualizarTimeLabel()
+        Dim porcentaje As Integer = (ToolStripProgressBar1.Value / ToolStripProgressBar1.Maximum) * 100
+
     End Sub
 #End Region
 End Class

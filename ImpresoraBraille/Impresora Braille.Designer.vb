@@ -72,6 +72,7 @@ Partial Class ImpresoraBraille
         Me.ButtonRecargarPuertos = New System.Windows.Forms.Button()
         Me.ComboBoxPuertos = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.PrintPreviewControl1 = New System.Windows.Forms.PrintPreviewControl()
@@ -83,7 +84,8 @@ Partial Class ImpresoraBraille
         Me.LabelRevision = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.TimerImpresion = New System.Windows.Forms.Timer(Me.components)
+        Me.TimeLabel = New Syncfusion.Windows.Forms.Tools.StatusStripLabel()
         CType(Me.TabControlAdv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControlAdv1.SuspendLayout()
         Me.TabPageAdv1.SuspendLayout()
@@ -634,6 +636,16 @@ Partial Class ImpresoraBraille
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Puerto:"
         '
+        'ListBox1
+        '
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.Location = New System.Drawing.Point(244, 251)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.ScrollAlwaysVisible = True
+        Me.ListBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.ListBox1.Size = New System.Drawing.Size(235, 134)
+        Me.ListBox1.TabIndex = 6
+        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.TableLayoutPanel2)
@@ -728,7 +740,7 @@ Partial Class ImpresoraBraille
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LabelRevision, Me.ToolStripStatusLabel2, Me.ToolStripProgressBar1})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LabelRevision, Me.ToolStripStatusLabel2, Me.ToolStripProgressBar1, Me.TimeLabel})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 439)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -756,13 +768,16 @@ Partial Class ImpresoraBraille
         Me.ToolStripProgressBar1.Step = 1
         Me.ToolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         '
-        'ListBox1
+        'TimerImpresion
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(244, 251)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(223, 108)
-        Me.ListBox1.TabIndex = 6
+        Me.TimerImpresion.Interval = 1000
+        '
+        'TimeLabel
+        '
+        Me.TimeLabel.Margin = New System.Windows.Forms.Padding(0, 3, 0, 2)
+        Me.TimeLabel.Name = "TimeLabel"
+        Me.TimeLabel.Size = New System.Drawing.Size(255, 17)
+        Me.TimeLabel.Text = "100% - T. Transcurrido: 2' 15' - Restante: 10' 30"""
         '
         'ImpresoraBraille
         '
@@ -873,4 +888,6 @@ Partial Class ImpresoraBraille
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
     Friend WithEvents ButtonGuardarPDF As Button
     Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents TimeLabel As Syncfusion.Windows.Forms.Tools.StatusStripLabel
+    Friend WithEvents TimerImpresion As Timer
 End Class
