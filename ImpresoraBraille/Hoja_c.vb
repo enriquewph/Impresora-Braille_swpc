@@ -8,6 +8,19 @@
         _numero = Numero
     End Sub
 
+    Public Function ContarLineas() As Integer
+        Dim cuenta As Integer = 0
+        For index_y As Integer = _bitMatrix.GetLowerBound(1) To _bitMatrix.GetUpperBound(1)
+            For index_x As Integer = _bitMatrix.GetLowerBound(0) To _bitMatrix.GetUpperBound(0)
+                If (_bitMatrix(index_x, index_y) = True) Then
+                    cuenta += 1
+                    Exit For
+                End If
+            Next
+        Next
+        Return cuenta
+    End Function
+
     Public Property Texto As String
         Get
             Return _texto

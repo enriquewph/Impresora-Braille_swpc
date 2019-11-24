@@ -84,8 +84,8 @@ Partial Class ImpresoraBraille
         Me.LabelRevision = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
-        Me.TimerImpresion = New System.Windows.Forms.Timer(Me.components)
         Me.TimeLabel = New Syncfusion.Windows.Forms.Tools.StatusStripLabel()
+        Me.TimerImpresion = New System.Windows.Forms.Timer(Me.components)
         CType(Me.TabControlAdv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControlAdv1.SuspendLayout()
         Me.TabPageAdv1.SuspendLayout()
@@ -768,16 +768,16 @@ Partial Class ImpresoraBraille
         Me.ToolStripProgressBar1.Step = 1
         Me.ToolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         '
-        'TimerImpresion
-        '
-        Me.TimerImpresion.Interval = 1000
-        '
         'TimeLabel
         '
         Me.TimeLabel.Margin = New System.Windows.Forms.Padding(0, 3, 0, 2)
         Me.TimeLabel.Name = "TimeLabel"
         Me.TimeLabel.Size = New System.Drawing.Size(255, 17)
         Me.TimeLabel.Text = "100% - T. Transcurrido: 2' 15' - Restante: 10' 30"""
+        '
+        'TimerImpresion
+        '
+        Me.TimerImpresion.Interval = 1000
         '
         'ImpresoraBraille
         '

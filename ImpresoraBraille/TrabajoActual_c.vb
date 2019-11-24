@@ -4,6 +4,8 @@
     Public hojaActual As Integer
     Public nuevaHoja As Boolean
     Public hojas_procesadas As Boolean
+    Public LineasTotales As Integer
+    Public LineaActual As Integer
 
     Public Sub New()
         _hojas = 1

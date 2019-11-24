@@ -282,41 +282,79 @@ Public Class ImpresoraBraille
 
 #Region "rutinas de impresion"
 
+    Private Imprimiendo As Boolean = False
+    Private TimeSpan_Impresion_Start As TimeSpan
+    Private TimeSpan_Last_Line As TimeSpan
+    Private DateTime_Impresion_Start As Date
+    Private DateTime_Last_Line As Date
+    Private TimeSpan_Restante As TimeSpan
+    Dim eventMessage() As String =
+    {
+        "No hay hoja en la impresora",
+        "Error random 1"
+    }
+
     Private Sub Imprimir()
-        TrabajoActual.listaHojas = ListaHojas
+        If Imprimiendo = False Then
+            TrabajoActual.listaHojas = ListaHojas
 
-        TrabajoActual.hojaActual = 1
-        TrabajoActual.Hojas = TrabajoActual.listaHojas.Count
+            TrabajoActual.hojaActual = 1
+            TrabajoActual.Hojas = TrabajoActual.listaHojas.Count
 
-        ToolStripProgressBar1.Minimum = 0
-        ToolStripProgressBar1.Value = 0
-        ToolStripProgressBar1.Maximum = TrabajoActual.Hojas * HOJA_LINEASxHOJA * 3
+            ToolStripProgressBar1.Minimum = 0
 
-        BCL.SendHojasTotales(TrabajoActual.Hojas)
-        Imprimir_handler()
+            TrabajoActual.LineaActual = 0
+            ToolStripProgressBar1.Value = TrabajoActual.LineaActual
+
+            TrabajoActual.LineasTotales = 0
+
+            For Each hoja In TrabajoActual.listaHojas
+                TrabajoActual.LineasTotales += hoja.ContarLineas()
+            Next
+
+            ToolStripProgressBar1.Maximum = TrabajoActual.LineasTotales
+
+            BCL.SendHojasTotales(TrabajoActual.Hojas)
+            Imprimiendo = True
+            DateTime_Impresion_Start = Date.Now()
+            DateTime_Last_Line = Date.Now()
+            ActualizarTimeLabel()
+            TimeLabel.Visible = True
+            TimerImpresion.Enabled = True
+            TimerImpresion.Start()
+            Imprimir_handler()
+        Else
+            MsgBox("Ya está imprimiendo un documento.", MsgBoxStyle.OkOnly, "Error en la impresión")
+        End If
     End Sub
-
     Private Sub Impresion_Terminada()
-        ToolStripProgressBar1.Value = 0
+        TrabajoActual.LineaActual = 0
+        ToolStripProgressBar1.Value = TrabajoActual.LineaActual
         MsgBox("Se termino la impresión")
+        TimeLabel.Visible = False
+        TimerImpresion.Enabled = False
+        TimerImpresion.Stop()
+        Imprimiendo = False
     End Sub
-
     Private Sub Cancelar_Impresion()
         TrabajoActual.hojaActual = 1
 
         ToolStripProgressBar1.Minimum = 0
-        ToolStripProgressBar1.Value = 0
         ToolStripProgressBar1.Maximum = TrabajoActual.Hojas * HOJA_LINEASxHOJA * 3
 
+        TrabajoActual.LineaActual = 0
+        ToolStripProgressBar1.Value = TrabajoActual.LineaActual
+        Imprimiendo = False
+        TimeLabel.Visible = False
+        TimerImpresion.Enabled = False
+        TimerImpresion.Stop()
         MsgBox("Hubo un error y se canceló la impresion.")
     End Sub
-
     Private Sub Imprimir_handler()
         If BCL.SendHoja(TrabajoActual.listaHojas(TrabajoActual.hojaActual - 1)) = False Then
             Cancelar_Impresion()
         End If
     End Sub
-
     Private Sub Impresion_ok() Handles BCL.impresion_ok
         If (TrabajoActual.hojaActual < TrabajoActual.Hojas) Then
             TrabajoActual.hojaActual += 1
@@ -325,49 +363,49 @@ Public Class ImpresoraBraille
             Impresion_Terminada()
         End If
     End Sub
-
-    Dim eventMessage() As String =
-    {
-        "No hay hoja en la impresora",
-        "Error random 1"
-    }
-
     Private Sub Impresion_fail(dato As Byte) Handles BCL.impresion_fail
         If (MsgBox(eventMessage(dato) + vbNewLine + "¿Desea reintentar la impresión?", MsgBoxStyle.RetryCancel, "Error en la impresión") = MsgBoxResult.Retry) Then
             BCL.SendHoja(TrabajoActual.listaHojas(TrabajoActual.hojaActual - 1))
         Else
-            MsgBox("Se canceló la impresión.")
+            Cancelar_Impresion()
         End If
     End Sub
-
-    Private Sub LineaTerminada() Handles BCL.linea_terminada
-        ToolStripProgressBar1.PerformStep()
-    End Sub
-
     Private Sub Printer_Shutdown() Handles BCL.shutdown
         MsgBox("Printer shutdown..")
     End Sub
-
     Private Sub TextBoxPaginas_keyPress(sender As Object, e As KeyPressEventArgs) Handles TextBoxPaginas.KeyPress
         If e.KeyChar = " " Then
             e.Handled = True
         End If
     End Sub
-
     Private Sub ButtonGuardarPDF_Click(sender As Object, e As EventArgs) Handles ButtonGuardarPDF.Click
         If TrabajoActual.hojas_procesadas Then
             Preview.PreviewDocument.Print()
         End If
     End Sub
 
-    Private Sub TimerImpresion_Tick(sender As Object, e As EventArgs) Handles TimerImpresion.Tick
+    Private Sub LineaTerminada() Handles BCL.linea_terminada
+        TrabajoActual.LineaActual += 1
+        ToolStripProgressBar1.Value = TrabajoActual.LineaActual
 
+        Dim newDateTime As Date = Date.Now()
+        TimeSpan_Last_Line = newDateTime.Subtract(DateTime_Last_Line)
+        DateTime_Last_Line = newDateTime
+        'ya se actualizo TimeSpan_Last_Line con el ultimo tiempo de linea
+        TimeSpan_Restante = New TimeSpan(0)
+        For i As Integer = TrabajoActual.LineaActual To TrabajoActual.LineasTotales
+            TimeSpan_Restante.Add(TimeSpan_Last_Line)
+        Next
     End Sub
-
-
+    Private Sub TimerImpresion_Tick(sender As Object, e As EventArgs) Handles TimerImpresion.Tick
+        ActualizarTimeLabel()
+    End Sub
     Private Sub ActualizarTimeLabel()
+        'actualizar TimeSpan
+        Dim newDateTime As Date = Date.Now()
+        TimeSpan_Impresion_Start = newDateTime.Subtract(DateTime_Impresion_Start)
         Dim porcentaje As Integer = (ToolStripProgressBar1.Value / ToolStripProgressBar1.Maximum) * 100
-
+        TimeLabel.Text = porcentaje.ToString + "% - T. Transcurrido: " + TimeSpan_Impresion_Start.Minutes.ToString + "' " + TimeSpan_Impresion_Start.Seconds.ToString + """ - Restante: " + TimeSpan_Restante.Minutes.ToString + "' " + TimeSpan_Restante.Seconds.ToString + """"
     End Sub
 #End Region
 End Class
