@@ -388,14 +388,15 @@ Public Class ImpresoraBraille
         TrabajoActual.LineaActual += 1
         ToolStripProgressBar1.Value = TrabajoActual.LineaActual
 
-        Dim newDateTime As Date = Date.Now()
-        TimeSpan_Last_Line = newDateTime.Subtract(DateTime_Last_Line)
-        DateTime_Last_Line = newDateTime
+        TimeSpan_Last_Line = Date.Now().Subtract(DateTime_Last_Line)
+        DateTime_Last_Line = Date.Now()
+
         'ya se actualizo TimeSpan_Last_Line con el ultimo tiempo de linea
         TimeSpan_Restante = New TimeSpan(0)
         For i As Integer = TrabajoActual.LineaActual To TrabajoActual.LineasTotales
             TimeSpan_Restante.Add(TimeSpan_Last_Line)
         Next
+
     End Sub
     Private Sub TimerImpresion_Tick(sender As Object, e As EventArgs) Handles TimerImpresion.Tick
         ActualizarTimeLabel()
