@@ -33,3 +33,37 @@ C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Rele
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.application
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.TrustInfo.xml
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbprojAssemblyReference.cache
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Impresora Braille.exe.config
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Impresora Braille.exe.manifest
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Impresora Braille.application
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Impresora Braille.exe
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Impresora Braille.pdb
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Impresora Braille.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Core.WinForms.dll
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Grid.Base.dll
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Grid.Windows.dll
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Shared.Base.dll
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Shared.Windows.dll
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Tools.Base.dll
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Tools.Windows.dll
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.SpellChecker.Base.dll
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Core.WinForms.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Grid.Base.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Grid.Windows.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Shared.Base.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Shared.Windows.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Tools.Base.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Tools.Windows.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.SpellChecker.Base.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Syncfusion.Grid.Windows.XmlSerializers.dll
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.ImpresoraBraille.resources
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.Resources.resources
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbproj.GenerateResource.cache
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbproj.CoreCompileInputs.cache
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.TrustInfo.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.exe.manifest
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.application
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbproj.CopyComplete
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.exe
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.xml
+C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.pdb

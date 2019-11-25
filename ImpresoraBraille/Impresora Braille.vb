@@ -27,7 +27,6 @@ Public Class ImpresoraBraille
 
 
         ActualizarLabelsConectar()
-
         My.Settings.COM = ComboBoxPuertos.SelectedItem
     End Sub
 
@@ -295,10 +294,15 @@ Public Class ImpresoraBraille
     Dim tiemposDeLinea As List(Of TimeSpan)
     Dim eventMessage() As String =
     {
-        "No hay hoja en la impresora",
-        "Error random 1"
+        "No hay hoja en la impresora.",
+        "Impresion abortada."
     }
 
+    Private Sub ButtonCancelar_Click(sender As Object, e As EventArgs) Handles ButtonCancelar.Click
+        BCL.ReiniciarImpresora()
+        BCL.SacarHoja()
+        Imprimiendo = False
+    End Sub
     Private Sub DumpTiempos()
         Dim outTxt As String = ""
         For Each tl In tiemposDeLinea
@@ -316,7 +320,6 @@ Public Class ImpresoraBraille
             End Using
         End If
     End Sub
-
     Private Sub Imprimir()
         If Imprimiendo = False Then
             TrabajoActual.listaHojas = ListaHojas

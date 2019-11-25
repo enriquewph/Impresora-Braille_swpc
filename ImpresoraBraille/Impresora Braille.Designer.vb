@@ -85,8 +85,9 @@ Partial Class ImpresoraBraille
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.TimeLabel = New Syncfusion.Windows.Forms.Tools.StatusStripLabel()
-        Me.TimerImpresion = New System.Windows.Forms.Timer(Me.components)
         Me.StatusStripButton1 = New Syncfusion.Windows.Forms.Tools.StatusStripButton()
+        Me.TimerImpresion = New System.Windows.Forms.Timer(Me.components)
+        Me.ButtonCancelar = New System.Windows.Forms.Button()
         CType(Me.TabControlAdv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControlAdv1.SuspendLayout()
         Me.TabPageAdv1.SuspendLayout()
@@ -468,6 +469,7 @@ Partial Class ImpresoraBraille
         Me.GroupBox4.Controls.Add(Me.GroupBox2)
         Me.GroupBox4.Controls.Add(Me.ButtonEnviar)
         Me.GroupBox4.Controls.Add(Me.GroupBox1)
+        Me.GroupBox4.Controls.Add(Me.ButtonCancelar)
         Me.GroupBox4.Location = New System.Drawing.Point(244, 3)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(235, 242)
@@ -557,7 +559,7 @@ Partial Class ImpresoraBraille
         Me.ButtonEnviar.Image = Global.ImpresoraBraille.My.Resources.Resources._12
         Me.ButtonEnviar.Location = New System.Drawing.Point(6, 193)
         Me.ButtonEnviar.Name = "ButtonEnviar"
-        Me.ButtonEnviar.Size = New System.Drawing.Size(223, 42)
+        Me.ButtonEnviar.Size = New System.Drawing.Size(175, 42)
         Me.ButtonEnviar.TabIndex = 3
         Me.ButtonEnviar.Text = "         Imprimir"
         Me.ButtonEnviar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -779,10 +781,6 @@ Partial Class ImpresoraBraille
         Me.TimeLabel.Text = "100% - T. Transcurrido: 2' 15' - Restante: 10' 30"""
         Me.TimeLabel.Visible = False
         '
-        'TimerImpresion
-        '
-        Me.TimerImpresion.Interval = 500
-        '
         'StatusStripButton1
         '
         Me.StatusStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -793,6 +791,21 @@ Partial Class ImpresoraBraille
         Me.StatusStripButton1.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.StatusStripButton1.Size = New System.Drawing.Size(23, 20)
         Me.StatusStripButton1.Text = "Debug"
+        '
+        'TimerImpresion
+        '
+        Me.TimerImpresion.Interval = 500
+        '
+        'ButtonCancelar
+        '
+        Me.ButtonCancelar.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonCancelar.Image = Global.ImpresoraBraille.My.Resources.Resources._01
+        Me.ButtonCancelar.Location = New System.Drawing.Point(187, 193)
+        Me.ButtonCancelar.Name = "ButtonCancelar"
+        Me.ButtonCancelar.Size = New System.Drawing.Size(42, 42)
+        Me.ButtonCancelar.TabIndex = 7
+        Me.ButtonCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.ButtonCancelar.UseVisualStyleBackColor = True
         '
         'ImpresoraBraille
         '
@@ -906,4 +919,5 @@ Partial Class ImpresoraBraille
     Friend WithEvents TimeLabel As Syncfusion.Windows.Forms.Tools.StatusStripLabel
     Friend WithEvents TimerImpresion As Timer
     Friend WithEvents StatusStripButton1 As Syncfusion.Windows.Forms.Tools.StatusStripButton
+    Friend WithEvents ButtonCancelar As Button
 End Class

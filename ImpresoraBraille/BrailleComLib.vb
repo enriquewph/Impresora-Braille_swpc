@@ -8,6 +8,10 @@ Public Class BrailleComLib
     Public ReadOnly BCLS_PREPARAR_IMPRESION As Byte = &HF1
     Public ReadOnly BCLS_HOJA_NUMERO As Byte = &HF2
     Public ReadOnly BCLS_HOJA_ACTUAL As Byte = &HF3
+    Public ReadOnly BCLS_ABORTAR As Byte = &HF4
+    Public ReadOnly BCLS_SACAR_HOJA As Byte = &HF5
+    Public ReadOnly BCLS_ESTADO_ACTUAL As Byte = &HF6
+
     Public ReadOnly BCLR_CMD_VALIDO As Byte = &HF4
     Public ReadOnly BCLR_CMD_INVALIDO As Byte = &HF5
     Public ReadOnly BCLE_RECEPCION_OK As Byte = &HF6
@@ -119,6 +123,40 @@ Public Class BrailleComLib
         Dim retorno As Boolean = False
         SerialEventEnable = False
         SendCommand(BCLS_HOJA_ACTUAL, Hoja)
+        retorno = GetResponse().Equals(BCLR_CMD_VALIDO)
+        SerialEventEnable = True
+        Return retorno
+    End Function
+
+    Public Function ConsultarEstadoActual() 'Si retorna 1, está imprimiendo.
+        SerialEventEnable = False
+        SendCommand(BCLS_ESTADO_ACTUAL, 0)
+        Dim response As Byte = GetResponse()
+        SerialEventEnable = True
+        If (response <> UART_TIMEOUT) Then
+            If response = 1 Then
+                Return True
+            Else
+                Return False
+            End If
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Sub ReiniciarImpresora()
+        If Impresora_Conectada Then
+            SerialPort1.RtsEnable = True
+            Thread.Sleep(500)
+            SerialPort1.RtsEnable = False
+            Thread.Sleep(6000)
+        End If
+    End Sub
+
+    Public Function SacarHoja()
+        Dim retorno As Boolean = False
+        SerialEventEnable = False
+        SendCommand(BCLS_SACAR_HOJA, 0)
         retorno = GetResponse().Equals(BCLR_CMD_VALIDO)
         SerialEventEnable = True
         Return retorno
@@ -314,7 +352,7 @@ Public Class BrailleComLib
                 End If
                 SerialPort1.DiscardInBuffer()
             Catch ex As Exception
-                '    MsgBox(ex.Message, MsgBoxStyle.Critical, "Error en ""DataReceivedHandler"":")
+                'MsgBox(ex.Message, MsgBoxStyle.Critical, "Error en ""DataReceivedHandler"":")
             End Try
         End If
     End Sub
