@@ -280,6 +280,10 @@ Public Class ImpresoraBraille
     End Sub
 #End Region
 
+    Private Sub StatusStripButton1_Click(sender As Object, e As EventArgs) Handles StatusStripButton1.Click
+        DumpTiempos()
+    End Sub
+
 #Region "rutinas de impresion"
 
     Private Imprimiendo As Boolean = False
@@ -288,11 +292,30 @@ Public Class ImpresoraBraille
     Private DateTime_Impresion_Start As Date
     Private DateTime_Last_Line As Date
     Private TimeSpan_Restante As TimeSpan
+    Dim tiemposDeLinea As List(Of TimeSpan)
     Dim eventMessage() As String =
     {
         "No hay hoja en la impresora",
         "Error random 1"
     }
+
+    Private Sub DumpTiempos()
+        Dim outTxt As String = ""
+        For Each tl In tiemposDeLinea
+            outTxt += tl.TotalMilliseconds.ToString + vbNewLine
+        Next
+
+        Dim SaveFileDialog1 As New SaveFileDialog With {
+            .DefaultExt = "*.txt",
+            .Filter = "Archivo de texto|*.txt",
+            .CreatePrompt = True
+        }
+        If SaveFileDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+            Using outputFile As New System.IO.StreamWriter(SaveFileDialog1.FileName)
+                outputFile.Write(outTxt)
+            End Using
+        End If
+    End Sub
 
     Private Sub Imprimir()
         If Imprimiendo = False Then
@@ -322,6 +345,7 @@ Public Class ImpresoraBraille
             TimeLabel.Visible = True
             TimerImpresion.Enabled = True
             TimerImpresion.Start()
+            tiemposDeLinea = New List(Of TimeSpan)
             Imprimir_handler()
         Else
             MsgBox("Ya está imprimiendo un documento.", MsgBoxStyle.OkOnly, "Error en la impresión")
@@ -335,6 +359,7 @@ Public Class ImpresoraBraille
         TimerImpresion.Enabled = False
         TimerImpresion.Stop()
         Imprimiendo = False
+        tiemposDeLinea = New List(Of TimeSpan)
     End Sub
     Private Sub Cancelar_Impresion()
         TrabajoActual.hojaActual = 1
@@ -348,6 +373,7 @@ Public Class ImpresoraBraille
         TimeLabel.Visible = False
         TimerImpresion.Enabled = False
         TimerImpresion.Stop()
+        tiemposDeLinea = New List(Of TimeSpan)
         MsgBox("Hubo un error y se canceló la impresion.")
     End Sub
     Private Sub Imprimir_handler()
@@ -383,20 +409,21 @@ Public Class ImpresoraBraille
             Preview.PreviewDocument.Print()
         End If
     End Sub
-
     Private Sub LineaTerminada() Handles BCL.linea_terminada
         TrabajoActual.LineaActual += 1
         ToolStripProgressBar1.Value = TrabajoActual.LineaActual
 
         TimeSpan_Last_Line = Date.Now().Subtract(DateTime_Last_Line)
         DateTime_Last_Line = Date.Now()
+        tiemposDeLinea.Add(TimeSpan_Last_Line)
 
         'ya se actualizo TimeSpan_Last_Line con el ultimo tiempo de linea
-        TimeSpan_Restante = New TimeSpan(0)
-        For i As Integer = TrabajoActual.LineaActual To TrabajoActual.LineasTotales
-            TimeSpan_Restante.Add(TimeSpan_Last_Line)
-        Next
 
+        TimeSpan_Restante = New TimeSpan(0)
+
+        For i As Integer = TrabajoActual.LineaActual To TrabajoActual.LineasTotales
+            TimeSpan_Restante = TimeSpan_Restante.Add(TimeSpan_Last_Line)
+        Next
     End Sub
     Private Sub TimerImpresion_Tick(sender As Object, e As EventArgs) Handles TimerImpresion.Tick
         ActualizarTimeLabel()

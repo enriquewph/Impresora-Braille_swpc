@@ -274,11 +274,17 @@ Public Class BrailleComLib
 
     Private Sub DataReceivedHandler(sender As Object, e As SerialDataReceivedEventArgs)
         If SerialEventEnable Then
+            Thread.Sleep(100)
             Dim sp As SerialPort = CType(sender, SerialPort)
 
             Try
+                If (sp.BytesToRead < 3) Then
+                    Thread.Sleep(100)
+                End If
+
                 Dim InBuffer(sp.BytesToRead - 1) As Byte
                 Dim AssignedBytes As Integer = sp.Read(InBuffer, 0, sp.BytesToRead)
+
                 Dim InString As String = ""
                 For Each dato In InBuffer
                     InString += "{" + Hex(dato) + "}"
@@ -286,27 +292,29 @@ Public Class BrailleComLib
                 Dim sn As ImpresoraBraille = CType(_sender, ImpresoraBraille)
                 sn.ListBox1.Items.Add(InString)
 
-                If AssignedBytes = 3 And InBuffer(0) = BCLE_EVENTO_PREFIX Then
-                    'el dato recibido es un evento.
-                    Dim args As New StatusUpdateArgs(InBuffer(1), InBuffer(2))
-
-                    Select Case args.IdEvento
-                        Case BCLE_EVENTO_IMPRESION_FAIL
-                            RaiseEvent impresion_fail(args.Dato)
-                        Case BCLE_EVENTO_IMPRESION_OK
-                            RaiseEvent impresion_ok()
-                        Case BCLE_EVENTO_LINEA_TERMINADA
-                            RaiseEvent linea_terminada(args.Dato)
-                        Case BCLE_EVENTO_SHUTDOWN
-                            RaiseEvent shutdown()
-                    End Select
+                If AssignedBytes = 3 Then
+                    If InBuffer(0) = BCLE_EVENTO_PREFIX Then
+                        'el dato recibido es un evento.
+                        Dim args As New StatusUpdateArgs(InBuffer(1), InBuffer(2))
+                        SerialClearBuffer()
+                        Select Case args.IdEvento
+                            Case BCLE_EVENTO_IMPRESION_FAIL
+                                RaiseEvent impresion_fail(args.Dato)
+                            Case BCLE_EVENTO_IMPRESION_OK
+                                RaiseEvent impresion_ok()
+                            Case BCLE_EVENTO_LINEA_TERMINADA
+                                RaiseEvent linea_terminada(args.Dato)
+                            Case BCLE_EVENTO_SHUTDOWN
+                                RaiseEvent shutdown()
+                        End Select
+                    End If
                 Else
                     lastResponse = InBuffer
                     responseReceived.Set()
                 End If
-
+                SerialPort1.DiscardInBuffer()
             Catch ex As Exception
-                MsgBox(ex.Message, MsgBoxStyle.Critical, "Error en ""DataReceivedHandler"":")
+                '    MsgBox(ex.Message, MsgBoxStyle.Critical, "Error en ""DataReceivedHandler"":")
             End Try
         End If
     End Sub
