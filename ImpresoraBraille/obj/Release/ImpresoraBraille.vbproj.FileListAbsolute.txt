@@ -32,7 +32,6 @@ C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\bin\Rele
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.exe.manifest
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.application
 C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.TrustInfo.xml
-C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbprojAssemblyReference.cache
 C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Impresora Braille.exe.config
 C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Impresora Braille.exe.manifest
 C:\Impresora-Braille_swpc\ImpresoraBraille\bin\Release\Impresora Braille.application
@@ -67,3 +66,4 @@ C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbproj.C
 C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.exe
 C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.xml
 C:\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\Impresora Braille.pdb
+C:\Users\quiqu\Documents\GitHub\Impresora-Braille_swpc\ImpresoraBraille\obj\Release\ImpresoraBraille.vbprojAssemblyReference.cache
